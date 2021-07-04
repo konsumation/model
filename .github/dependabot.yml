@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: daily
+      time: '--delete--'
+    commit-message:
+      prefix: 'fix(deps):'
+      prefix-development: 'chore(deps):'
+    open-pull-requests-limit: '--delete--'
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: daily
+      time: '04:00'
+    open-pull-requests-limit: 10
