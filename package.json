@@ -1,0 +1,26 @@
+{
+  "name": "konsum-model",
+  "publishConfig": {
+    "access": "public"
+  },
+  "contributors": [
+    {
+      "name": "Markus Felten",
+      "email": "markus.felten@gmx.de"
+    },
+    {
+      "name": "Konstantin Karpman"
+    }
+  ],
+  "devDependencies": {
+    "semantic-release": "^19.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/konsumation/konsum-model.git"
+  },
+  "bugs": {
+    "url": "https://github.com/konsumation/konsum-model/issues"
+  },
+  "homepage": "https://github.com/konsumation/konsum-model#readme"
+}
