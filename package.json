@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/konsumation/konsum-model.git"
+    "url": "https://github.com/konsumation/konsum-model"
   },
   "bugs": {
     "url": "https://github.com/konsumation/konsum-model/issues"
