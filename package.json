@@ -14,7 +14,7 @@
     }
   ],
   "devDependencies": {
-    "semantic-release": "^22.0.7"
+    "semantic-release": "^22.0.8"
   },
   "repository": {
     "type": "git",
