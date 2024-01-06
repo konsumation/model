@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/konsumation/konsum-model/issues"
   },
-  "homepage": "https://github.com/konsumation/konsum-model#readme"
+  "homepage": "https://github.com/konsumation/konsum-model#readme",
+  "template": {
+    "inheritFrom": "konsumation/template"
+  }
 }
