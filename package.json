@@ -5,6 +5,11 @@
     "access": "public",
     "provenance": true
   },
+  "exports": {
+    ".": {
+      "default": "{{main}}"
+    }
+  },
   "contributors": [
     {
       "name": "Markus Felten",
@@ -14,8 +19,25 @@
       "name": "Konstantin Karpman"
     }
   ],
+  "scripts": {
+    "test": "npm run test:browser-ava && npm run test:ava",
+    "test:browser-ava": "--overwrite-- browser-ava --headless --no-keep-open tests/*-ava.mjs tests/*-ava-browser.mjs",
+    "cover": "--overwrite-- c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 4m tests/*-ava.mjs tests/*-ava-node.mjs && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
+    "test:ava": "--overwrite-- ava --timeout 4m tests/*-ava.mjs tests/*-ava-node.mjs",
+    "docs": "documentation readme --section=API ./src/**/*.mjs",
+    "lint": "npm run lint:docs && npm run lint:typescript",
+    "lint:docs": "documentation lint ./src/**/*.mjs",
+    "prepare": "npm run prepare:typescript",
+    "prepare:typescript": "--overwrite-- tsc --allowJs --declaration --emitDeclarationOnly --declarationDir types --resolveJsonModule -t esnext -m esnext --module nodenext --moduleResolution nodenext --rootDir src ./src**/*.mjs",
+    "lint:typescript": "--overwrite-- tsc --allowJs --checkJs --noEmit --resolveJsonModule -t esnext -m esnext --module nodenext --moduleResolution nodenext ./src**/*.mjs"
+  },
   "devDependencies": {
-    "semantic-release": "^23.0.3"
+    "ava": "^6.1.2",
+    "browser-ava": "^2.2.3",
+    "c8": "^9.1.0",
+    "documentation": "^14.0.3",
+    "semantic-release": "^23.0.3",
+    "typescript": "^5.4.2"
   },
   "repository": {
     "type": "git",
@@ -26,6 +48,12 @@
   },
   "homepage": "https://github.com/konsumation/konsum-model#readme",
   "template": {
-    "inheritFrom": "konsumation/template"
+    "inheritFrom": [
+      "arlac77/template-browser-ava",
+      "arlac77/template-github-action",
+      "arlac77/template-javascript-component",
+      "arlac77/template-typescript",
+      "konsumation/template"
+    ]
   }
 }
