@@ -12,21 +12,6 @@ import { definePropertiesFromOptions, optionJSON } from "./attribute.mjs";
  * @property {string} unit physical unit
  */
 export class Base {
-  /**
-   * Prefix of the key
-   * @return {string}
-   */
-  static get keyPrefix() {
-    return this.typeName + "s.";
-  }
-
-  /**
-   * @param {Base} object
-   * @return {String} prefix for a given (master) object
-   */
-  static keyPrefixWith(object) {
-    return this.keyPrefix + object.name + ".";
-  }
 
   /**
    * Name of the type in text dump
@@ -50,10 +35,9 @@ export class Base {
   }
 
   constructor(name, owner, options) {
-    definePropertiesFromOptions(this, options, {
-      name: { value: name },
-      owner: { value: owner }
-    });
+    this.name = name;
+    this.owner = owner;
+    definePropertiesFromOptions(this, options);
   }
 
   toString() {
@@ -70,14 +54,4 @@ export class Base {
     return this.constructor.typeName;
   }
 
-  get keyPrefix() {
-    return this.constructor.keyPrefix;
-  }
-
-  /**
-   * @return {string}
-   */
-  get key() {
-    return this.keyPrefix + this.name;
-  }
 }

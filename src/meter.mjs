@@ -39,8 +39,4 @@ export class Meter extends Base {
       return this.category.fractionalDigits;
     }
   }
-
-  get keyPrefix() {
-    return super.keyPrefix + this.category.name + ".";
-  }
 }

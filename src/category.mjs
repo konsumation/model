@@ -21,8 +21,4 @@ export class Category extends Base {
       ...METER_ATTRIBUTES
     };
   }
-
-  static get keyPrefix() {
-    return "categories.";
-  }
 }

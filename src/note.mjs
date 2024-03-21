@@ -9,8 +9,4 @@ export class Note extends Base {
   get category() {
     return this.owner;
   }
-
-  get keyPrefix() {
-    return super.keyPrefix + this.category.name + ".";
-  }
 }
