@@ -7,9 +7,11 @@
   },
   "exports": {
     ".": {
-      "default": "{{main}}"
+      "default": "./src/master.mjs",
+      "types": "./types/master.d.mts"
     }
   },
+  "types": "./types/master.d.mts",
   "contributors": [
     {
       "name": "Markus Felten",
