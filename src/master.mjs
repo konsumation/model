@@ -5,4 +5,7 @@ export { Note } from "./note.mjs";
 
 export class Master {
 
+    async initialize(config) {
+        
+    }
 }
