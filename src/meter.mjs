@@ -1,1 +1,4 @@
-export class Meter {}
+export class Meter {
+  async *values() {}
+  async *notes() {}
+}
