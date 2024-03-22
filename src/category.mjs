@@ -1,10 +1,11 @@
+import { Meter } from "./meter.mjs";
 
 /**
- * 
+ *
  */
 export class Category {
-
-    async * meters()
-    {
-    }
+  /**
+   * @return {AsyncIterable<Meter>}
+   */
+  async *meters() {}
 }

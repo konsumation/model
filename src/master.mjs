@@ -3,15 +3,15 @@ export { Meter } from "./meter.mjs";
 export { Note } from "./note.mjs";
 export { Category };
 /**
- * 
+ *
  */
 export class Master {
   /**
    *
    * @param {Object|string} config
    */
-  async initialize(config) {
-    return this;
+  static async initialize(config) {
+    return new this(config);
   }
 
   /**
