@@ -1,9 +1,10 @@
 import test from "ava";
 import { Master } from "@konsumation/model";
 
-test("initialize", t => {
+test("initialize", async t => {
   const master = new Master();
-  master.initialize('');
+  await master.initialize('');
   t.truthy(master);
+  await master.close();
 });
 

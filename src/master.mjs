@@ -15,6 +15,10 @@ export class Master {
   }
 
   /**
+   */
+  async close() {}
+
+  /**
    * @return {AsyncIterable<Category>}
    */
   async *categories() {}
