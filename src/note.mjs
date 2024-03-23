@@ -2,4 +2,6 @@
 /**
  * 
  */
-export class Note {}
+export class Note {
+    time;
+}
