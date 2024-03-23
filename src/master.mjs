@@ -7,9 +7,8 @@ export { Category };
  * @property {string} schemaVersion
  */
 export class Master {
+  /** @type {string} */schemaVersion;
 
-  schemaVersion;
-  
   /**
    *
    * @param {Object|string} config
@@ -26,4 +25,16 @@ export class Master {
    * @return {AsyncIterable<Category>}
    */
   async *categories() {}
+
+  /**
+   * Create text representation
+   * @return {AsyncIterable<string>}
+   */
+  async *text() {
+    yield `schemaVersion=${this.schemaVersion}`;
+
+    for await (const category of this.categories()) {
+      yield* category.text();
+    }
+  }
 }
