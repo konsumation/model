@@ -1,13 +1,14 @@
 import { Category } from "./category.mjs";
+import { SCHEMA_VERSION_CURRENT } from "./consts.mjs";
 export { Meter } from "./meter.mjs";
 export { Note } from "./note.mjs";
-export { Category };
+export { Category, SCHEMA_VERSION_CURRENT };
 
 /**
  * @property {string} schemaVersion
  */
 export class Master {
-  /** @type {string} */schemaVersion;
+  /** @type {string} */ schemaVersion = SCHEMA_VERSION_CURRENT;
 
   /**
    *
