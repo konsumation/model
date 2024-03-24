@@ -6,6 +6,11 @@ import { Meter } from "./meter.mjs";
 export class Category {
   /** @type {string} */ name;
 
+  constructor(name)
+  {
+    this.name = name;
+  }
+  
   /**
    * @return {AsyncIterable<Meter>}
    */

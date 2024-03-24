@@ -1,7 +1,12 @@
 import { Note } from "./note.mjs";
 
 export class Meter {
-  /** @type {string} */name;
+  /** @type {string} */ name;
+
+  constructor(name)
+  {
+    this.name = name;
+  }
 
   /**
    * @return {AsyncIterable<{time:Date,value:number}>}
