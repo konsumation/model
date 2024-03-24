@@ -13,6 +13,7 @@ export class Master {
   /**
    *
    * @param {Object|string} config
+   * @return {Promise<Master>}
    */
   static async initialize(config) {
     return new this(config);
