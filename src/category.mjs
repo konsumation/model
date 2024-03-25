@@ -5,12 +5,12 @@ import { Meter } from "./meter.mjs";
  */
 export class Category {
   /** @type {string} */ name;
+  /** @type {string} */ description;
 
-  constructor(name)
-  {
+  constructor(name) {
     this.name = name;
   }
-  
+
   async delete(master) {}
 
   /**
