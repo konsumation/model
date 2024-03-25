@@ -4,9 +4,10 @@ export class Meter {
   /** @type {string} */ name;
   /** @type {string} */ unit;
   /** @type {number} */ fractionalDigits;
+  /** @type {Date} */ activeSince;
 
   get attributeNames() {
-    return ["unit", "fractionalDigits"];
+    return ["unit", "fractionalDigits", "activeSince"];
   }
 
   constructor(name) {
@@ -29,7 +30,13 @@ export class Meter {
     yield `[meter "${this.name}"]`;
 
     for (const a of this.attributeNames) {
-      if (this[a] !== undefined) yield `${a}=${this[a]}`;
+      let value = this[a];
+      if (value !== undefined) {
+        if(value instanceof Date) {
+          value = value.toISOString();
+        }
+        yield `${a}=${value}`;
+      }
     }
 
     for await (const note of this.notes()) {

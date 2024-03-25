@@ -22,6 +22,20 @@ export class Category {
    */
   async *meters() {}
 
+  /**
+   * 
+   * @returns Primise<Meter|undefined>
+   */
+  async activeMeter() {
+    let meters = [];
+    for await (const meter of this.meters()) {
+      meters.push(meter);
+    }
+
+    meters = meters.sort((a, b) => a.activeSince.time() > b.activeSince.time());
+    return meters[0];
+  }
+
   async *text() {
     yield `[category "${this.name}"]`;
 

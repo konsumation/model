@@ -1,7 +1,12 @@
 import test from "ava";
 import { Master, Category, Meter } from "@konsumation/model";
 
-class MyMeter extends Meter {}
+class MyMeter extends Meter {
+  constructor(name) {
+    super(name);
+    this.activeSince = new Date(0);
+  }
+}
 
 class MyCategory extends Category {
   async *meters() {
@@ -30,8 +35,10 @@ test("text", async t => {
       "schemaVersion=2",
       '[category "C1"]',
       '[meter "M1"]',
+      "activeSince=1970-01-01T00:00:00.000Z",
       '[category "C2"]',
-      '[meter "M1"]'
+      '[meter "M1"]',
+      "activeSince=1970-01-01T00:00:00.000Z"
     ],
     lines
   );
