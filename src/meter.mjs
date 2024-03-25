@@ -8,6 +8,8 @@ export class Meter {
     this.name = name;
   }
 
+  async delete(master) {}
+
   /**
    * @return {AsyncIterable<{time:Date,value:number}>}
    */

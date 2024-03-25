@@ -11,6 +11,8 @@ export class Category {
     this.name = name;
   }
   
+  async delete(master) {}
+
   /**
    * @return {AsyncIterable<Meter>}
    */
