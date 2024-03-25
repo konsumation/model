@@ -9,6 +9,6 @@ export class Note {
 
   async *text() {
     yield `[note "${this.time}"]`;
-    yield this.description;
+    yield `description=${this.description}`;
   }
 }

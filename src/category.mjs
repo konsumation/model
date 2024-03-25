@@ -7,6 +7,10 @@ export class Category {
   /** @type {string} */ name;
   /** @type {string} */ description;
 
+  get attributeNames() {
+    return ["description"];
+  }
+
   constructor(name) {
     this.name = name;
   }
@@ -20,6 +24,10 @@ export class Category {
 
   async *text() {
     yield `[category "${this.name}"]`;
+
+    for (const a of this.attributeNames) {
+      if (this[a] !== undefined) yield `${a}=${this[a]}`;
+    }
 
     for await (const meter of this.meters()) {
       yield* meter.text();

@@ -1,9 +1,7 @@
 import test from "ava";
 import { Master, Category, Meter } from "@konsumation/model";
 
-
-class MyMeter extends Meter {
-}
+class MyMeter extends Meter {}
 
 class MyCategory extends Category {
   async *meters() {
