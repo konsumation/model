@@ -1,13 +1,23 @@
 import { Note } from "./note.mjs";
+import { unit, name, validFrom, fractionalDigits } from "./attributes.mjs";
 
 export class Meter {
   /** @type {string} */ name;
   /** @type {string} */ unit;
   /** @type {number} */ fractionalDigits;
-  /** @type {Date} */ activeSince;
+  /** @type {Date} */ validFrom;
+
+  get attributes() {
+    return {
+      unit,
+ //     name,
+      validFrom,
+      fractionalDigits
+    };
+  }
 
   get attributeNames() {
-    return ["unit", "fractionalDigits", "activeSince"];
+    return Object.keys(this.attributes);
   }
 
   constructor(name) {
@@ -32,7 +42,7 @@ export class Meter {
     for (const a of this.attributeNames) {
       let value = this[a];
       if (value !== undefined) {
-        if(value instanceof Date) {
+        if (value instanceof Date) {
           value = value.toISOString();
         }
         yield `${a}=${value}`;

@@ -1,4 +1,5 @@
 import { Meter } from "./meter.mjs";
+import { description } from "./attributes.mjs";
 
 /**
  *
@@ -7,8 +8,14 @@ export class Category {
   /** @type {string} */ name;
   /** @type {string} */ description;
 
+  get attributes() {
+    return {
+      description
+    };
+  }
+
   get attributeNames() {
-    return ["description"];
+    return Object.keys(this.attributes);
   }
 
   constructor(name) {

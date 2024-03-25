@@ -4,7 +4,7 @@ import { Master, Category, Meter } from "@konsumation/model";
 class MyMeter extends Meter {
   constructor(name) {
     super(name);
-    this.activeSince = new Date(0);
+    this.validFrom = new Date(0);
   }
 }
 
@@ -35,10 +35,10 @@ test("text", async t => {
       "schemaVersion=2",
       '[category "C1"]',
       '[meter "M1"]',
-      "activeSince=1970-01-01T00:00:00.000Z",
+      "validFrom=1970-01-01T00:00:00.000Z",
       '[category "C2"]',
       '[meter "M1"]',
-      "activeSince=1970-01-01T00:00:00.000Z"
+      "validFrom=1970-01-01T00:00:00.000Z"
     ],
     lines
   );
