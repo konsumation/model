@@ -1,4 +1,5 @@
 import { description } from "./attributes.mjs";
+import { toText } from "./util.mjs";
 
 /**
  *
@@ -6,6 +7,14 @@ import { description } from "./attributes.mjs";
 export class Note {
   time;
   /** @type {string} */ description;
+
+  /**
+   * Name of the type in text dump
+   * @return {string}
+   */
+  static get typeName() {
+    return "note";
+  }
 
   get attributes() {
     return {
@@ -20,9 +29,6 @@ export class Note {
   async delete(master) {}
 
   async *text() {
-    yield `[note "${this.time}"]`;
-    for (const a of this.attributeNames) {
-      if (this[a] !== undefined) yield `${a}=${this[a]}`;
-    }
+    yield* toText(this, "time");
   }
 }

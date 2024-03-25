@@ -1,5 +1,6 @@
 import { Note } from "./note.mjs";
 import { unit, name, validFrom, fractionalDigits } from "./attributes.mjs";
+import { toText } from "./util.mjs";
 
 export class Meter {
   /** @type {string} */ name;
@@ -7,10 +8,18 @@ export class Meter {
   /** @type {number} */ fractionalDigits;
   /** @type {Date} */ validFrom;
 
+  /**
+   * Name of the type in text dump
+   * @return {string}
+   */
+  static get typeName() {
+    return "meter";
+  }
+
   get attributes() {
     return {
       unit,
- //     name,
+      name,
       validFrom,
       fractionalDigits
     };
@@ -37,20 +46,6 @@ export class Meter {
   async *notes() {}
 
   async *text() {
-    yield `[meter "${this.name}"]`;
-
-    for (const a of this.attributeNames) {
-      let value = this[a];
-      if (value !== undefined) {
-        if (value instanceof Date) {
-          value = value.toISOString();
-        }
-        yield `${a}=${value}`;
-      }
-    }
-
-    for await (const note of this.notes()) {
-      yield* note.text();
-    }
+    yield* toText(this, "name", this.notes());
   }
 }

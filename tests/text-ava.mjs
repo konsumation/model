@@ -1,28 +1,8 @@
 import test from "ava";
-import { Master, Category, Meter } from "@konsumation/model";
-
-class MyMeter extends Meter {
-  constructor(name) {
-    super(name);
-    this.validFrom = new Date(0);
-  }
-}
-
-class MyCategory extends Category {
-  async *meters() {
-    yield new MyMeter("M1");
-  }
-}
-
-class MyMaster extends Master {
-  async *categories() {
-    yield new MyCategory("C1");
-    yield new MyCategory("C2");
-  }
-}
+import { Master } from "./model.mjs";
 
 test("text", async t => {
-  const master = await MyMaster.initialize("");
+  const master = await Master.initialize("");
 
   const lines = [];
 

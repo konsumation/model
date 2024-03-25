@@ -1,15 +1,25 @@
 import { Meter } from "./meter.mjs";
-import { description } from "./attributes.mjs";
+import { name, description } from "./attributes.mjs";
+import { toText } from "./util.mjs";
 
 /**
  *
  */
 export class Category {
+  /**
+   * Name of the type in text dump
+   * @return {string}
+   */
+  static get typeName() {
+    return "category";
+  }
+
   /** @type {string} */ name;
   /** @type {string} */ description;
 
   get attributes() {
     return {
+      name,
       description
     };
   }
@@ -30,7 +40,7 @@ export class Category {
   async *meters() {}
 
   /**
-   * 
+   *
    * @returns Primise<Meter|undefined>
    */
   async activeMeter() {
@@ -39,19 +49,11 @@ export class Category {
       meters.push(meter);
     }
 
-    meters = meters.sort((a, b) => a.activeSince.time() > b.activeSince.time());
+    meters = meters.sort((a, b) => a.validFrom.getTime() - b.validFrom.getTime());
     return meters[0];
   }
 
   async *text() {
-    yield `[category "${this.name}"]`;
-
-    for (const a of this.attributeNames) {
-      if (this[a] !== undefined) yield `${a}=${this[a]}`;
-    }
-
-    for await (const meter of this.meters()) {
-      yield* meter.text();
-    }
+    yield* toText(this, "name", this.meters());
   }
 }
