@@ -3,7 +3,8 @@ import { name, description } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
 /**
- *
+ * Value Category.
+
  */
 export class Category {
   /**
@@ -34,6 +35,7 @@ export class Category {
     }
   }
 
+  async write(context) {}
   async delete(context) {}
 
   /**

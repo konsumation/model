@@ -1,12 +1,13 @@
 import { Note } from "./note.mjs";
-import { unit, name, validFrom, fractionalDigits } from "./attributes.mjs";
+import { unit, serial, name, validFrom, fractionalDigits } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
 export class Meter {
   /** @type {string} */ name;
   /** @type {string} */ unit;
+  /** @type {string} */ serial;
   /** @type {number} */ fractionalDigits;
-  /** @type {Date} */ validFrom;
+  /** @type {Date} */   validFrom;
 
   /**
    * Name of the type in text dump
@@ -20,6 +21,7 @@ export class Meter {
     return {
       unit,
       name,
+      serial,
       validFrom,
       fractionalDigits
     };
@@ -35,7 +37,10 @@ export class Meter {
     }
   }
 
-  async delete(master) {}
+  
+  async write(context) {}
+
+  async delete(context) {}
 
   /**
    * @return {AsyncIterable<{time:Date,value:number}>}
