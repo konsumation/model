@@ -12,14 +12,14 @@ class MyMeter extends Meter {
 
 class MyCategory extends Category {
   async *meters() {
-    yield new MyMeter("M1");
+    yield new MyMeter({name:"M1"});
   }
 }
 
 class MyMaster extends Master {
   async *categories() {
-    yield new MyCategory("C1");
-    yield new MyCategory("C2");
+    yield new MyCategory({name:"C1"});
+    yield new MyCategory({name:"C2"});
   }
 }
 

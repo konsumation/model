@@ -26,6 +26,12 @@ export class Note {
     return Object.keys(this.attributes);
   }
 
+  constructor(values) {
+    for (const a of this.attributeNames) {
+      this[a] = values[a];
+    }
+  }
+
   async delete(master) {}
 
   async *text() {

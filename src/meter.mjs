@@ -29,8 +29,10 @@ export class Meter {
     return Object.keys(this.attributes);
   }
 
-  constructor(name) {
-    this.name = name;
+  constructor(values) {
+    for (const a of this.attributeNames) {
+      this[a] = values[a];
+    }
   }
 
   async delete(master) {}

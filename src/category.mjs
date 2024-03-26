@@ -28,8 +28,10 @@ export class Category {
     return Object.keys(this.attributes);
   }
 
-  constructor(name) {
-    this.name = name;
+  constructor(values) {
+    for (const a of this.attributeNames) {
+      this[a] = values[a];
+    }
   }
 
   async delete(master) {}
@@ -49,7 +51,9 @@ export class Category {
       meters.push(meter);
     }
 
-    meters = meters.sort((a, b) => a.validFrom.getTime() - b.validFrom.getTime());
+    meters = meters.sort(
+      (a, b) => a.validFrom.getTime() - b.validFrom.getTime()
+    );
     return meters[0];
   }
 
