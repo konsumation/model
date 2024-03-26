@@ -4,7 +4,7 @@ import { toText } from "./util.mjs";
 
 /**
  * Value Category.
-
+ *
  */
 export class Category {
   /**
@@ -29,6 +29,9 @@ export class Category {
     return Object.keys(this.constructor.attributes);
   }
 
+  /**
+   * @param {object} values
+   */
   constructor(values) {
     for (const a of this.attributeNames) {
       this[a] = values[a];
@@ -44,8 +47,8 @@ export class Category {
   async *meters(context) {}
 
   /**
-   *
-   * @returns Primise<Meter|undefined>
+   * newest Meter
+   * @returns Promise<Meter|undefined>
    */
   async activeMeter(context) {
     let meters = [];
