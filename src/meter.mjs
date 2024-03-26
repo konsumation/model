@@ -16,7 +16,7 @@ export class Meter {
     return "meter";
   }
 
-  get attributes() {
+  static get attributes() {
     return {
       unit,
       name,
@@ -26,7 +26,7 @@ export class Meter {
   }
 
   get attributeNames() {
-    return Object.keys(this.attributes);
+    return Object.keys(this.constructor.attributes);
   }
 
   constructor(values) {
