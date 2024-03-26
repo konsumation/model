@@ -14,6 +14,7 @@ test("text", async t => {
     [
       "schemaVersion=2",
       '[category "C1"]',
+      "description=desc",
       '[meter "M1"]',
       "validFrom=1970-01-01T00:00:00.000Z",
       '[category "C2"]',

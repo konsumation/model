@@ -17,7 +17,7 @@ export class Category {
   /** @type {string} */ name;
   /** @type {string} */ description;
 
-  get attributes() {
+  static get attributes() {
     return {
       name,
       description
@@ -25,7 +25,7 @@ export class Category {
   }
 
   get attributeNames() {
-    return Object.keys(this.attributes);
+    return Object.keys(this.constructor.attributes);
   }
 
   constructor(values) {

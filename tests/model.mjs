@@ -1,7 +1,6 @@
 import { Master, Category, Meter, Note } from "@konsumation/model";
 
-class MyNote extends Note {
-}
+class MyNote extends Note {}
 
 class MyMeter extends Meter {
   constructor(name) {
@@ -12,14 +11,14 @@ class MyMeter extends Meter {
 
 class MyCategory extends Category {
   async *meters() {
-    yield new MyMeter({name:"M1"});
+    yield new MyMeter({ name: "M1" });
   }
 }
 
 class MyMaster extends Master {
   async *categories() {
-    yield new MyCategory({name:"C1"});
-    yield new MyCategory({name:"C2"});
+    yield new MyCategory({ name: "C1", description: "desc" });
+    yield new MyCategory({ name: "C2" });
   }
 }
 

@@ -16,14 +16,14 @@ export class Note {
     return "note";
   }
 
-  get attributes() {
+  static get attributes() {
     return {
       description
     };
   }
 
   get attributeNames() {
-    return Object.keys(this.attributes);
+    return Object.keys(this.constructor.attributes);
   }
 
   constructor(values) {
