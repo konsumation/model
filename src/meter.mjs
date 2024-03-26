@@ -40,14 +40,14 @@ export class Meter {
   /**
    * @return {AsyncIterable<{time:Date,value:number}>}
    */
-  async *values() {}
+  async *values(context) {}
 
   /**
    * @return {AsyncIterable<Note>}
    */
-  async *notes() {}
+  async *notes(context) {}
 
-  async *text() {
-    yield* toText(this, "name", this.notes());
+  async *text(context) {
+    yield* toText(context, this, "name", this.notes(context));
   }
 }

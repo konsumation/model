@@ -34,7 +34,7 @@ export class Note {
 
   async delete(master) {}
 
-  async *text() {
-    yield* toText(this, "time");
+  async *text(context) {
+    yield* toText(context, this, "time");
   }
 }

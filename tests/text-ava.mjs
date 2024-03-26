@@ -1,12 +1,11 @@
 import test from "ava";
-import { Master } from "./model.mjs";
+import { Master, data } from "./model.mjs";
 
 test("text", async t => {
-  const master = await Master.initialize("");
-
+  const master = await Master.initialize(data);
   const lines = [];
 
-  for await (const line of master.text()) {
+  for await (const line of master.text(master.context)) {
     lines.push(line);
   }
 

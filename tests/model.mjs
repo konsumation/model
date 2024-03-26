@@ -1,24 +1,42 @@
 import { Master, Category, Meter, Note } from "@konsumation/model";
 
+export const data = {
+  categories: [{ name: "C1", description: "desc" }, { name: "C2" }],
+  meters: [
+    { name: "M1", category: "C1" },
+    { name: "M1", category: "C2" }
+  ]
+};
+
 class MyNote extends Note {}
 
 class MyMeter extends Meter {
-  constructor(name) {
-    super(name);
+  constructor(values) {
+    super(values);
     this.validFrom = new Date(0);
   }
 }
 
 class MyCategory extends Category {
-  async *meters() {
-    yield new MyMeter({ name: "M1" });
+  async *meters(context) {
+    for (const m of context.meters) {
+      if (m.category === this.name) {
+        yield new MyMeter(m);
+      }
+    }
   }
 }
 
 class MyMaster extends Master {
-  async *categories() {
-    yield new MyCategory({ name: "C1", description: "desc" });
-    yield new MyCategory({ name: "C2" });
+  constructor(data) {
+    super(data);
+    this.context = data;
+  }
+
+  async *categories(context) {
+    for (const c of this.context.categories) {
+      yield new MyCategory(c);
+    }
   }
 }
 

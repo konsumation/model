@@ -22,7 +22,7 @@ export class Master {
   static async initialize(config) {
     return new this(config);
   }
-
+  
   /**
    */
   async close() {}
@@ -30,17 +30,17 @@ export class Master {
   /**
    * @return {AsyncIterable<Category>}
    */
-  async *categories() {}
+  async *categories(context) {}
 
   /**
    * Create text representation
    * @return {AsyncIterable<string>}
    */
-  async *text() {
+  async *text(context) {
     yield `schemaVersion=${this.schemaVersion}`;
 
-    for await (const category of this.categories()) {
-      yield* category.text();
+    for await (const category of this.categories(context)) {
+      yield* category.text(context);
     }
   }
 }

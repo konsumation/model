@@ -1,4 +1,4 @@
-export async function* toText(object, key, ...iterators) {
+export async function* toText(context, object, key, ...iterators) {
   yield `[${object.constructor.typeName} "${object[key]}"]`;
 
   for (const a of object.attributeNames) {
@@ -15,7 +15,7 @@ export async function* toText(object, key, ...iterators) {
 
   for (const iterator of iterators) {
     for await (const object of iterator) {
-      yield* object.text();
+      yield* object.text(context);
     }
   }
 }

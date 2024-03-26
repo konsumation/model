@@ -34,20 +34,20 @@ export class Category {
     }
   }
 
-  async delete(master) {}
+  async delete(context) {}
 
   /**
    * @return {AsyncIterable<Meter>}
    */
-  async *meters() {}
+  async *meters(context) {}
 
   /**
    *
    * @returns Primise<Meter|undefined>
    */
-  async activeMeter() {
+  async activeMeter(context) {
     let meters = [];
-    for await (const meter of this.meters()) {
+    for await (const meter of this.meters(context)) {
       meters.push(meter);
     }
 
@@ -57,7 +57,7 @@ export class Category {
     return meters[0];
   }
 
-  async *text() {
-    yield* toText(this, "name", this.meters());
+  async *text(context) {
+    yield* toText(context,this, "name", this.meters(context));
   }
 }
