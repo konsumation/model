@@ -1,8 +1,12 @@
 import { Category } from "./category.mjs";
-import { SCHEMA_VERSION_CURRENT } from "./consts.mjs";
+import {
+  SCHEMA_VERSION_CURRENT,
+  SCHEMA_VERSION_1,
+  SCHEMA_VERSION_2
+} from "./consts.mjs";
 export { Meter } from "./meter.mjs";
 export { Note } from "./note.mjs";
-export { Category, SCHEMA_VERSION_CURRENT };
+export { Category, SCHEMA_VERSION_CURRENT, SCHEMA_VERSION_1, SCHEMA_VERSION_2 };
 
 /**
  * @property {string} schemaVersion
