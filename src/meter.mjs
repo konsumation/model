@@ -1,13 +1,14 @@
 import { Note } from "./note.mjs";
-import { unit, serial, name, validFrom, fractionalDigits } from "./attributes.mjs";
+import { unit, serial, name, validFrom, fractionalDigits, description } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
 export class Meter {
-  /** @type {string} */ name;
+  /** @type {string} */ description;
   /** @type {string} */ unit;
   /** @type {string} */ serial;
   /** @type {number} */ fractionalDigits;
   /** @type {Date} */   validFrom;
+
 
   /**
    * Name of the type in text dump
@@ -20,8 +21,8 @@ export class Meter {
   static get attributes() {
     return {
       unit,
-      name,
       serial,
+      description,
       validFrom,
       fractionalDigits
     };
@@ -53,6 +54,6 @@ export class Meter {
   async *notes(context) {}
 
   async *text(context) {
-    yield* toText(context, this, "name", this.notes(context));
+    yield* toText(context, this, "serial", this.notes(context));
   }
 }

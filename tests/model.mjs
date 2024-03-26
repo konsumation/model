@@ -3,8 +3,8 @@ import { Master, Category, Meter, Note } from "@konsumation/model";
 export const data = {
   categories: [{ name: "C1", description: "desc" }, { name: "C2" }],
   meters: [
-    { name: "M1", category: "C1" },
-    { name: "M1", category: "C2" }
+    { serial: "M1", category: "C1" },
+    { serial: "M1", category: "C2" }
   ]
 };
 
