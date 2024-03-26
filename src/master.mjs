@@ -6,6 +6,7 @@ import {
 } from "./consts.mjs";
 export { Meter } from "./meter.mjs";
 export { Note } from "./note.mjs";
+export * from "./attributes.mjs";
 export { Category, SCHEMA_VERSION_CURRENT, SCHEMA_VERSION_1, SCHEMA_VERSION_2 };
 
 /**
