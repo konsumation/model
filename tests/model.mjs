@@ -13,7 +13,7 @@ class MyNote extends Note {}
 class MyMeter extends Meter {
   constructor(values) {
     super(values);
-    this.validFrom = new Date(0);
+    this.validfrom = new Date(0);
   }
 }
 

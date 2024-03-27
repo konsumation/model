@@ -2,8 +2,8 @@ import { Note } from "./note.mjs";
 import {
   unit,
   serial,
-  validFrom,
-  fractionalDigits,
+  validfrom,
+  fractionaldigits,
   description
 } from "./attributes.mjs";
 import { toText } from "./util.mjs";
@@ -12,8 +12,8 @@ export class Meter {
   /** @type {string} */ description;
   /** @type {string} */ unit;
   /** @type {string} */ serial;
-  /** @type {number} */ fractionalDigits = 2;
-  /** @type {Date} */ validFrom;
+  /** @type {number} */ fractionaldigits = 2;
+  /** @type {Date} */ validfrom;
 
   /**
    * Name of the type in text dump
@@ -28,8 +28,8 @@ export class Meter {
       unit,
       serial,
       description,
-      validFrom,
-      fractionalDigits
+      validfrom,
+      fractionaldigits
     };
   }
 

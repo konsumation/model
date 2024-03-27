@@ -15,10 +15,10 @@ test("text", async t => {
       '[category "C1"]',
       "description=desc",
       '[meter "M1"]',
-      "validFrom=1970-01-01T00:00:00.000Z",
+      "validfrom=1970-01-01T00:00:00.000Z",
       '[category "C2"]',
       '[meter "M1"]',
-      "validFrom=1970-01-01T00:00:00.000Z"
+      "validfrom=1970-01-01T00:00:00.000Z"
     ],
     lines
   );

@@ -81,7 +81,7 @@ export class Category {
     }
 
     meters = meters.sort(
-      (a, b) => a.validFrom.getTime() - b.validFrom.getTime()
+      (a, b) => a.validfrom.getTime() - b.validfrom.getTime()
     );
     return meters[0];
   }
