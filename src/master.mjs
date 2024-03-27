@@ -87,6 +87,7 @@ export class Master extends Base {
             await insertObject();
             type = m[1];
             identifier = m[2];
+            values.name = identifier; // TODO key attribute
           } else {
             m = line.match(/^([\d\.]+)\s+([\d\.]+)/);
             if (m) {
