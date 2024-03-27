@@ -1,5 +1,11 @@
 import { Note } from "./note.mjs";
-import { unit, serial, name, validFrom, fractionalDigits, description } from "./attributes.mjs";
+import {
+  unit,
+  serial,
+  validFrom,
+  fractionalDigits,
+  description
+} from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
 export class Meter {
@@ -7,8 +13,7 @@ export class Meter {
   /** @type {string} */ unit;
   /** @type {string} */ serial;
   /** @type {number} */ fractionalDigits;
-  /** @type {Date} */   validFrom;
-
+  /** @type {Date} */ validFrom;
 
   /**
    * Name of the type in text dump
@@ -28,17 +33,24 @@ export class Meter {
     };
   }
 
-  get attributeNames() {
-    return Object.keys(this.constructor.attributes);
-  }
-
   constructor(values) {
     for (const a of this.attributeNames) {
       this[a] = values[a];
     }
   }
 
-  
+  get attributeNames() {
+    return Object.keys(this.constructor.attributes);
+  }
+
+  get attributeValues() {
+    return Object.fromEntries(
+      this.attributeNames
+        .filter(a => this[a] !== undefined)
+        .map(a => [a, this[a]])
+    );
+  }
+
   async write(context) {}
 
   async delete(context) {}

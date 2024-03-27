@@ -7,6 +7,9 @@ import { toText } from "./util.mjs";
  *
  */
 export class Category {
+  /** @type {string} */ name;
+  /** @type {string} */ description;
+
   /**
    * Name of the type in text dump
    * @return {string}
@@ -15,18 +18,11 @@ export class Category {
     return "category";
   }
 
-  /** @type {string} */ name;
-  /** @type {string} */ description;
-
   static get attributes() {
     return {
       name,
       description
     };
-  }
-
-  get attributeNames() {
-    return Object.keys(this.constructor.attributes);
   }
 
   /**
@@ -36,6 +32,18 @@ export class Category {
     for (const a of this.attributeNames) {
       this[a] = values[a];
     }
+  }
+
+  get attributeNames() {
+    return Object.keys(this.constructor.attributes);
+  }
+
+  get attributeValues() {
+    return Object.fromEntries(
+      this.attributeNames
+        .filter(a => this[a] !== undefined)
+        .map(a => [a, this[a]])
+    );
   }
 
   async write(context) {}
@@ -63,6 +71,6 @@ export class Category {
   }
 
   async *text(context) {
-    yield* toText(context,this, "name", this.meters(context));
+    yield* toText(context, this, "name", this.meters(context));
   }
 }

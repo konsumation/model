@@ -22,14 +22,22 @@ export class Note {
     };
   }
 
-  get attributeNames() {
-    return Object.keys(this.constructor.attributes);
-  }
-
   constructor(values) {
     for (const a of this.attributeNames) {
       this[a] = values[a];
     }
+  }
+
+  get attributeNames() {
+    return Object.keys(this.constructor.attributes);
+  }
+
+  get attributeValues() {
+    return Object.fromEntries(
+      this.attributeNames
+        .filter(a => this[a] !== undefined)
+        .map(a => [a, this[a]])
+    );
   }
 
   async write(context) {}
