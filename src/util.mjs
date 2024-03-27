@@ -1,5 +1,8 @@
 export async function* toText(context, object, key, ...iterators) {
-  yield `[${object.constructor.typeName} "${object[key]}"]`;
+
+  if(key) {
+    yield `[${object.constructor.typeName} "${object[key]}"]`;
+  }
 
   for (const a of object.attributeNames) {
     if (a !== key) {
