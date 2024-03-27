@@ -25,10 +25,6 @@ export class Master extends Base {
     };
   }
 
-  static get attributeNameMapping() {
-    return { };
-  }
-
   /**
    *
    * @param {Object|string} config
@@ -36,6 +32,10 @@ export class Master extends Base {
    */
   static async initialize(config) {
     return new this(config);
+  }
+
+  constructor(values) {
+    super();
   }
 
   /**
@@ -70,6 +70,7 @@ export class Master extends Base {
         object = new typeLookup[type](values);
         type = undefined;
         values = {};
+        // @ts-ignore
         return object.write(this.context);
       }
     };
@@ -90,7 +91,9 @@ export class Master extends Base {
             m = line.match(/^([\d\.]+)\s+([\d\.]+)/);
             if (m) {
               await insertObject();
+              // @ts-ignore
               object.writeValue(
+                // @ts-ignore
                 this.context,
                 parseFloat(m[2]),
                 parseFloat(m[1])

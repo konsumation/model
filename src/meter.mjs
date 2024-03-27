@@ -9,6 +9,9 @@ import {
 } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
+/**
+ * 
+ */
 export class Meter extends Base {
   /** @type {string} */ description;
   /** @type {string} */ unit;

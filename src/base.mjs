@@ -12,10 +12,12 @@ export class Base {
   }
 
   get attributeNames() {
+    // @ts-ignore
     return this.constructor.attributeNames;
   }
 
   get attributeValues() {
+    // @ts-ignore
     const mapping = this.constructor.attributeNameMapping;
 
     return Object.fromEntries(
@@ -26,6 +28,7 @@ export class Base {
   }
 
   set attributeValues(values) {
+    // @ts-ignore
     const mapping = this.constructor.attributeNameMapping;
     for (const name of this.attributeNames) {
       this[name] = values[mapping[name] || name];
