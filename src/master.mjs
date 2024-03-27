@@ -67,15 +67,18 @@ export class Master {
   }
 
   async fromText(input, factories) {
+    const typeLookup = Object.fromEntries(factories.map(f => [f.typeName, f]));
+    const statistics = Object.fromEntries(factories.map(f => [f.typeName, 0]));
+
     let buffer = "";
-    let numberOfValues = 0;
     let type, identifier;
     let values = {};
     let object;
 
     const insertObject = async () => {
-      if (factories[type]) {
-        object = new factories[type](values);
+      if (typeLookup[type]) {
+        statistics[type] = statistics[type] + 1;
+        object = new typeLookup[type](values);
         type = undefined;
         values = {};
         return object.write(this.context);
@@ -103,11 +106,12 @@ export class Master {
                 parseFloat(m[2]),
                 parseFloat(m[1])
               );
-              numberOfValues += 1;
             }
           }
         }
       }
     }
+
+    return statistics;
   }
 }
