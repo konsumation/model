@@ -3,7 +3,7 @@ import { Master, Category, Meter, Note } from "@konsumation/model";
 export const data = {
   categories: [{ name: "C1", description: "desc" }, { name: "C2" }],
   meters: [
-    { serial: "M1", category: "C1" },
+    { serial: "M1", category: "C1", fractional_digits: 4 },
     { serial: "M1", category: "C2" }
   ]
 };
@@ -11,6 +11,10 @@ export const data = {
 class MyNote extends Note {}
 
 class MyMeter extends Meter {
+  static get attributeNameMapping() {
+    return { fractionalDigits: "fractional_digits" };
+  }
+
   constructor(values) {
     super(values);
     this.validFrom = new Date(0);

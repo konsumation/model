@@ -1,3 +1,4 @@
+import { Base } from "./base.mjs";
 import { Note } from "./note.mjs";
 import {
   unit,
@@ -8,7 +9,7 @@ import {
 } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
-export class Meter {
+export class Meter extends Base {
   /** @type {string} */ description;
   /** @type {string} */ unit;
   /** @type {string} */ serial;
@@ -33,26 +34,9 @@ export class Meter {
     };
   }
 
-  static get attributeNames() {
-    return Object.keys(this.attributes);
-  }
-
   constructor(values) {
-    for (const a of this.attributeNames) {
-      this[a] = values[a];
-    }
-  }
-
-  get attributeNames() {
-    return this.constructor.attributeNames;
-  }
-
-  get attributeValues() {
-    return Object.fromEntries(
-      this.attributeNames
-        .filter(a => this[a] !== undefined)
-        .map(a => [a, this[a]])
-    );
+    super();
+    this.attributeValues = values;
   }
 
   async write(context) {}
@@ -64,7 +48,7 @@ export class Meter {
    */
   async *values(context) {}
 
-  async addValue(context,time,value) {}
+  async addValue(context, time, value) {}
 
   /**
    * @return {AsyncIterable<Note>}

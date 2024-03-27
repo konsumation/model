@@ -1,10 +1,11 @@
+import { Base } from "./base.mjs";
 import { description } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
 /**
  *
  */
-export class Note {
+export class Note extends Base {
   time;
   /** @type {string} */ description;
 
@@ -22,26 +23,9 @@ export class Note {
     };
   }
 
-  static get attributeNames() {
-    return Object.keys(this.attributes);
-  }
-
   constructor(values) {
-    for (const a of this.attributeNames) {
-      this[a] = values[a];
-    }
-  }
-
-  get attributeNames() {
-    return this.constructor.attributeNames;
-  }
-
-  get attributeValues() {
-    return Object.fromEntries(
-      this.attributeNames
-        .filter(a => this[a] !== undefined)
-        .map(a => [a, this[a]])
-    );
+    super();
+    this.attributeValues = values;
   }
 
   async write(context) {}

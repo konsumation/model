@@ -16,6 +16,7 @@ test("text", async t => {
       "description=desc",
       '[meter "M1"]',
       "validFrom=1970-01-01T00:00:00.000Z",
+      "fractionalDigits=4",
       '[category "C2"]',
       '[meter "M1"]',
       "validFrom=1970-01-01T00:00:00.000Z"

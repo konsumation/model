@@ -1,3 +1,4 @@
+import { Base } from "./base.mjs";
 import { Category } from "./category.mjs";
 import {
   SCHEMA_VERSION_CURRENT,
@@ -14,7 +15,7 @@ export { Category, SCHEMA_VERSION_CURRENT, SCHEMA_VERSION_1, SCHEMA_VERSION_2 };
 /**
  * @property {string} schemaVersion
  */
-export class Master {
+export class Master extends Base {
   /** @type {string} */ schemaVersion = SCHEMA_VERSION_CURRENT;
 
   static get attributes() {
@@ -24,8 +25,8 @@ export class Master {
     };
   }
 
-  static get attributeNames() {
-    return Object.keys(this.attributes);
+  static get attributeNameMapping() {
+    return { };
   }
 
   /**
@@ -40,18 +41,6 @@ export class Master {
   /**
    */
   async close() {}
-
-  get attributeNames() {
-    return this.constructor.attributeNames;
-  }
-
-  get attributeValues() {
-    return Object.fromEntries(
-      this.attributeNames
-        .filter(a => this[a] !== undefined)
-        .map(a => [a, this[a]])
-    );
-  }
 
   /**
    * @return {AsyncIterable<Category>}
