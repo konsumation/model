@@ -22,6 +22,10 @@ export class Note {
     };
   }
 
+  static get attributeNames() {
+    return Object.keys(this.attributes);
+  }
+
   constructor(values) {
     for (const a of this.attributeNames) {
       this[a] = values[a];
@@ -29,7 +33,7 @@ export class Note {
   }
 
   get attributeNames() {
-    return Object.keys(this.constructor.attributes);
+    return this.constructor.attributeNames;
   }
 
   get attributeValues() {

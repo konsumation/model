@@ -12,7 +12,7 @@ export class Meter {
   /** @type {string} */ description;
   /** @type {string} */ unit;
   /** @type {string} */ serial;
-  /** @type {number} */ fractionalDigits;
+  /** @type {number} */ fractionalDigits = 2;
   /** @type {Date} */ validFrom;
 
   /**
@@ -33,6 +33,10 @@ export class Meter {
     };
   }
 
+  static get attributeNames() {
+    return Object.keys(this.attributes);
+  }
+
   constructor(values) {
     for (const a of this.attributeNames) {
       this[a] = values[a];
@@ -40,7 +44,7 @@ export class Meter {
   }
 
   get attributeNames() {
-    return Object.keys(this.constructor.attributes);
+    return this.constructor.attributeNames;
   }
 
   get attributeValues() {
@@ -59,6 +63,8 @@ export class Meter {
    * @return {AsyncIterable<{time:Date,value:number}>}
    */
   async *values(context) {}
+
+  async addValue(context,time,value) {}
 
   /**
    * @return {AsyncIterable<Note>}

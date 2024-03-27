@@ -25,6 +25,10 @@ export class Category {
     };
   }
 
+  static get attributeNames() {
+    return Object.keys(this.attributes);
+  }
+
   /**
    * @param {object} values
    */
@@ -35,7 +39,7 @@ export class Category {
   }
 
   get attributeNames() {
-    return Object.keys(this.constructor.attributes);
+    return this.constructor.attributeNames;
   }
 
   get attributeValues() {
@@ -53,6 +57,18 @@ export class Category {
    * @return {AsyncIterable<Meter>}
    */
   async *meters(context) {}
+
+  /**
+   * Add a value to the current meter
+   * @param {*} context 
+   * @param {*} time 
+   * @param {*} value 
+   * @returns {Promise<any>}
+   */
+  async addValue(context, time, value) {
+    const meter = await this.activeMeter(context);
+    return meter.addValue(context, time, value);
+  }
 
   /**
    * newest Meter
