@@ -1,11 +1,12 @@
 import { Base } from "./base.mjs";
 import { Note } from "./note.mjs";
+import { Category } from "./category.mjs";
 import {
   unit,
   serial,
   validFrom,
   fractionalDigits,
-  description
+  description,
 } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
@@ -18,6 +19,7 @@ export class Meter extends Base {
   /** @type {string} */ serial;
   /** @type {number} */ fractionalDigits = 2;
   /** @type {Date} */ validFrom;
+  /** @type {Category} */ category;
 
   /**
    * Name of the type in text dump
@@ -33,7 +35,8 @@ export class Meter extends Base {
       serial,
       description,
       validFrom,
-      fractionalDigits
+      fractionalDigits,
+      category: Category
     };
   }
 

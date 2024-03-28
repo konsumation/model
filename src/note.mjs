@@ -1,4 +1,5 @@
 import { Base } from "./base.mjs";
+import { Meter } from "./meter.mjs";
 import { description } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
@@ -8,6 +9,7 @@ import { toText } from "./util.mjs";
 export class Note extends Base {
   time;
   /** @type {string} */ description;
+  /** @type {Meter} */ meter;
 
   /**
    * Name of the type in text dump
@@ -19,7 +21,8 @@ export class Note extends Base {
 
   static get attributes() {
     return {
-      description
+      description,
+      meter: Meter
     };
   }
 
