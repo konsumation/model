@@ -1,10 +1,5 @@
 
 /**
- * Outdated schema version
- */
-export const SCHEMA_VERSION_1 = "1";
-
-/**
  * Schema with type + name
  */
 export const SCHEMA_VERSION_2 = "2";
