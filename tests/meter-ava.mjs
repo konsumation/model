@@ -1,9 +1,5 @@
 import test from "ava";
+import { testMeterConstructor } from "@konsumation/db-test";
 import { Meter } from "@konsumation/model";
 
-test("Meter attributeValues", t => {
-  const values = { serial: "M1", description: "sometext" };
-  const m = new Meter(values);
-
-  t.deepEqual(m.attributeValues, values);
-});
+test("Meter constructor", t => testMeterConstructor(t, Meter));

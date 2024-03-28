@@ -1,9 +1,5 @@
 import test from "ava";
+import { testNoteConstructor } from "@konsumation/db-test";
 import { Note } from "@konsumation/model";
 
-test("Note attributeValues", t => {
-  const values = { /* time: new Date(),*/ description: "sometext" };
-  const n = new Note(values);
-
-  t.deepEqual(n.attributeValues, values);
-});
+test("Note constructor", t => testNoteConstructor(t, Note));

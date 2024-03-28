@@ -1,12 +1,8 @@
 import test from "ava";
+import { testCategoryConstructor } from "@konsumation/db-test";
 import { Category } from "@konsumation/model";
 
-test("Category attributeValues", t => {
-  const values = { name: "C1", description: "sometext" };
-  const c = new Category(values);
 
-  t.is(c.name, "C1");
-  t.is(c.description, "sometext");
-  
-  t.deepEqual(c.attributeValues, values);
-});
+test("Category constructor", t => testCategoryConstructor(t, Category));
+
+
