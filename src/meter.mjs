@@ -45,6 +45,10 @@ export class Meter extends Base {
     this.attributeValues = values;
   }
 
+  toString() {
+    return this.serial;
+  }
+
   async write(context) {}
 
   async delete(context) {}

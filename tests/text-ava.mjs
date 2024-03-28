@@ -11,13 +11,16 @@ test("text", async t => {
 
   t.deepEqual(
     [
-      "schemaVersion=2",
+      "schemaVersion=3",
       '[category "C1"]',
       "description=desc",
       '[meter "M1"]',
       "validFrom=1970-01-01T00:00:00.000Z",
       "fractionalDigits=4",
       "category=C1",
+      '[note "0"]',
+      "description=a note",
+      "meter=M1",
       '[category "C2"]',
       '[meter "M1"]',
       "validFrom=1970-01-01T00:00:00.000Z",

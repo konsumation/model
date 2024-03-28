@@ -3,8 +3,16 @@ import { Master, Category, Meter, Note } from "@konsumation/model";
 export const data = {
   categories: [{ name: "C1", description: "desc" }, { name: "C2" }],
   meters: [
-    { serial: "M1", category: "C1", fractional_digits: 4 },
-    { serial: "M1", category: "C2" }
+    {
+      serial: "M1",
+      category: "C1",
+      fractional_digits: 4,
+      validFrom: new Date(0)
+    },
+    { serial: "M1", category: "C2", validFrom: new Date(0) }
+  ],
+  notes: [
+    { category: "C1", meter: "M1", time: 0 /*new Date(0)*/, description: "a note" }
   ]
 };
 
@@ -15,9 +23,13 @@ class MyMeter extends Meter {
     return { fractionalDigits: "fractional_digits" };
   }
 
-  constructor(values) {
-    super(values);
-    this.validFrom = new Date(0);
+  async *notes(context) {
+    for (const n of context.notes) {
+      if (n.category === this.category.name && n.meter === this.serial) {
+        n.meter = this;
+        yield new MyNote(n);
+      }
+    }
   }
 }
 
@@ -25,6 +37,7 @@ class MyCategory extends Category {
   async *meters(context) {
     for (const m of context.meters) {
       if (m.category === this.name) {
+        m.category = this;
         yield new MyMeter(m);
       }
     }

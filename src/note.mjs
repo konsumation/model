@@ -1,13 +1,13 @@
 import { Base } from "./base.mjs";
 import { Meter } from "./meter.mjs";
-import { description } from "./attributes.mjs";
+import { description, validFrom } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
 /**
  *
  */
 export class Note extends Base {
-  time;
+  /** @type {Date} */ time;
   /** @type {string} */ description;
   /** @type {Meter} */ meter;
 
@@ -21,6 +21,7 @@ export class Note extends Base {
 
   static get attributes() {
     return {
+      time: validFrom,
       description,
       meter: Meter
     };
@@ -29,6 +30,10 @@ export class Note extends Base {
   constructor(values) {
     super();
     this.attributeValues = values;
+  }
+
+  toString() {
+    return this.time;
   }
 
   async write(context) {}

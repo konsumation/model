@@ -31,6 +31,10 @@ export class Category extends Base {
     this.attributeValues = values;
   }
 
+  toString() {
+    return this.name;
+  }
+  
   /**
    * Write into store.
    */
