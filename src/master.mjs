@@ -3,14 +3,15 @@ import { Category } from "./category.mjs";
 import {
   SCHEMA_VERSION_CURRENT,
   SCHEMA_VERSION_1,
-  SCHEMA_VERSION_2
+  SCHEMA_VERSION_2,
+  SCHEMA_VERSION_3
 } from "./consts.mjs";
 export { Meter } from "./meter.mjs";
 export { Note } from "./note.mjs";
 import { toText } from "./util.mjs";
 import { description, schemaVersion } from "./attributes.mjs";
 export * from "./attributes.mjs";
-export { Category, SCHEMA_VERSION_CURRENT, SCHEMA_VERSION_1, SCHEMA_VERSION_2 };
+export { Category, SCHEMA_VERSION_CURRENT, SCHEMA_VERSION_1, SCHEMA_VERSION_2, SCHEMA_VERSION_3 };
 
 /**
  * @property {string} schemaVersion
