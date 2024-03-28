@@ -1,5 +1,4 @@
 export class Base {
-
   /**
    * Attribute definitions.
    * @return {object}
@@ -43,6 +42,7 @@ export class Base {
         .map(name => [mapping[name] || name, this[name]])
     );
   }
+
   /**
    * Sets values with external attribute names.
    * @param {object} values
