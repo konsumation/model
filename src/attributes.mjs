@@ -3,6 +3,7 @@
  */
 export const description = { type: "string", writable: true };
 export const name = { type: "string", writable: true };
+export const id = { type: "number", writable: true };
 
 /**
  * Physical unit.
