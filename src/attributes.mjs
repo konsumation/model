@@ -1,3 +1,5 @@
+import { SCHEMA_VERSION_CURRENT } from "./consts.mjs";
+
 /**
  * Description of the content.
  */
@@ -13,7 +15,8 @@ export const unit = { type: "string", writable: true };
 export const schemaVersion = {
   type: "string",
   writable: true,
-  mandatory: true
+  mandatory: true,
+  default: SCHEMA_VERSION_CURRENT
 };
 export const serial = { type: "string", writable: true };
 export const validFrom = { type: "timestamp", writable: true };
