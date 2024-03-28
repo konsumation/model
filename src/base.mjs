@@ -36,11 +36,36 @@ export class Base {
     // @ts-ignore
     const mapping = this.constructor.attributeNameMapping;
 
-    return Object.fromEntries(
-      this.attributeNames
-        .filter(name => this[name] !== undefined)
-        .map(name => [mapping[name] || name, this[name]])
-    );
+    const values = {};
+
+    for (const key of this.attributeNames) {
+      if (this[key] !== undefined) {
+        if (mapping[key] === null) {
+        } else {
+          values[mapping[key] || key] = this[key];
+        }
+      }
+    }
+
+    for (const [exp, key] of Object.entries(mapping)) {
+      if (key !== null) {
+        const path = exp.split(/\./);
+        const last = path.pop();
+
+        let o = this;
+        for (const k of path) {
+          o = o[k];
+        }
+
+        if (o) {
+          values[key] = o[last];
+        } else {
+          // throw new Error(`unable to access ${exp}`);
+        }
+      }
+    }
+
+    return values;
   }
 
   /**
@@ -50,8 +75,13 @@ export class Base {
   set attributeValues(values) {
     // @ts-ignore
     const mapping = this.constructor.attributeNameMapping;
+
     for (const name of this.attributeNames) {
       this[name] = values[mapping[name] || name];
     }
+  }
+
+  toJSON() {
+    return this.attributeValues;
   }
 }
