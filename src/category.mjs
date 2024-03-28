@@ -31,19 +31,27 @@ export class Category extends Base {
     this.attributeValues = values;
   }
 
+  /**
+   * Write into store.
+   */
   async write(context) {}
+
+  /**
+   * Delete from store.
+   *&
   async delete(context) {}
 
   /**
+   * List assigned meters.
    * @return {AsyncIterable<Meter>}
    */
   async *meters(context) {}
 
   /**
-   * Add a value to the current meter
+   * Add a value to the active meter.
    * @param {*} context 
-   * @param {*} time 
-   * @param {*} value 
+   * @param {Date} time 
+   * @param {number} value 
    * @returns {Promise<any>}
    */
   async addValue(context, time, value) {
@@ -52,7 +60,7 @@ export class Category extends Base {
   }
 
   /**
-   * newest Meter
+   * Currently active Meter.
    * @returns Promise<Meter|undefined>
    */
   async activeMeter(context) {

@@ -57,6 +57,7 @@ export class Meter extends Base {
   async addValue(context, time, value) {}
 
   /**
+   * List assigned Notes.
    * @return {AsyncIterable<Note>}
    */
   async *notes(context) {}
