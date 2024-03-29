@@ -12,8 +12,21 @@ export const data = {
     { serial: "M1", category: "C2", validFrom: new Date(0) }
   ],
   notes: [
-    { category: "C1", meter: "M1", time: 0 /*new Date(0)*/, description: "a note" }
-  ]
+    {
+      category: "C1",
+      meter: "M1",
+      time: 0 /*new Date(0)*/,
+      description: "a note"
+    }
+  ],
+  values: []
+};
+
+export const emptyData = {
+  categories: [],
+  meters: [],
+  notes: [],
+  values: [],
 };
 
 class MyNote extends Note {}
@@ -54,6 +67,10 @@ class MyMaster extends Master {
     for (const c of this.context.categories) {
       yield new MyCategory(c);
     }
+  }
+
+  async fromText(input) {
+    return super.fromText(input, [MyCategory, MyMeter, MyNote]);
   }
 }
 
