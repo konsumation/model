@@ -61,6 +61,10 @@ export class Meter extends Base {
     this.#unit = value;
   }
 
+  get name() {
+    return this.serial;
+  }
+  
   toString() {
     return this.serial;
   }
