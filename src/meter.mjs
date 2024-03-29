@@ -2,24 +2,24 @@ import { Base } from "./base.mjs";
 import { Note } from "./note.mjs";
 import { Category } from "./category.mjs";
 import {
-  unit,
   serial,
   validFrom,
-  fractionalDigits,
   description,
+  unit,
+  fractionalDigits,
 } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
 /**
- * 
+ *
  */
 export class Meter extends Base {
   /** @type {string} */ description;
-  /** @type {string} */ unit;
   /** @type {string} */ serial;
-  /** @type {number} */ fractionalDigits = 2;
   /** @type {Date} */ validFrom;
   /** @type {Category} */ category;
+  /** @type {number} */ #fractionalDigits = 2;
+  /** @type {string} */ #unit;
 
   /**
    * Name of the type in text dump
@@ -45,6 +45,22 @@ export class Meter extends Base {
     this.attributeValues = values;
   }
 
+  get fractionalDigits() {
+    return this.#fractionalDigits || this.category?.fractionalDigits;
+  }
+
+  set fractionalDigits(value) {
+    this.#fractionalDigits = value;
+  }
+
+  get unit() {
+    return this.#unit || this.category?.unit;
+  }
+
+  set unit(value) {
+    this.#unit = value;
+  }
+
   toString() {
     return this.serial;
   }
@@ -58,6 +74,12 @@ export class Meter extends Base {
    */
   async *values(context) {}
 
+  /**
+   * Write new value
+   * @param {*} context
+   * @param {Date} time
+   * @param {number} value
+   */
   async addValue(context, time, value) {}
 
   /**

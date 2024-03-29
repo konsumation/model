@@ -26,6 +26,11 @@ class MyBase extends Base {
   }
 }
 
+test("set undefined attributes", t => {
+  const category = new Category(undefined);
+  t.truthy(category);
+});
+
 test("attribute expressions category.name", t => {
   const date = new Date();
   const category = new Category({ name: "C1" });

@@ -1,6 +1,6 @@
 import { Base } from "./base.mjs";
 import { Meter } from "./meter.mjs";
-import { name, description } from "./attributes.mjs";
+import { name, description, unit, fractionalDigits } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
 /**
@@ -10,6 +10,8 @@ import { toText } from "./util.mjs";
 export class Category extends Base {
   /** @type {string} */ name;
   /** @type {string} */ description;
+  /** @type {number} */ fractionalDigits = fractionalDigits.default;
+  /** @type {string} */ unit;
 
   /**
    * Name of the type in text dump
@@ -22,7 +24,9 @@ export class Category extends Base {
   static get attributes() {
     return {
       name,
-      description
+      description,
+      fractionalDigits,
+      unit
     };
   }
 
@@ -34,7 +38,7 @@ export class Category extends Base {
   toString() {
     return this.name;
   }
-  
+
   /**
    * Write into store.
    */
@@ -42,7 +46,7 @@ export class Category extends Base {
 
   /**
    * Delete from store.
-   *&
+   */
   async delete(context) {}
 
   /**
@@ -53,9 +57,9 @@ export class Category extends Base {
 
   /**
    * Add a value to the active meter.
-   * @param {*} context 
-   * @param {Date} time 
-   * @param {number} value 
+   * @param {*} context
+   * @param {Date} time
+   * @param {number} value
    * @returns {Promise<any>}
    */
   async addValue(context, time, value) {

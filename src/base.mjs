@@ -57,10 +57,8 @@ export class Base {
           o = o[k];
         }
 
-        if (o) {
+        if (o?.[last] !== undefined) {
           values[key] = o[last];
-        } else {
-          // throw new Error(`unable to access ${exp}`);
         }
       }
     }
@@ -73,11 +71,13 @@ export class Base {
    * @param {object} values
    */
   set attributeValues(values) {
-    // @ts-ignore
-    const mapping = this.constructor.attributeNameMapping;
+    if (values) {
+      // @ts-ignore
+      const mapping = this.constructor.attributeNameMapping;
 
-    for (const name of this.attributeNames) {
-      this[name] = values[mapping[name] || name];
+      for (const name of this.attributeNames) {
+        this[name] = values[mapping[name] || name];
+      }
     }
   }
 
