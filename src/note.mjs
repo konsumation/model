@@ -1,13 +1,13 @@
 import { Base } from "./base.mjs";
 import { Meter } from "./meter.mjs";
-import { description, validFrom } from "./attributes.mjs";
+import { description, name } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
 /**
  *
  */
 export class Note extends Base {
-  /** @type {Date} */ time;
+  /** @type {string} */ name;
   /** @type {string} */ description;
   /** @type {Meter} */ meter;
 
@@ -19,9 +19,13 @@ export class Note extends Base {
     return "note";
   }
 
+  static get parentTypeName() {
+    return "meter";
+  }
+
   static get attributes() {
     return {
-      time: validFrom,
+      name,
       description,
       meter: Meter
     };
@@ -33,7 +37,7 @@ export class Note extends Base {
   }
 
   toString() {
-    return this.time;
+    return this.name;
   }
 
   async write(context) {}
@@ -41,6 +45,6 @@ export class Note extends Base {
   async delete(context) {}
 
   async *text(context) {
-    yield* toText(context, this, "time");
+    yield* toText(context, this, "name");
   }
 }
