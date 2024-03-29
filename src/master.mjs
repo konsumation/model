@@ -128,6 +128,8 @@ export class Master extends Base {
       }
     }
 
+    await insertObject();
+
     return statistics;
   }
 }
