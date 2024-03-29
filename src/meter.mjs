@@ -2,11 +2,12 @@ import { Base } from "./base.mjs";
 import { Note } from "./note.mjs";
 import { Category } from "./category.mjs";
 import {
+  name,
   serial,
   validFrom,
   description,
   unit,
-  fractionalDigits,
+  fractionalDigits
 } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
@@ -14,6 +15,7 @@ import { toText } from "./util.mjs";
  *
  */
 export class Meter extends Base {
+  /** @type {string} */ name;
   /** @type {string} */ description;
   /** @type {string} */ serial;
   /** @type {Date} */ validFrom;
@@ -29,11 +31,16 @@ export class Meter extends Base {
     return "meter";
   }
 
+  static get parentTypeName() {
+    return "category";
+  }
+
   static get attributes() {
     return {
-      unit,
-      serial,
+      name,
       description,
+      serial,
+      unit,
       validFrom,
       fractionalDigits,
       category: Category
@@ -61,12 +68,8 @@ export class Meter extends Base {
     this.#unit = value;
   }
 
-  get name() {
-    return this.serial;
-  }
-  
   toString() {
-    return this.serial;
+    return this.name;
   }
 
   async write(context) {}
@@ -93,6 +96,6 @@ export class Meter extends Base {
   async *notes(context) {}
 
   async *text(context) {
-    yield* toText(context, this, "serial", this.notes(context));
+    yield* toText(context, this, "name", this.notes(context));
   }
 }
