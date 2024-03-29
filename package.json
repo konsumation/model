@@ -34,7 +34,7 @@
     "lint:typescript": "tsc --allowJs --checkJs --noEmit --resolveJsonModule -t esnext -m esnext --module nodenext --moduleResolution nodenext ./src**/*.mjs"
   },
   "devDependencies": {
-    "@konsumation/db-test": "^1.8.4",
+    "@konsumation/db-test": "^1.8.6",
     "ava": "^6.1.2",
     "browser-ava": "^2.2.7",
     "c8": "^9.1.0",
