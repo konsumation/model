@@ -62,7 +62,6 @@ export class Master extends Base {
     let values = {};
     let object;
     let last = {};
-    let parentType;
 
     const insertObject = async () => {
       if (typeLookup[type]) {
