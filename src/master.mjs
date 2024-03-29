@@ -7,7 +7,7 @@ import { toText } from "./util.mjs";
 import { description, schemaVersion } from "./attributes.mjs";
 export * from "./attributes.mjs";
 export * from "./consts.mjs";
-export { Category, Meter, Note };
+export { Category, Meter, Note, Base };
 
 /**
  * @property {string} schemaVersion
