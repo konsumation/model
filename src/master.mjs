@@ -66,6 +66,7 @@ export class Master extends Base {
         statistics[type] = statistics[type] + 1;
         object = new typeLookup[type](values);
         type = undefined;
+        // @ts-ignore
         values = {};
         // @ts-ignore
         return object.write(this.context);

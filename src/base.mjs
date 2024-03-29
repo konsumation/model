@@ -1,7 +1,10 @@
+/**
+ * 
+ */
 export class Base {
   /**
    * Attribute definitions.
-   * @return {object}
+   * @return {Object}
    */
   static get attributes() {
     return {};
@@ -9,7 +12,7 @@ export class Base {
 
   /**
    * Maping of attribute names from internal (javascript) to external (database).
-   * @return {object}
+   * @return {Object}
    */
   static get attributeNameMapping() {
     return {};
@@ -30,7 +33,7 @@ export class Base {
 
   /**
    * Object keys are the mapped external attribute names.
-   * @return {object}
+   * @return {Object}
    */
   get attributeValues() {
     // @ts-ignore
@@ -68,7 +71,7 @@ export class Base {
 
   /**
    * Sets values with external attribute names.
-   * @param {object} values
+   * @param {Object} values
    */
   set attributeValues(values) {
     if (values) {
