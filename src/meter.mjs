@@ -80,7 +80,7 @@ export class Meter extends Base {
    * @param {Date} time
    * @param {number} value
    */
-  async addValue(context, time, value) {}
+  async writeValue(context, time, value) {}
 
   /**
    * List assigned Notes.

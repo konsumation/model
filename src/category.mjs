@@ -62,9 +62,9 @@ export class Category extends Base {
    * @param {number} value
    * @returns {Promise<any>}
    */
-  async addValue(context, time, value) {
+  async writeValue(context, time, value) {
     const meter = await this.activeMeter(context);
-    return meter.addValue(context, time, value);
+    return meter.writeValue(context, time, value);
   }
 
   /**
