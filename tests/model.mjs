@@ -1,58 +1,88 @@
 import { Master, Category, Meter, Note } from "@konsumation/model";
 
 export const data = {
-  categories: [{ name: "C1", description: "desc" }, { name: "C2" }],
-  meters: [
-    {
-      serial: "M1",
-      category: "C1",
-      fractional_digits: 4,
-      validFrom: new Date(0)
+  categories: {
+    C1: {
+      description: "desc",
+      meters: {
+        M1: {
+          fractional_digits: 4,
+          validFrom: new Date(0),
+          notes: {
+            [new Date(0).toISOString()]: {
+              description: "a note"
+            }
+          },
+          values: [{ date: new Date(0), value: 1.0 }]
+        }
+      }
     },
-    { serial: "M1", category: "C2", validFrom: new Date(0) }
-  ],
-  notes: [
-    {
-      category: "C1",
-      meter: "M1",
-      time: 0 /*new Date(0)*/,
-      description: "a note"
+    C2: {
+      meters: { M1: { validFrom: new Date(0), values: [], notes: {} } }
     }
-  ],
-  values: []
+  }
 };
 
 export const emptyData = {
-  categories: [],
-  meters: [],
-  notes: [],
-  values: [],
+  categories: {}
 };
 
-class MyNote extends Note {}
+class MyNote extends Note {
+  async write(data) {
+    const note = this.attributeValues;
+    console.log("NOTE WRITE", note);
+    data.categories[this.meter.category.name].meters[this.meter.name].notes[this.name] = note;
+  }
+}
 
 class MyMeter extends Meter {
   static get attributeNameMapping() {
     return { fractionalDigits: "fractional_digits" };
   }
 
-  async *notes(context) {
-    for (const n of context.notes) {
-      if (n.category === this.category.name && n.meter === this.serial) {
-        n.meter = this;
-        yield new MyNote(n);
-      }
+  async write(data) {
+    const meter = this.attributeValues;
+    meter.values = [];
+    meter.notes = [];
+   // console.log("METER WRITE", meter);
+    data.categories[this.category.name].meters[this.name] = meter;
+  }
+
+  async writeValue(data, date, value) {
+   // console.log("VALUE WRITE", date, value);
+    data.categories[this.category.name].meters[this.name].values.push({
+      date,
+      value
+    });
+  }
+
+  async *notes(data) {
+    //console.log(this.name, this.category.name, data.categories[this.category.name].meters);
+    for (const [name, note] of Object.entries(
+      data.categories[this.category.name].meters[this.name].notes
+    )) {
+      note.name = name;
+      note.meter = this;
+      yield new MyNote(note);
     }
   }
 }
 
 class MyCategory extends Category {
-  async *meters(context) {
-    for (const m of context.meters) {
-      if (m.category === this.name) {
-        m.category = this;
-        yield new MyMeter(m);
-      }
+  async write(data) {
+    const category = this.attributeValues;
+    category.meters = {};
+    //console.log("CATEGORY WRITE", category);
+    data.categories[category.name] = category;
+  }
+
+  async *meters(data) {
+    for (const [name, meter] of Object.entries(
+      data.categories[this.name].meters
+    )) {
+      meter.name = name;
+      meter.category = this;
+      yield new MyMeter(meter);
     }
   }
 }
@@ -64,8 +94,9 @@ class MyMaster extends Master {
   }
 
   async *categories(context) {
-    for (const c of this.context.categories) {
-      yield new MyCategory(c);
+    for (const [name, category] of Object.entries(this.context.categories)) {
+      category.name = name;
+      yield new MyCategory(category);
     }
   }
 
