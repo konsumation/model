@@ -84,6 +84,11 @@ export class Base {
     }
   }
 
+  get typeName() {
+    // @ts-ignore
+    return this.constructor.typeName;
+  }
+
   toJSON() {
     return this.attributeValues;
   }
