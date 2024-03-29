@@ -90,6 +90,13 @@ export class Meter extends Base {
   async writeValue(context, time, value) {}
 
   /**
+   * Delete a value
+   * @param {*} context
+   * @param {Date} time
+   */
+  async deleteValue(context, time) {}
+
+  /**
    * List assigned Notes.
    * @return {AsyncIterable<Note>}
    */
