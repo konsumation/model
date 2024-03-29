@@ -58,17 +58,28 @@ export class Master extends Base {
     statistics.value = 0;
 
     let buffer = "";
-    let type, identifier;
+    let type, name;
     let values = {};
     let object;
+    let last = {};
+    let parentType;
 
     const insertObject = async () => {
       if (typeLookup[type]) {
-        statistics[type] = statistics[type] + 1;
+        statistics[type]++;
+
+        const parentTypeName = typeLookup[type].parentTypeName;
+
+        if (last[parentTypeName]) {
+          values[parentTypeName] = last[parentTypeName];
+        }
+
         object = new typeLookup[type](values);
+        last[type] = object;
+
         type = undefined;
         // @ts-ignore
-        values = {};
+        values = undefined;
         // @ts-ignore
         return object.write(this.context);
       }
@@ -85,8 +96,8 @@ export class Master extends Base {
           if (m) {
             await insertObject();
             type = m[1];
-            identifier = m[2];
-            values.name = identifier; // TODO key attribute
+            name = m[2];
+            values = { name };
           } else {
             m = line.match(/^([\d\.]+)\s+([\d\.]+)/);
             if (m) {
@@ -95,10 +106,23 @@ export class Master extends Base {
               object.writeValue(
                 // @ts-ignore
                 this.context,
-                parseFloat(m[2]),
+                new Date(parseFloat(m[2])),
                 parseFloat(m[1])
               );
               statistics.value++;
+            } else {
+              m = line.match(/^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d)\s+([\d\.]+)/);
+              if (m) {
+                await insertObject();
+                // @ts-ignore
+                object.writeValue(
+                  // @ts-ignore
+                  this.context,
+                  new Date(m[2]),
+                  parseFloat(m[1])
+                );
+                statistics.value++;
+              }
             }
           }
         }
