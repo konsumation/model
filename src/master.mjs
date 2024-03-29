@@ -1,13 +1,13 @@
 import { Base } from "./base.mjs";
 import { Category } from "./category.mjs";
+import { Meter } from "./meter.mjs";
+import { Note } from "./note.mjs";
 import { SCHEMA_VERSION_CURRENT } from "./consts.mjs";
-export { Meter } from "./meter.mjs";
-export { Note } from "./note.mjs";
 import { toText } from "./util.mjs";
 import { description, schemaVersion } from "./attributes.mjs";
 export * from "./attributes.mjs";
 export * from "./consts.mjs";
-export { Category };
+export { Category, Meter, Note };
 
 /**
  * @property {string} schemaVersion
@@ -55,6 +55,7 @@ export class Master extends Base {
   async fromText(input, factories) {
     const typeLookup = Object.fromEntries(factories.map(f => [f.typeName, f]));
     const statistics = Object.fromEntries(factories.map(f => [f.typeName, 0]));
+    statistics.value = 0;
 
     let buffer = "";
     let type, identifier;
@@ -97,6 +98,7 @@ export class Master extends Base {
                 parseFloat(m[2]),
                 parseFloat(m[1])
               );
+              statistics.value++;
             }
           }
         }
