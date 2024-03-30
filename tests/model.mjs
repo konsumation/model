@@ -30,7 +30,6 @@ export const emptyData = {
 class MyNote extends Note {
   async write(data) {
     const note = this.attributeValues;
-    console.log("NOTE WRITE", note);
     data.categories[this.meter.category.name].meters[this.meter.name].notes[this.name] = note;
   }
 }
