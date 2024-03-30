@@ -56,6 +56,16 @@ export class Category extends Base {
   async *meters(context) {}
 
   /**
+   * All values from all meters
+   * @return {AsyncIterable<{time:Date,value:number}>}
+   */
+  async *values(context) {
+    for await (const meter of this.meters(context)) {
+      yield* meter.values(context);
+    }
+  }
+
+  /**
    * Add a value to the active meter.
    * @param {*} context
    * @param {Date} time
