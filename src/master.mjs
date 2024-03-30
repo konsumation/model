@@ -105,8 +105,8 @@ export class Master extends Base {
               object.writeValue(
                 // @ts-ignore
                 this.context,
-                new Date(parseFloat(m[2])),
-                parseFloat(m[1])
+                new Date(parseFloat(m[1])),
+                parseFloat(m[2])
               );
               statistics.value++;
             } else {
@@ -117,8 +117,8 @@ export class Master extends Base {
                 object.writeValue(
                   // @ts-ignore
                   this.context,
-                  new Date(m[2]),
-                  parseFloat(m[1])
+                  new Date(m[1]),
+                  parseFloat(m[2])
                 );
                 statistics.value++;
               }
