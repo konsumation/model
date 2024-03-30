@@ -22,11 +22,11 @@ export class Master extends Base {
 
   /**
    *
-   * @param {Object|string} config
+   * @param {Object|string} values
    * @return {Promise<Master>}
    */
-  static async initialize(config) {
-    return new this(config);
+  static async initialize(values) {
+    return new this(values);
   }
 
   constructor(values) {
@@ -62,6 +62,8 @@ export class Master extends Base {
     const statistics = Object.fromEntries(factories.map(f => [f.typeName, 0]));
     statistics.value = 0;
 
+    const context = this.context;
+
     let buffer = "";
     let type, name;
     let values = {};
@@ -85,48 +87,38 @@ export class Master extends Base {
         // @ts-ignore
         values = undefined;
         // @ts-ignore
-        return object.write(this.context);
+        return object.write(context);
       }
     };
 
     for await (const chunk of input) {
       buffer += chunk;
       for (const line of buffer.split(/\n/)) {
-        let m = line.match(/^(\w+)\s*=\s*(.*)/);
+        let m = line.match(
+          /^(([\d\.]{10,})|(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d))\s+([\d\.]+)/
+        );
         if (m) {
-          values[m[1]] = m[2];
+          await insertObject();
+          // @ts-ignore
+          object.writeValue(
+            // @ts-ignore
+            context,
+            m[2] ?  new Date(parseFloat(m[2])) : new Date(m[3]),
+            parseFloat(m[4])
+          );
+
+          statistics.value++;
         } else {
-          m = line.match(/^\[(\w+)\s+"([^"]+)"\]/);
+          m = line.match(/^(\w+)\s*=\s*(.*)/);
           if (m) {
-            await insertObject();
-            type = m[1];
-            name = m[2];
-            values = { name };
+            values[m[1]] = m[2];
           } else {
-            m = line.match(/^([\d\.]+)\s+([\d\.]+)/);
+            m = line.match(/^\[(\w+)\s+"([^"]+)"\]/);
             if (m) {
               await insertObject();
-              // @ts-ignore
-              object.writeValue(
-                // @ts-ignore
-                this.context,
-                new Date(parseFloat(m[1])),
-                parseFloat(m[2])
-              );
-              statistics.value++;
-            } else {
-              m = line.match(/^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d)\s+([\d\.]+)/);
-              if (m) {
-                await insertObject();
-                // @ts-ignore
-                object.writeValue(
-                  // @ts-ignore
-                  this.context,
-                  new Date(m[1]),
-                  parseFloat(m[2])
-                );
-                statistics.value++;
-              }
+              type = m[1];
+              name = m[2];
+              values = { name };
             }
           }
         }
