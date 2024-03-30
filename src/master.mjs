@@ -13,8 +13,6 @@ export { Category, Meter, Note, Base };
  * @property {string} schemaVersion
  */
 export class Master extends Base {
-  /** @type {string} */ schemaVersion = SCHEMA_VERSION_CURRENT;
-
   static get attributes() {
     return {
       description,
@@ -33,6 +31,13 @@ export class Master extends Base {
 
   constructor(values) {
     super();
+    this.attributeValues = values;
+  }
+
+  set schemaVersion(value) {}
+
+  get schemaVersion() {
+    return SCHEMA_VERSION_CURRENT;
   }
 
   /**
