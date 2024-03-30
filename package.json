@@ -44,12 +44,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/konsumation/konsum-model.git"
+    "url": "git+https://github.com/konsumation/model.git"
   },
   "bugs": {
-    "url": "https://github.com/konsumation/konsum-model/issues"
+    "url": "https://github.com/konsumation/model/issues"
   },
-  "homepage": "https://github.com/konsumation/konsum-model#readme",
+  "homepage": "https://github.com/konsumation/model#readme",
   "template": {
     "inheritFrom": [
       "arlac77/template-browser-ava",
