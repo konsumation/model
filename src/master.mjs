@@ -2,7 +2,7 @@ import { Base } from "./base.mjs";
 import { Category } from "./category.mjs";
 import { Meter } from "./meter.mjs";
 import { Note } from "./note.mjs";
-import { SCHEMA_VERSION_CURRENT } from "./consts.mjs";
+import { SCHEMA_VERSION_CURRENT, SCHEMA_VERSION_2, SCHEMA_VERSION_3 } from "./consts.mjs";
 import { toText } from "./util.mjs";
 import { description, schemaVersion } from "./attributes.mjs";
 export * from "./attributes.mjs";
@@ -27,6 +27,11 @@ export class Master extends Base {
    */
   static async initialize(values) {
     return new this(values);
+  }
+
+  static get supportedSchemaVersions()
+  {
+    return new Set([SCHEMA_VERSION_2, SCHEMA_VERSION_3]);
   }
 
   constructor(values) {
