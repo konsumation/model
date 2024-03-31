@@ -79,7 +79,16 @@ export class Base {
       const mapping = this.constructor.attributeNameMapping;
 
       for (const name of this.attributeNames) {
-        this[name] = values[mapping[name] || name];
+        const value = values[mapping[name] || name];
+
+        if(value === undefined) {
+     /*     if(this[name] !== undefined) {
+            this[name] = value;
+          }*/
+        }
+        else {
+          this[name] = value;
+        }
       }
     }
   }

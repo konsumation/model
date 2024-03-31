@@ -9,11 +9,13 @@ test("text", async t => {
     lines.push(line);
   }
 
+  //console.log(lines);
   t.deepEqual(
     [
       "schemaVersion=3",
       '[category "C1"]',
       "description=desc",
+      "fractionalDigits=2",
       '[meter "M1"]',
       "validFrom=1970-01-01T00:00:00.000Z",
       "fractionalDigits=4",
@@ -22,8 +24,10 @@ test("text", async t => {
       "description=a note",
       "meter=M1",
       '[category "C2"]',
+      "fractionalDigits=2",
       '[meter "M1"]',
       "validFrom=1970-01-01T00:00:00.000Z",
+      "fractionalDigits=2",
       "category=C2"
     ],
     lines

@@ -1,6 +1,5 @@
 import test from "ava";
-import { Base } from "../src/base.mjs";
-import { Category, validFrom } from "@konsumation/model";
+import { Master, Base, Category, validFrom } from "@konsumation/model";
 
 class MyBase extends Base {
   static get attributes() {
@@ -29,6 +28,11 @@ class MyBase extends Base {
 test("set undefined attributes", t => {
   const category = new Category(undefined);
   t.truthy(category);
+});
+
+test("set undefined value", t => {
+  const master = new Master({ schemaVersion: undefined });
+  t.is(master.schemaVersion, "3");
 });
 
 test("attribute expressions category.name", t => {
