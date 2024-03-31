@@ -20,7 +20,7 @@ export class Meter extends Base {
   /** @type {string} */ serial;
   /** @type {Date} */ validFrom;
   /** @type {Category} */ category;
-  /** @type {number} */ #fractionalDigits = 2;
+  /** @type {number} */ #fractionalDigits;
   /** @type {string} */ #unit;
 
   /**
