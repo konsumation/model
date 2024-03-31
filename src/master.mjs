@@ -45,6 +45,15 @@ export class Master extends Base {
   async close() {}
 
   /**
+   * Add a category.
+   * @param {Object} values 
+   * @returns {Promise<Category>}
+   */
+  async addCategory(values) {
+    return new Category(values);
+  }
+
+  /**
    * @return {AsyncIterable<Category>}
    */
   async *categories(context) {}
