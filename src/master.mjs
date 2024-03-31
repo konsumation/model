@@ -2,7 +2,11 @@ import { Base } from "./base.mjs";
 import { Category } from "./category.mjs";
 import { Meter } from "./meter.mjs";
 import { Note } from "./note.mjs";
-import { SCHEMA_VERSION_CURRENT, SCHEMA_VERSION_2, SCHEMA_VERSION_3 } from "./consts.mjs";
+import {
+  SCHEMA_VERSION_CURRENT,
+  SCHEMA_VERSION_2,
+  SCHEMA_VERSION_3
+} from "./consts.mjs";
 import { toText } from "./util.mjs";
 import { description, schemaVersion } from "./attributes.mjs";
 export * from "./attributes.mjs";
@@ -29,8 +33,7 @@ export class Master extends Base {
     return new this(values);
   }
 
-  static get supportedSchemaVersions()
-  {
+  static get supportedSchemaVersions() {
     return new Set([SCHEMA_VERSION_2, SCHEMA_VERSION_3]);
   }
 
@@ -39,7 +42,15 @@ export class Master extends Base {
     this.attributeValues = values;
   }
 
-  set schemaVersion(value) {}
+  set schemaVersion(value) {
+    if (!this.constructor.supportedSchemaVersions.has(value)) {
+      throw new Error(
+        `Unsupported schema version ${value} only supporting ${[
+          ...this.constructor.supportedSchemaVersions
+        ]}`
+      );
+    }
+  }
 
   get schemaVersion() {
     return SCHEMA_VERSION_CURRENT;
@@ -51,7 +62,7 @@ export class Master extends Base {
 
   /**
    * Add a category.
-   * @param {Object} values 
+   * @param {Object} values
    * @returns {Promise<Category>}
    */
   async addCategory(values) {
@@ -85,6 +96,13 @@ export class Master extends Base {
     let last = {};
 
     const insertObject = async () => {
+      if (type === undefined) {
+        this.attributeValues = values;
+
+        // @ts-ignore
+        values = undefined;
+        return;
+      }
       if (typeLookup[type]) {
         statistics[type]++;
 
@@ -117,7 +135,7 @@ export class Master extends Base {
           object.writeValue(
             // @ts-ignore
             context,
-            m[2] ?  new Date(parseFloat(m[2])) : new Date(m[3]),
+            m[2] ? new Date(parseFloat(m[2])) : new Date(m[3]),
             parseFloat(m[4])
           );
 
