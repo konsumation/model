@@ -43,6 +43,8 @@ export class Master extends Base {
     return new this(values);
   }
 
+  context;
+
   constructor(values) {
     super();
     this.attributeValues = values;
@@ -81,14 +83,14 @@ export class Master extends Base {
   /**
    * @return {AsyncIterable<Category>}
    */
-  async *categories(context) {}
+  async *categories() {}
 
   /**
    * Create text representation
    * @return {AsyncIterable<string>}
    */
-  async *text(context) {
-    yield* toText(context, this, undefined, this.categories(context));
+  async *text() {
+    yield* toText(this.context, this, undefined, this.categories());
   }
 
   async fromText(input) {
