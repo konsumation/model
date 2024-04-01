@@ -23,6 +23,12 @@ export class Meter extends Base {
   /** @type {number} */ #fractionalDigits;
   /** @type {string} */ #unit;
 
+  static get factories() {
+    return {
+      [Note.typeName]: Note
+    };
+  }
+
   /**
    * Name of the type in text dump
    * @return {string}

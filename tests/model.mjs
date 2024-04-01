@@ -30,11 +30,19 @@ export const emptyData = {
 class MyNote extends Note {
   async write(data) {
     const note = this.attributeValues;
-    data.categories[this.meter.category.name].meters[this.meter.name].notes[this.name] = note;
+    data.categories[this.meter.category.name].meters[this.meter.name].notes[
+      this.name
+    ] = note;
   }
 }
 
 class MyMeter extends Meter {
+  static get factories() {
+    return {
+      [MyNote.typeName]: MyNote
+    };
+  }
+
   static get attributeNameMapping() {
     return { fractionalDigits: "fractional_digits" };
   }
@@ -43,12 +51,12 @@ class MyMeter extends Meter {
     const meter = this.attributeValues;
     meter.values = [];
     meter.notes = [];
-   // console.log("METER WRITE", meter);
+    // console.log("METER WRITE", meter);
     data.categories[this.category.name].meters[this.name] = meter;
   }
 
   async writeValue(data, date, value) {
-   // console.log("VALUE WRITE", date, value);
+    // console.log("VALUE WRITE", date, value);
     data.categories[this.category.name].meters[this.name].values.push({
       date,
       value
@@ -68,6 +76,12 @@ class MyMeter extends Meter {
 }
 
 class MyCategory extends Category {
+  static get factories() {
+    return {
+      [MyMeter.typeName]: MyMeter
+    };
+  }
+
   async write(data) {
     const category = this.attributeValues;
     category.meters = {};
@@ -87,6 +101,12 @@ class MyCategory extends Category {
 }
 
 class MyMaster extends Master {
+  static get factories() {
+    return {
+      [MyCategory.typeName]: MyCategory
+    };
+  }
+
   constructor(data) {
     super(data);
     this.context = data;

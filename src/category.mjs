@@ -13,6 +13,12 @@ export class Category extends Base {
   /** @type {number} */ fractionalDigits = fractionalDigits.default;
   /** @type {string} */ unit;
 
+  static get factories() {
+    return {
+      [Meter.typeName]: Meter
+    };
+  }
+
   /**
    * Name of the type in text dump
    * @return {string}
@@ -54,6 +60,16 @@ export class Category extends Base {
    * @return {AsyncIterable<Meter>}
    */
   async *meters(context) {}
+
+  /**
+   * Add a meter to the category;
+   * @param {*} context
+   * @param {Object} values
+   */
+  async addMeter(context, values = {}) {
+    values.category = this;
+    new this.constructor.factories.mater(values);
+  }
 
   /**
    * All values from all meters.

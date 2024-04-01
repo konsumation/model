@@ -24,6 +24,16 @@ export class Master extends Base {
     };
   }
 
+  static get factories() {
+    return {
+      [Category.typeName]: Category
+    };
+  }
+
+  static get supportedSchemaVersions() {
+    return new Set([SCHEMA_VERSION_2, SCHEMA_VERSION_3]);
+  }
+
   /**
    *
    * @param {Object|string} values
@@ -31,10 +41,6 @@ export class Master extends Base {
    */
   static async initialize(values) {
     return new this(values);
-  }
-
-  static get supportedSchemaVersions() {
-    return new Set([SCHEMA_VERSION_2, SCHEMA_VERSION_3]);
   }
 
   constructor(values) {
@@ -65,8 +71,8 @@ export class Master extends Base {
    * @param {Object} values
    * @returns {Promise<Category>}
    */
-  async addCategory(values) {
-    return new Category(values);
+  async addCategory(context, values) {
+    return new this.constructor.factories.category(values);
   }
 
   /**
@@ -82,9 +88,17 @@ export class Master extends Base {
     yield* toText(context, this, undefined, this.categories(context));
   }
 
-  async fromText(input, factories) {
-    const typeLookup = Object.fromEntries(factories.map(f => [f.typeName, f]));
-    const statistics = Object.fromEntries(factories.map(f => [f.typeName, 0]));
+  async fromText(input) {
+    const typeLookup = this.constructor.factories;
+    Object.assign(
+      typeLookup,
+      typeLookup.category.factories,
+      typeLookup.category.factories.meter.factories
+    );
+
+    const statistics = Object.fromEntries(
+      Object.keys(typeLookup).map(typeName => [typeName, 0])
+    );
     statistics.value = 0;
 
     const context = this.context;
