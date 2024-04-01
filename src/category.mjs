@@ -1,5 +1,6 @@
 import { Base } from "./base.mjs";
 import { Meter } from "./meter.mjs";
+import { Note } from "./note.mjs";
 import { name, description, unit, fractionalDigits } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
@@ -68,6 +69,7 @@ export class Category extends Base {
    */
   async addMeter(context, values = {}) {
     values.category = this;
+    // @ts-ignore
     new this.constructor.factories.mater(values);
   }
 
@@ -83,7 +85,7 @@ export class Category extends Base {
 
   /**
    * All notes from all meters.
-   * @return {AsyncIterable<{Note}>}
+   * @return {AsyncIterable<Note>}
    */
   async *notes(context) {
     for await (const meter of this.meters(context)) {

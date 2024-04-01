@@ -49,9 +49,11 @@ export class Master extends Base {
   }
 
   set schemaVersion(value) {
+    // @ts-ignore
     if (!this.constructor.supportedSchemaVersions.has(value)) {
       throw new Error(
         `Unsupported schema version ${value} only supporting ${[
+          // @ts-ignore
           ...this.constructor.supportedSchemaVersions
         ]}`
       );
@@ -72,6 +74,7 @@ export class Master extends Base {
    * @returns {Promise<Category>}
    */
   async addCategory(context, values) {
+    // @ts-ignore
     return new this.constructor.factories.category(values);
   }
 
@@ -89,6 +92,7 @@ export class Master extends Base {
   }
 
   async fromText(input) {
+    // @ts-ignore
     const typeLookup = this.constructor.factories;
     Object.assign(
       typeLookup,
@@ -101,6 +105,7 @@ export class Master extends Base {
     );
     statistics.value = 0;
 
+    // @ts-ignore
     const context = this.context;
 
     let buffer = "";
