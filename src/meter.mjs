@@ -108,6 +108,18 @@ export class Meter extends Base {
    */
   async *notes(context) {}
 
+  /**
+   * Add a note to the meter;
+   * @param {*} context
+   * @param {Object} values
+   * @return {Promise<Note>}
+   */
+   addNote(context, values = {}) {
+    values.meter = this;
+    // @ts-ignore
+    return new this.constructor.factories.note(values);
+  }
+
   async *text(context) {
     yield* toText(context, this, "name", this.notes(context));
   }
