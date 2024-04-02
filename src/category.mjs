@@ -66,8 +66,9 @@ export class Category extends Base {
    * Add a meter to the category;
    * @param {*} context
    * @param {Object} values
+   * @return {Promise<Meter>}
    */
-  async addMeter(context, values = {}) {
+  addMeter(context, values = {}) {
     values.category = this;
     // @ts-ignore
     return new this.constructor.factories.meter(values);
