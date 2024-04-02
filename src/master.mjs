@@ -75,7 +75,7 @@ export class Master extends Base {
    * @param {Object} values
    * @returns {Promise<Category>}
    */
-  async addCategory(context, values) {
+  async addCategory(values) {
     // @ts-ignore
     return new this.constructor.factories.category(values);
   }
