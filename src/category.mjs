@@ -70,7 +70,7 @@ export class Category extends Base {
   async addMeter(context, values = {}) {
     values.category = this;
     // @ts-ignore
-    new this.constructor.factories.mater(values);
+    return new this.constructor.factories.meter(values);
   }
 
   /**
