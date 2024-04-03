@@ -123,9 +123,10 @@ export class Meter extends Base {
   /**
    * List assigned Notes.
    * @param {any} context
+   * @param {Object} [options]
    * @return {AsyncIterable<Note>}
    */
-  async *notes(context) {}
+  async *notes(context, options) {}
 
   /**
    * Add a note to the meter;
