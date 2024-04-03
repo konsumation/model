@@ -16,12 +16,12 @@ import { toText } from "./util.mjs";
  */
 export class Meter extends Base {
   /** @type {string} */ name;
-  /** @type {string} */ description;
-  /** @type {string} */ serial;
-  /** @type {Date} */ validFrom;
   /** @type {Category} */ category;
-  /** @type {number} */ #fractionalDigits;
-  /** @type {string} */ #unit;
+  /** @type {string?} */ description;
+  /** @type {string?} */ serial;
+  /** @type {Date?} */ validFrom;
+  /** @type {number?} */ #fractionalDigits;
+  /** @type {string?} */ #unit;
 
   static get factories() {
     return {
@@ -44,15 +44,26 @@ export class Meter extends Base {
   static get attributes() {
     return {
       name,
+      category: Category,
       description,
       serial,
       unit,
       validFrom,
-      fractionalDigits,
-      category: Category
+      fractionalDigits
     };
   }
 
+  /**
+   * Create a new Meter.
+   * @param {Object} values
+   * @param {string} values.name
+   * @param {string} values.category
+   * @param {string} [values.description]
+   * @param {string} [values.serial]
+   * @param {Date} [values.validFrom]
+   * @param {number} [values.fractionalDigits]
+   * @param {string} [values.unit]
+   */
   constructor(values) {
     super();
     this.attributeValues = values;
@@ -78,39 +89,47 @@ export class Meter extends Base {
     return this.name;
   }
 
+  /**
+   * @param {any} context
+   */
   async write(context) {}
 
+  /**
+   * @param {any} context
+   */
   async delete(context) {}
 
   /**
+   * @param {any} context
    * @return {AsyncIterable<{date:Date,value:number}>}
    */
   async *values(context) {}
 
   /**
-   * Write new value
-   * @param {*} context
+   * Write new value.
+   * @param {any} context
    * @param {Date} time
    * @param {number} value
    */
   async writeValue(context, time, value) {}
 
   /**
-   * Delete a value
-   * @param {*} context
+   * Delete a value.
+   * @param {any} context
    * @param {Date} time
    */
   async deleteValue(context, time) {}
 
   /**
    * List assigned Notes.
+   * @param {any} context
    * @return {AsyncIterable<Note>}
    */
   async *notes(context) {}
 
   /**
    * Add a note to the meter;
-   * @param {*} context
+   * @param {any} context
    * @param {Object} values
    * @return {Promise<Note>}
    */
@@ -120,6 +139,11 @@ export class Meter extends Base {
     return new this.constructor.factories.note(values);
   }
 
+  /**
+   * Text representation.
+   * @param {any} context
+   * @returns {AsyncIterable<string>}
+   */
   async *text(context) {
     yield* toText(context, this, "name", this.notes(context));
   }

@@ -17,18 +17,18 @@ test("text", async t => {
       "description=desc",
       "fractionalDigits=2",
       '[meter "M1"]',
+      "category=C1",
       "validFrom=1970-01-01T00:00:00.000Z",
       "fractionalDigits=4",
-      "category=C1",
       '[note "1970-01-01T00:00:00.000Z"]',
       "description=a note",
       "meter=M1",
       '[category "C2"]',
       "fractionalDigits=2",
       '[meter "M1"]',
+      "category=C2",
       "validFrom=1970-01-01T00:00:00.000Z",
-      "fractionalDigits=2",
-      "category=C2"
+      "fractionalDigits=2"
     ],
     lines
   );

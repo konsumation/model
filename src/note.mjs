@@ -8,7 +8,7 @@ import { toText } from "./util.mjs";
  */
 export class Note extends Base {
   /** @type {string} */ name;
-  /** @type {string} */ description;
+  /** @type {string?} */ description;
   /** @type {Meter} */ meter;
 
   /**
@@ -31,6 +31,13 @@ export class Note extends Base {
     };
   }
 
+  /**
+   * Create a new Category.
+   * @param {Object} values
+   * @param {string} values.name
+   * @param {Meter} values.meter
+   * @param {string} [values.description]
+   */
   constructor(values) {
     super();
     this.attributeValues = values;
@@ -40,10 +47,23 @@ export class Note extends Base {
     return this.name;
   }
 
+  /**
+   * Write into store.
+   * @param {any} context
+   */
   async write(context) {}
 
+  /**
+   * Delete from store.
+   * @param {any} context
+   */
   async delete(context) {}
 
+  /**
+   * Text representation.
+   * @param {any} context
+   * @returns {AsyncIterable<string>}
+   */
   async *text(context) {
     yield* toText(context, this, "name");
   }

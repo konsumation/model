@@ -10,9 +10,9 @@ import { toText } from "./util.mjs";
  */
 export class Category extends Base {
   /** @type {string} */ name;
-  /** @type {string} */ description;
-  /** @type {number} */ fractionalDigits = fractionalDigits.default;
-  /** @type {string} */ unit;
+  /** @type {string?} */ description;
+  /** @type {number?} */ fractionalDigits = fractionalDigits.default;
+  /** @type {string?} */ unit;
 
   static get factories() {
     return {
@@ -37,6 +37,14 @@ export class Category extends Base {
     };
   }
 
+  /**
+   * Create a new Category.
+   * @param {Object} values
+   * @param {string} values.name
+   * @param {string} [values.description]
+   * @param {number} [values.fractionalDigits]
+   * @param {string} [values.unit]
+   */
   constructor(values) {
     super();
     this.attributeValues = values;
@@ -48,11 +56,13 @@ export class Category extends Base {
 
   /**
    * Write into store.
+   * @param {any} context
    */
   async write(context) {}
 
   /**
    * Delete from store.
+   * @param {any} context
    */
   async delete(context) {}
 
@@ -81,7 +91,8 @@ export class Category extends Base {
 
   /**
    * All values from all meters.
-   * @return {AsyncIterable<{time:Date,value:number}>}
+   * @param {any} context
+   * @return {AsyncIterable<{date:Date,value:number}>}
    */
   async *values(context) {
     for await (const meter of this.meters(context)) {
@@ -91,6 +102,7 @@ export class Category extends Base {
 
   /**
    * All notes from all meters.
+   * @param {any} context
    * @return {AsyncIterable<Note>}
    */
   async *notes(context) {
@@ -101,30 +113,31 @@ export class Category extends Base {
 
   /**
    * Add a value to the active meter.
-   * @param {*} context
+   * @param {any} context
    * @param {Date} time
    * @param {number} value
    * @returns {Promise<any>}
    */
   async writeValue(context, time, value) {
     const meter = await this.activeMeter(context);
-    return meter.writeValue(context, time, value);
+    return meter?.writeValue(context, time, value);
   }
 
   /**
    * Delete a value from the active meter.
-   * @param {*} context
+   * @param {any} context
    * @param {Date} time
    * @returns {Promise<any>}
    */
   async deleteValue(context, time) {
     const meter = await this.activeMeter(context);
-    return meter.deleteValue(context, time);
+    return meter?.deleteValue(context, time);
   }
 
   /**
    * Currently active Meter.
-   * @returns Promise<Meter|undefined>
+   * @param {any} context
+   * @returns {Promise<Meter|undefined>}
    */
   async activeMeter(context) {
     let meters = [];
@@ -138,6 +151,11 @@ export class Category extends Base {
     return meters[0];
   }
 
+  /**
+   * Text representation.
+   * @param {any} context
+   * @returns {AsyncIterable<string>}
+   */
   async *text(context) {
     yield* toText(context, this, "name", this.meters(context));
   }
