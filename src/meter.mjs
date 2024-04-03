@@ -83,7 +83,7 @@ export class Meter extends Base {
   async delete(context) {}
 
   /**
-   * @return {AsyncIterable<{time:Date,value:number}>}
+   * @return {AsyncIterable<{date:Date,value:number}>}
    */
   async *values(context) {}
 
@@ -114,7 +114,7 @@ export class Meter extends Base {
    * @param {Object} values
    * @return {Promise<Note>}
    */
-   addNote(context, values = {}) {
+  addNote(context, values = {}) {
     values.meter = this;
     // @ts-ignore
     return new this.constructor.factories.note(values);

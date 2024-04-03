@@ -58,13 +58,18 @@ export class Category extends Base {
 
   /**
    * List assigned meters.
+   * @param {any} context
+   * @param {Object} [options]
+   * @param {string} [options.gte] from name
+   * @param {string} [options.lte] up to name
+   * @param {boolean} [options.reverse] order
    * @return {AsyncIterable<Meter>}
    */
-  async *meters(context) {}
+  async *meters(context, options) {}
 
   /**
    * Add a meter to the category;
-   * @param {*} context
+   * @param {any} context
    * @param {Object} values
    * @return {Promise<Meter>}
    */
