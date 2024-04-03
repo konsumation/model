@@ -19,13 +19,17 @@ export class Base {
   }
 
   /**
-   * Attribute names on the javacript side.
+   * Attribute names on the javascript side.
    * @return {string[]}
    */
   static get attributeNames() {
     return Object.keys(this.attributes);
   }
 
+  /**
+   * Attribute names on the javascript side.
+   * @return {string[]}
+   */
   get attributeNames() {
     // @ts-ignore
     return this.constructor.attributeNames;
@@ -81,18 +85,20 @@ export class Base {
       for (const name of this.attributeNames) {
         const value = values[mapping[name] || name];
 
-        if(value === undefined) {
-     /*     if(this[name] !== undefined) {
+        if (value === undefined) {
+          /*     if(this[name] !== undefined) {
             this[name] = value;
           }*/
-        }
-        else {
+        } else {
           this[name] = value;
         }
       }
     }
   }
 
+  /**
+   * @return {string}
+   */
   get typeName() {
     // @ts-ignore
     return this.constructor.typeName;
