@@ -66,7 +66,7 @@ export class Meter extends Base {
    */
   constructor(values) {
     super();
-    this.attributeValues = values;
+    this.setAttributes(values);
   }
 
   get fractionalDigits() {

@@ -39,7 +39,7 @@ export class Base {
    * Object keys are the mapped external attribute names.
    * @return {Object}
    */
-  get attributeValues() {
+  getAttributes() {
     // @ts-ignore
     const mapping = this.constructor.attributeNameMapping;
 
@@ -77,7 +77,7 @@ export class Base {
    * Sets values with external attribute names.
    * @param {Object} values
    */
-  set attributeValues(values) {
+  setAttributes(values) {
     if (values) {
       // @ts-ignore
       const mapping = this.constructor.attributeNameMapping;
@@ -105,6 +105,6 @@ export class Base {
   }
 
   toJSON() {
-    return this.attributeValues;
+    return this.getAttributes();
   }
 }

@@ -29,7 +29,7 @@ export const emptyData = {
 
 class MyNote extends Note {
   async write(data) {
-    const note = this.attributeValues;
+    const note = this.getAttributes();
     data.categories[this.meter.category.name].meters[this.meter.name].notes[
       this.name
     ] = note;
@@ -48,7 +48,7 @@ class MyMeter extends Meter {
   }
 
   async write(data) {
-    const meter = this.attributeValues;
+    const meter = this.getAttributes();
     meter.values = [];
     meter.notes = [];
     // console.log("METER WRITE", meter);
@@ -83,7 +83,7 @@ class MyCategory extends Category {
   }
 
   async write(data) {
-    const category = this.attributeValues;
+    const category = this.getAttributes();
     category.meters = {};
     //console.log("CATEGORY WRITE", category);
     data.categories[category.name] = category;

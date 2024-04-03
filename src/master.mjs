@@ -47,7 +47,7 @@ export class Master extends Base {
 
   constructor(values) {
     super();
-    this.attributeValues = values;
+    this.setAttributes(values);
   }
 
   set schemaVersion(value) {
@@ -118,7 +118,7 @@ export class Master extends Base {
 
     const insertObject = async () => {
       if (type === undefined) {
-        this.attributeValues = values;
+        this.setAttributes(values);
 
         // @ts-ignore
         values = undefined;

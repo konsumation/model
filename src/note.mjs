@@ -40,7 +40,7 @@ export class Note extends Base {
    */
   constructor(values) {
     super();
-    this.attributeValues = values;
+    this.setAttributes(values);
   }
 
   toString() {

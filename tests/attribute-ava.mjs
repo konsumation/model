@@ -21,7 +21,7 @@ class MyBase extends Base {
 
   constructor(values) {
     super();
-    this.attributeValues = values;
+    this.setAttributes(values);
   }
 }
 
@@ -42,7 +42,7 @@ test("attribute expressions category.name", t => {
 
   t.is(b.category, category);
 
-  t.deepEqual(b.attributeValues, {
+  t.deepEqual(b.getAttributes(), {
     category_name: "C1",
     valid_from: date
   });
