@@ -86,6 +86,19 @@ export class Master extends Base {
   async *categories() {}
 
   /**
+   *
+   * @param {string} name
+   * @returns {Promise<Category|undefined>}
+   */
+  async category(name) {
+    for await (const category of this.categories()) {
+      if (category.name === name) {
+        return category;
+      }
+    }
+  }
+
+  /**
    * Create text representation
    * @return {AsyncIterable<string>}
    */
