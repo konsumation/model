@@ -137,7 +137,17 @@ export class Category extends Base {
    */
   async writeValue(context, time, value) {
     const meter = await this.activeMeter(context);
-    return meter?.writeValue(context, time, value);
+    this.checkMeterIsPresent(meter);
+    // @ts-ignore
+    return meter.writeValue(context, time, value);
+  }
+
+  checkMeterIsPresent(meter) {
+    if (meter === undefined) {
+      const error = new Error(`no active meter in category ${this.name}`);
+      error.category = this;
+      throw error;
+    }
   }
 
   /**
@@ -148,7 +158,9 @@ export class Category extends Base {
    */
   async deleteValue(context, time) {
     const meter = await this.activeMeter(context);
-    return meter?.deleteValue(context, time);
+    this.checkMeterIsPresent(meter);
+    // @ts-ignore
+    return meter.deleteValue(context, time);
   }
 
   /**
