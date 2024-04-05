@@ -67,7 +67,7 @@ export class Master extends Base {
   }
 
   /**
-   * Write into store.
+   * Write attributes store.
    * @param {any} context
    */
   async write(context) {}
@@ -149,13 +149,11 @@ export class Master extends Base {
         last[type] = object;
 
         type = undefined;
-        // @ts-ignore
-        values = undefined;
-        // @ts-ignore
+        values = {};
         return object.write(context);
       } else if (object && type === undefined) {
         object.setAttributes(values);
-        values = undefined;
+        values = {};
         return object.write(context);
       }
     };
