@@ -161,7 +161,6 @@ export class Master extends Base {
     for await (const chunk of input) {
       buffer += chunk;
       for (const line of buffer.split(/\n/)) {
-        console.log(line);
         let m = line.match(
           /^(([\d\.]{10,})|(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d))\s+([\d\.]+)/
         );
