@@ -67,6 +67,12 @@ export class Master extends Base {
   }
 
   /**
+   * Write into store.
+   * @param {any} context
+   */
+  async write(context) {}
+
+  /**
    */
   async close() {}
 
@@ -126,17 +132,10 @@ export class Master extends Base {
     let buffer = "";
     let type, name;
     let values = {};
-    let object;
+    let object = this;
     let last = {};
 
     const insertObject = async () => {
-      if (type === undefined) {
-        this.setAttributes(values);
-
-        // @ts-ignore
-        values = undefined;
-        return;
-      }
       if (typeLookup[type]) {
         statistics[type]++;
 
@@ -154,12 +153,17 @@ export class Master extends Base {
         values = undefined;
         // @ts-ignore
         return object.write(context);
+      } else if (object && type === undefined) {
+        object.setAttributes(values);
+        values = undefined;
+        return object.write(context);
       }
     };
 
     for await (const chunk of input) {
       buffer += chunk;
       for (const line of buffer.split(/\n/)) {
+        console.log(line);
         let m = line.match(
           /^(([\d\.]{10,})|(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d))\s+([\d\.]+)/
         );
