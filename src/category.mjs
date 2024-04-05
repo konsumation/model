@@ -61,7 +61,7 @@ export class Category extends Base {
   async write(context) {}
 
   /**
-   * Delete from store.
+   * Delete Category from store.
    * @param {any} context
    */
   async delete(context) {}
@@ -78,6 +78,23 @@ export class Category extends Base {
   async *meters(context, options) {}
 
   /**
+   * Currently active Meter.
+   * @param {any} context
+   * @returns {Promise<Meter|undefined>}
+   */
+  async activeMeter(context) {
+    let meters = [];
+    for await (const meter of this.meters(context)) {
+      meters.push(meter);
+    }
+
+    meters = meters.sort(
+      (a, b) => a.validFrom.getTime() - b.validFrom.getTime()
+    );
+    return meters[0];
+  }
+
+  /**
    * Add a meter to the category;
    * @param {any} context
    * @param {Object} values
@@ -90,17 +107,6 @@ export class Category extends Base {
   }
 
   /**
-   * All values from all meters.
-   * @param {any} context
-   * @return {AsyncIterable<{date:Date,value:number}>}
-   */
-  async *values(context) {
-    for await (const meter of this.meters(context)) {
-      yield* meter.values(context);
-    }
-  }
-
-  /**
    * All notes from all meters.
    * @param {any} context
    * @return {AsyncIterable<Note>}
@@ -108,6 +114,17 @@ export class Category extends Base {
   async *notes(context) {
     for await (const meter of this.meters(context)) {
       yield* meter.notes(context);
+    }
+  }
+
+  /**
+   * All values from all meters.
+   * @param {any} context
+   * @return {AsyncIterable<{date:Date,value:number}>}
+   */
+  async *values(context) {
+    for await (const meter of this.meters(context)) {
+      yield* meter.values(context);
     }
   }
 
@@ -132,23 +149,6 @@ export class Category extends Base {
   async deleteValue(context, time) {
     const meter = await this.activeMeter(context);
     return meter?.deleteValue(context, time);
-  }
-
-  /**
-   * Currently active Meter.
-   * @param {any} context
-   * @returns {Promise<Meter|undefined>}
-   */
-  async activeMeter(context) {
-    let meters = [];
-    for await (const meter of this.meters(context)) {
-      meters.push(meter);
-    }
-
-    meters = meters.sort(
-      (a, b) => a.validFrom.getTime() - b.validFrom.getTime()
-    );
-    return meters[0];
   }
 
   /**
