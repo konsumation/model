@@ -22,5 +22,5 @@ test("Meter add Note", t => {
   const meter = category.addMeter({ name: "M1" });
   const note = meter.addNote({ name: new Date() });
 
-  t.is(note.typeName, Note.typeName);
+  t.is(note.type, Note.type);
 });

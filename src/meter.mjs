@@ -25,7 +25,7 @@ export class Meter extends Base {
 
   static get factories() {
     return {
-      [Note.typeName]: Note
+      [Note.type]: Note
     };
   }
 
@@ -33,11 +33,11 @@ export class Meter extends Base {
    * Name of the type in text dump
    * @return {string}
    */
-  static get typeName() {
+  static get type() {
     return "meter";
   }
 
-  static get parentTypeName() {
+  static get parenttype() {
     return "category";
   }
 

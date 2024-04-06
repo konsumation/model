@@ -10,7 +10,7 @@ import { Base } from "./base.mjs";
 export async function* toText(context, object, key, ...iterators) {
   if (key) {
     // @ts-ignore
-    yield `[${object.constructor.typeName} "${object[key]}"]`;
+    yield `[${object.constructor.type} "${object[key]}"]`;
   }
 
   for (const a of object.attributeNames) {

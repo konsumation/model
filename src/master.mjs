@@ -26,7 +26,7 @@ export class Master extends Base {
 
   static get factories() {
     return {
-      [Category.typeName]: Category
+      [Category.type]: Category
     };
   }
 
@@ -122,7 +122,7 @@ export class Master extends Base {
     );
 
     const statistics = Object.fromEntries(
-      Object.keys(typeLookup).map(typeName => [typeName, 0])
+      Object.keys(typeLookup).map(type => [type, 0])
     );
     statistics.value = 0;
 
@@ -139,10 +139,10 @@ export class Master extends Base {
       if (typeLookup[type]) {
         statistics[type]++;
 
-        const parentTypeName = typeLookup[type].parentTypeName;
+        const parenttype = typeLookup[type].parenttype;
 
-        if (last[parentTypeName]) {
-          values[parentTypeName] = last[parentTypeName];
+        if (last[parenttype]) {
+          values[parenttype] = last[parenttype];
         }
 
         object = new typeLookup[type](values);

@@ -16,7 +16,7 @@ export class Category extends Base {
 
   static get factories() {
     return {
-      [Meter.typeName]: Meter
+      [Meter.type]: Meter
     };
   }
 
@@ -24,7 +24,7 @@ export class Category extends Base {
    * Name of the type in text dump
    * @return {string}
    */
-  static get typeName() {
+  static get type() {
     return "category";
   }
 

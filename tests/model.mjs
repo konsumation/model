@@ -39,7 +39,7 @@ class MyNote extends Note {
 class MyMeter extends Meter {
   static get factories() {
     return {
-      [MyNote.typeName]: MyNote
+      [MyNote.type]: MyNote
     };
   }
 
@@ -78,7 +78,7 @@ class MyMeter extends Meter {
 class MyCategory extends Category {
   static get factories() {
     return {
-      [MyMeter.typeName]: MyMeter
+      [MyMeter.type]: MyMeter
     };
   }
 
@@ -103,7 +103,7 @@ class MyCategory extends Category {
 class MyMaster extends Master {
   static get factories() {
     return {
-      [MyCategory.typeName]: MyCategory
+      [MyCategory.type]: MyCategory
     };
   }
 

@@ -99,9 +99,9 @@ export class Base {
   /**
    * @return {string}
    */
-  get typeName() {
+  get type() {
     // @ts-ignore
-    return this.constructor.typeName;
+    return this.constructor.type;
   }
 
   toJSON() {
