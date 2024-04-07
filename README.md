@@ -7,4 +7,22 @@
 [![Styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Known Vulnerabilities](https://snyk.io/test/github/konsumation/model/badge.svg)](https://snyk.io/test/github/konsumation/model)
-# konsum-model
+
+# @konsumation/model
+
+Data model of the konsumation apps
+
+# API
+
+
+# install
+
+With [npm](http://npmjs.org) do:
+
+```shell
+npm install @konsumation/model
+```
+
+# license
+
+BSD-2-Clause

@@ -1,6 +1,7 @@
 {
   "name": "@konsumation/model",
   "version": "0.0.0-semantic-release",
+  "description": "data model of the konsumation apps",
   "publishConfig": {
     "access": "public",
     "provenance": true
