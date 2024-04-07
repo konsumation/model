@@ -89,6 +89,12 @@ export class Meter extends Base {
     return this.name;
   }
 
+  toJSON() {
+    const json = super.toJSON();
+    delete json.category; // TODO handle in base impl ?
+    return json;
+  }
+
   /**
    * @param {any} context
    */
@@ -130,11 +136,10 @@ export class Meter extends Base {
 
   /**
    * Add a note to the meter;
-   * @param {any} context
    * @param {Object} values
    * @return {Promise<Note>}
    */
-  addNote(context, values = {}) {
+  addNote( values = {}) {
     values.meter = this;
     // @ts-ignore
     return new this.constructor.factories.note(values);

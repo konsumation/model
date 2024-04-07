@@ -96,11 +96,10 @@ export class Category extends Base {
 
   /**
    * Add a meter to the category;
-   * @param {any} context
    * @param {Object} values
    * @return {Promise<Meter>}
    */
-  addMeter(context, values = {}) {
+  addMeter(values = {}) {
     values.category = this;
     // @ts-ignore
     return new this.constructor.factories.meter(values);

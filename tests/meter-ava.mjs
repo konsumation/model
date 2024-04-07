@@ -13,6 +13,17 @@ test("Meter default values from Category", t => {
   t.is(meter.fractionalDigits, 3);
 });
 
+test("Meter toJSON", t => {
+  const category = new Category({
+    name: "C1",
+    unit: "m3",
+    fractionalDigits: 3
+  });
+  const meter = category.addMeter({ name: "M1", serial: "123" });
+
+  t.deepEqual(meter.toJSON(), { name: "M1", serial: "123", unit: "m3", fractionalDigits: 3 });
+});
+
 test("Meter add Note", t => {
   const category = new Category({
     name: "C1",
