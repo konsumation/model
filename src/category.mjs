@@ -144,6 +144,7 @@ export class Category extends Base {
   checkMeterIsPresent(meter) {
     if (meter === undefined) {
       const error = new Error(`no active meter in category ${this.name}`);
+      // @ts-ignore
       error.category = this;
       throw error;
     }
