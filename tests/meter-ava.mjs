@@ -21,7 +21,12 @@ test("Meter toJSON", t => {
   });
   const meter = category.addMeter({ name: "M1", serial: "123" });
 
-  t.deepEqual(meter.toJSON(), { name: "M1", serial: "123", unit: "m3", fractionalDigits: 3 });
+  t.deepEqual(meter.toJSON(), {
+    name: "M1",
+    serial: "123",
+    unit: "m3",
+    fractionalDigits: 3
+  });
 });
 
 test("Meter add Note", t => {

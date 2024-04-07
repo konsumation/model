@@ -47,6 +47,12 @@ export class Note extends Base {
     return this.name;
   }
 
+  toJSON() {
+    const json = super.toJSON();
+    delete json.meter; // TODO handle in base impl ?
+    return json;
+  }
+
   /**
    * Write into store.
    * @param {any} context
