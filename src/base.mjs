@@ -2,6 +2,12 @@
  *
  */
 export class Base {
+
+  /* act like a Attribute */
+  static get writable() { return true; }
+  static get mandatory() { return true; }
+  static get isKey() { return false; }
+
   /**
    * Attribute definitions.
    * @return {Object}
