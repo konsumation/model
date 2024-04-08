@@ -27,4 +27,6 @@ test("Category meter", async t => {
   const meter = await category.meter(master.context, "M1");
 
   t.is(meter.name, "M1");
+
+  t.is(await category.meter(master.context, "M1XX"), undefined);
 });
