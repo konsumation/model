@@ -78,6 +78,20 @@ export class Category extends Base {
   async *meters(context, options) {}
 
   /**
+   * Deliver Meter for a given name.
+   * @param {any} context
+   * @param {string} name
+   * @returns {Promise<Meter|undefined>}
+   */
+  async meter(context, name) {
+    for await (const meter of this.meters(context)) {
+      if (meter.name === name) {
+        return meter;
+      }
+    }
+  }
+
+  /**
    * Currently active Meter.
    * @param {any} context
    * @returns {Promise<Meter|undefined>}
