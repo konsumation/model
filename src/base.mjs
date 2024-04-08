@@ -91,16 +91,25 @@ export class Base {
   setAttributes(values) {
     if (values) {
       // @ts-ignore
+      const attributes = this.constructor.attributes;
+
+      // @ts-ignore
       const mapping = this.constructor.attributeNameMapping;
 
       for (const name of this.attributeNames) {
-        const value = values[mapping[name] || name];
+        let value = values[mapping[name] || name];
 
         if (value === undefined) {
           /*     if(this[name] !== undefined) {
             this[name] = value;
           }*/
         } else {
+          if (typeof value === "string") {
+            if (attributes[name]?.type === "timestamp") {
+              value = new Date(value);
+            }
+          }
+
           this[name] = value;
         }
       }
