@@ -2,11 +2,16 @@
  *
  */
 export class Base {
-
   /* act like a Attribute */
-  static get writable() { return true; }
-  static get mandatory() { return true; }
-  static get isKey() { return false; }
+  static get writable() {
+    return true;
+  }
+  static get mandatory() {
+    return true;
+  }
+  static get isKey() {
+    return false;
+  }
 
   /**
    * Attribute definitions.
@@ -111,6 +116,12 @@ export class Base {
   }
 
   toJSON() {
-    return this.getAttributes();
+    const values = this.getAttributes();
+    for (const [k, v] of Object.entries(values)) {
+      if (v instanceof Date) {
+        values[k] = v.toISOString();
+      }
+    }
+    return values;
   }
 }

@@ -19,7 +19,7 @@ export class Meter extends Base {
   /** @type {Category} */ category;
   /** @type {string?} */ description;
   /** @type {string?} */ serial;
-  /** @type {Date?} */ validFrom;
+  /** @type {Date?} */ validFrom = validFrom.default;
   /** @type {number?} */ #fractionalDigits;
   /** @type {string?} */ #unit;
 
@@ -58,9 +58,9 @@ export class Meter extends Base {
    * @param {Object} values
    * @param {string} values.name
    * @param {string} values.category
+   * @param {Date} values.validFrom
    * @param {string} [values.description]
    * @param {string} [values.serial]
-   * @param {Date} [values.validFrom]
    * @param {number} [values.fractionalDigits]
    * @param {string} [values.unit]
    */

@@ -83,7 +83,8 @@ export const serial = {
 export const validFrom = {
   type: "timestamp",
   writable: true,
-  mandatory: false,
+  mandatory: true,
+  default: new Date(0),
   isKey: false
 };
 
