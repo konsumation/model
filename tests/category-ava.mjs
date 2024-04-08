@@ -31,7 +31,7 @@ test("Category meter", async t => {
 });
 
 
-test.only("Category active meter", async t => {
+test("Category active meter", async t => {
   const master = await Master.initialize(data);
   const category = await master.category("C1");
 
