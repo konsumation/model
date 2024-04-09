@@ -127,6 +127,23 @@ export class Meter extends Base {
   async deleteValue(context, time) {}
 
   /**
+   * Get the latest value.
+   * @param {any} context
+   * @return {Promise<{date:Date,value:number}|undefined>}
+   */
+  async latestValue(context) {
+    let latest;
+
+    for await (const value of this.values(context)) {
+      if(!latest || value.date.getTime() > latest.date.getTime()) {
+        latest = value;
+      }
+    }
+
+    return latest;
+  }
+
+  /**
    * List assigned Notes.
    * @param {any} context
    * @param {Object} [options]

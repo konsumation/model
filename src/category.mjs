@@ -142,6 +142,18 @@ export class Category extends Base {
   }
 
   /**
+   * Get the latest value.
+   * @param {any} context
+   * @return {Promise<{date:Date,value:number}|undefined>}
+   */
+  async latestValue(context) {
+    const meter = await this.activeMeter(context);
+    this.checkMeterIsPresent(meter);
+    // @ts-ignore
+    return meter.latestValue(context);
+  }
+
+  /**
    * Add a value to the active meter.
    * @param {any} context
    * @param {Date} time
