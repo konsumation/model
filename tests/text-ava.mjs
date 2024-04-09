@@ -20,6 +20,8 @@ test("text", async t => {
       "category=C1",
       "validFrom=1970-01-01T00:00:00.000Z",
       "fractionalDigits=4",
+      "1970-01-01T00:00:00.000Z 1",
+      "1970-01-01T00:00:01.000Z 2",
       '[note "1970-01-01T00:00:00.000Z"]',
       "description=a note",
       "meter=M1",

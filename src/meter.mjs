@@ -139,7 +139,7 @@ export class Meter extends Base {
    * @param {Object} values
    * @return {Promise<Note>}
    */
-  addNote( values = {}) {
+  addNote(values = {}) {
     values.meter = this;
     // @ts-ignore
     return new this.constructor.factories.note(values);
@@ -151,6 +151,14 @@ export class Meter extends Base {
    * @returns {AsyncIterable<string>}
    */
   async *text(context) {
-    yield* toText(context, this, "name", this.notes(context));
+    yield* toText(context, this, "name");
+
+    for await (const value of this.values(context)) {
+      yield `${value.date.toISOString()} ${value.value}`;
+    }
+
+    for await (const object of this.notes(context)) {
+      yield* object.text(context);
+    }
   }
 }

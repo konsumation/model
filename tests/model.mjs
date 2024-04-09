@@ -13,7 +13,10 @@ export const data = {
               description: "a note"
             }
           },
-          values: [{ date: new Date(0), value: 1.0 }]
+          values: [
+            { date: new Date(0), value: 1.0 },
+            { date: new Date(1000), value: 2.0 }
+          ]
         }
       }
     },
@@ -72,6 +75,10 @@ class MyMeter extends Meter {
       note.meter = this;
       yield new MyNote(note);
     }
+  }
+
+  async *values(data) {
+    yield * data.categories[this.category.name].meters[this.name].values;
   }
 }
 
