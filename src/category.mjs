@@ -1,7 +1,7 @@
 import { Base } from "./base.mjs";
 import { Meter } from "./meter.mjs";
 import { Note } from "./note.mjs";
-import { name, description, unit, fractionalDigits } from "./attributes.mjs";
+import { name, description, unit, fractionalDigits, order } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
 /**
@@ -13,6 +13,7 @@ export class Category extends Base {
   /** @type {string?} */ description;
   /** @type {number?} */ fractionalDigits = fractionalDigits.default;
   /** @type {string?} */ unit;
+  /** @type {string?} */ order = order.default;
 
   static get factories() {
     return {
@@ -33,7 +34,8 @@ export class Category extends Base {
       name,
       description,
       fractionalDigits,
-      unit
+      unit,
+      order
     };
   }
 

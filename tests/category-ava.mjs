@@ -15,7 +15,8 @@ test("Category toJSON", t => {
   t.deepEqual(category.toJSON(), {
     name: "C1",
     unit: "m3",
-    fractionalDigits: 3
+    fractionalDigits: 3,
+    order: 1
   });
 });
 

@@ -99,3 +99,15 @@ export const fractionalDigits = {
   default: 2,
   isKey: false
 };
+
+/**
+ * @type {AttributeDefinition}
+ * sort order.
+ */
+export const order = {
+  type: "number",
+  writable: true,
+  mandatory: true,
+  default: 1,
+  isKey: false
+};
