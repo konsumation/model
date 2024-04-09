@@ -61,68 +61,72 @@ Data model of the konsumation apps
         *   [Parameters](#parameters-8)
     *   [values](#values)
         *   [Parameters](#parameters-9)
-    *   [writeValue](#writevalue)
+    *   [latestValue](#latestvalue)
         *   [Parameters](#parameters-10)
-    *   [deleteValue](#deletevalue)
+    *   [writeValue](#writevalue)
         *   [Parameters](#parameters-11)
-    *   [text](#text)
+    *   [deleteValue](#deletevalue)
         *   [Parameters](#parameters-12)
+    *   [text](#text)
+        *   [Parameters](#parameters-13)
     *   [type](#type-1)
 *   [SCHEMA\_VERSION\_2](#schema_version_2)
 *   [SCHEMA\_VERSION\_3](#schema_version_3)
 *   [SCHEMA\_VERSION\_CURRENT](#schema_version_current)
 *   [Master](#master)
-    *   [Parameters](#parameters-13)
+    *   [Parameters](#parameters-14)
     *   [Properties](#properties-1)
     *   [write](#write-1)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-15)
     *   [close](#close)
     *   [addCategory](#addcategory)
-        *   [Parameters](#parameters-15)
+        *   [Parameters](#parameters-16)
     *   [categories](#categories)
     *   [category](#category-1)
-        *   [Parameters](#parameters-16)
+        *   [Parameters](#parameters-17)
     *   [text](#text-1)
     *   [initialize](#initialize)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-18)
 *   [Meter](#meter-1)
-    *   [Parameters](#parameters-18)
+    *   [Parameters](#parameters-19)
     *   [name](#name-2)
     *   [category](#category-2)
     *   [description](#description-2)
     *   [serial](#serial-1)
     *   [validFrom](#validfrom-1)
     *   [write](#write-2)
-        *   [Parameters](#parameters-19)
-    *   [delete](#delete-1)
         *   [Parameters](#parameters-20)
-    *   [values](#values-1)
+    *   [delete](#delete-1)
         *   [Parameters](#parameters-21)
-    *   [writeValue](#writevalue-1)
+    *   [values](#values-1)
         *   [Parameters](#parameters-22)
-    *   [deleteValue](#deletevalue-1)
+    *   [writeValue](#writevalue-1)
         *   [Parameters](#parameters-23)
-    *   [notes](#notes-1)
+    *   [deleteValue](#deletevalue-1)
         *   [Parameters](#parameters-24)
-    *   [addNote](#addnote)
+    *   [latestValue](#latestvalue-1)
         *   [Parameters](#parameters-25)
-    *   [text](#text-2)
+    *   [notes](#notes-1)
         *   [Parameters](#parameters-26)
+    *   [addNote](#addnote)
+        *   [Parameters](#parameters-27)
+    *   [text](#text-2)
+        *   [Parameters](#parameters-28)
     *   [type](#type-2)
 *   [Note](#note)
-    *   [Parameters](#parameters-27)
+    *   [Parameters](#parameters-29)
     *   [name](#name-3)
     *   [description](#description-3)
     *   [meter](#meter-2)
     *   [write](#write-3)
-        *   [Parameters](#parameters-28)
-    *   [delete](#delete-2)
-        *   [Parameters](#parameters-29)
-    *   [text](#text-3)
         *   [Parameters](#parameters-30)
+    *   [delete](#delete-2)
+        *   [Parameters](#parameters-31)
+    *   [text](#text-3)
+        *   [Parameters](#parameters-32)
     *   [type](#type-3)
 *   [toText](#totext)
-    *   [Parameters](#parameters-31)
+    *   [Parameters](#parameters-33)
 
 ## AttributeDefinition
 
@@ -330,6 +334,16 @@ All values from all meters.
 
 Returns **AsyncIterable<{date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)}>**&#x20;
 
+### latestValue
+
+Get the latest value.
+
+#### Parameters
+
+*   `context` **any**&#x20;
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<({date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)} | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
+
 ### writeValue
 
 Add a value to the active meter.
@@ -509,6 +523,16 @@ Delete a value.
 
 *   `context` **any**&#x20;
 *   `time` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)**&#x20;
+
+### latestValue
+
+Get the latest value.
+
+#### Parameters
+
+*   `context` **any**&#x20;
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<({date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)} | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
 
 ### notes
 
