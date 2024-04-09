@@ -30,6 +30,7 @@ Data model of the konsumation apps
 *   [validFrom](#validfrom)
 *   [fractionalDigits](#fractionaldigits)
 *   [fractionalDigits](#fractionaldigits-1)
+*   [order](#order)
 *   [Base](#base)
     *   [attributeNames](#attributenames)
     *   [getAttributes](#getattributes)
@@ -45,6 +46,7 @@ Data model of the konsumation apps
     *   [description](#description-1)
     *   [fractionalDigits](#fractionaldigits-2)
     *   [unit](#unit-2)
+    *   [order](#order-1)
     *   [write](#write)
         *   [Parameters](#parameters-2)
     *   [delete](#delete)
@@ -182,6 +184,10 @@ Type: [AttributeDefinition](#attributedefinition)
 
 Type: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?
 
+## order
+
+Type: [AttributeDefinition](#attributedefinition)
+
 ## Base
 
 ### attributeNames
@@ -249,6 +255,10 @@ Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 Type: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?
 
 ### unit
+
+Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?
+
+### order
 
 Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?
 
