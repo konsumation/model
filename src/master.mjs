@@ -118,7 +118,8 @@ export class Master extends Base {
     Object.assign(
       typeLookup,
       typeLookup.category.factories,
-      typeLookup.category.factories.meter.factories
+      typeLookup.category.factories.meter.factories,
+      { master: this.constructor }
     );
 
     const statistics = Object.fromEntries(
@@ -130,7 +131,8 @@ export class Master extends Base {
     const context = this.context;
 
     let buffer = "";
-    let type, name;
+    let type = "master";
+    let name;
     let values = {};
     let object = this;
     let last = {};
@@ -139,21 +141,23 @@ export class Master extends Base {
       if (typeLookup[type]) {
         statistics[type]++;
 
-        const parenttype = typeLookup[type].parenttype;
+        if (type === "master") {
+          object.setAttributes(values);
+        } else {
+          const parenttype = typeLookup[type].parenttype;
 
-        if (last[parenttype]) {
-          values[parenttype] = last[parenttype];
+          if (last[parenttype]) {
+            values[parenttype] = last[parenttype];
+          }
+
+          object = new typeLookup[type](values);
         }
 
-        object = new typeLookup[type](values);
         last[type] = object;
 
         type = undefined;
         values = {};
-        return object.write(context);
-      } else if (object && type === undefined) {
-        object.setAttributes(values);
-        values = {};
+
         return object.write(context);
       }
     };
@@ -186,7 +190,18 @@ export class Master extends Base {
         } else {
           m = line.match(/^(\w+)\s*=\s*(.*)/);
           if (m) {
-            values[m[1]] = m[2];
+            const key = m[1];
+            const attribute = typeLookup[type].attributes[key];
+            switch (attribute.type) {
+              case "timestamp":
+                values[key] = new Date(m[2]);
+                break;
+              case "number":
+                values[key] = parseFloat(m[2]);
+                break;
+              default:
+                values[key] = m[2];
+            }
           } else {
             m = line.match(/^\[(\w+)\s+"([^"]+)"\]/);
             if (m) {
