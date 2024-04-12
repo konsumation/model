@@ -50,6 +50,18 @@ export class Master extends Base {
     this.setAttributes(values);
   }
 
+  get factories()
+  {
+    // @ts-ignore
+    const factories = this.constructor.factories;
+    return Object.assign(
+      factories,
+      factories.category.factories,
+      factories.category.factories.meter.factories,
+      { master: this.constructor }
+    );
+  }
+
   set schemaVersion(value) {
     // @ts-ignore
     if (!this.constructor.supportedSchemaVersions.has(value)) {
@@ -113,14 +125,7 @@ export class Master extends Base {
   }
 
   async fromText(input) {
-    // @ts-ignore
-    const typeLookup = this.constructor.factories;
-    Object.assign(
-      typeLookup,
-      typeLookup.category.factories,
-      typeLookup.category.factories.meter.factories,
-      { master: this.constructor }
-    );
+    const typeLookup = this.factories;
 
     const statistics = Object.fromEntries(
       Object.keys(typeLookup).map(type => [type, 0])
