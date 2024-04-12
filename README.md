@@ -401,7 +401,8 @@ Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 ## SCHEMA\_VERSION\_3
 
-Values are attached to the meter
+Values are attached to the meter.
+Value dates may be given as iso date.
 
 Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
 
