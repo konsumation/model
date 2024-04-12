@@ -78,6 +78,24 @@ export class Master extends Base {
     }
   }
 
+  async *all(query) {
+    if (query.category) {
+      const category = await this.category(query.category);
+      if (query.meter) {
+        if (query.meter === "*") {
+          yield* category.meters(this.context);
+        } else {
+          const meter = await category.meter(this.context, query.meter);
+          yield* meter.notes(this.context);
+        }
+      }
+
+      return;
+    }
+
+    yield* this.categories();
+  }
+
   set schemaVersion(value) {
     // @ts-ignore
     if (!this.constructor.supportedSchemaVersions.has(value)) {
