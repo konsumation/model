@@ -110,25 +110,27 @@ Data model of the konsumation apps
         *   [Parameters](#parameters-25)
     *   [notes](#notes-1)
         *   [Parameters](#parameters-26)
-    *   [addNote](#addnote)
+    *   [note](#note)
         *   [Parameters](#parameters-27)
-    *   [text](#text-2)
+    *   [addNote](#addnote)
         *   [Parameters](#parameters-28)
+    *   [text](#text-2)
+        *   [Parameters](#parameters-29)
     *   [type](#type-2)
-*   [Note](#note)
-    *   [Parameters](#parameters-29)
+*   [Note](#note-1)
+    *   [Parameters](#parameters-30)
     *   [name](#name-3)
     *   [description](#description-3)
     *   [meter](#meter-2)
     *   [write](#write-3)
-        *   [Parameters](#parameters-30)
-    *   [delete](#delete-2)
         *   [Parameters](#parameters-31)
-    *   [text](#text-3)
+    *   [delete](#delete-2)
         *   [Parameters](#parameters-32)
+    *   [text](#text-3)
+        *   [Parameters](#parameters-33)
     *   [type](#type-3)
 *   [toText](#totext)
-    *   [Parameters](#parameters-33)
+    *   [Parameters](#parameters-34)
 
 ## AttributeDefinition
 
@@ -555,6 +557,17 @@ List assigned Notes.
 *   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?**&#x20;
 
 Returns **AsyncIterable<[Note](#note)>**&#x20;
+
+### note
+
+Deliver Note for a given name.
+
+#### Parameters
+
+*   `context` **any**&#x20;
+*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<([Note](#note) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
 
 ### addNote
 
