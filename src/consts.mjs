@@ -5,7 +5,8 @@
 export const SCHEMA_VERSION_2 = "2";
 
 /**
- * Values are attached to the meter
+ * Values are attached to the meter.
+ * Value dates may be given as iso date.
  */
 export const SCHEMA_VERSION_3 = "3";
 
