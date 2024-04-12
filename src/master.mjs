@@ -50,8 +50,7 @@ export class Master extends Base {
     this.setAttributes(values);
   }
 
-  get factories()
-  {
+  get factories() {
     // @ts-ignore
     const factories = this.constructor.factories;
     return Object.assign(
@@ -60,6 +59,23 @@ export class Master extends Base {
       factories.category.factories.meter.factories,
       { master: this.constructor }
     );
+  }
+
+  async one(query) {
+    if (query.category) {
+      const category = await this.category(query.category);
+      if (query.meter) {
+        const meter = await category.meter(this.context, query.meter);
+
+        if (query.note) {
+          return meter.note(this.context, query.note);
+        }
+
+        return meter;
+      }
+
+      return category;
+    }
   }
 
   set schemaVersion(value) {

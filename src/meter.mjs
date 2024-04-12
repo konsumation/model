@@ -135,7 +135,7 @@ export class Meter extends Base {
     let latest;
 
     for await (const value of this.values(context)) {
-      if(!latest || value.date.getTime() > latest.date.getTime()) {
+      if (!latest || value.date.getTime() > latest.date.getTime()) {
         latest = value;
       }
     }
@@ -150,6 +150,20 @@ export class Meter extends Base {
    * @return {AsyncIterable<Note>}
    */
   async *notes(context, options) {}
+
+  /**
+   * Deliver Note for a given name.
+   * @param {any} context
+   * @param {string} name
+   * @returns {Promise<Note|undefined>}
+   */
+  async note(context, name) {
+    for await (const note of this.notes(context)) {
+      if (note.name === name) {
+        return note;
+      }
+    }
+  }
 
   /**
    * Add a note to the meter;
