@@ -83,7 +83,9 @@ export class Master extends Base {
       const category = await this.category(query.category);
 
       if (query.meter === "*" || query.note === undefined) {
-        yield* category.meters(this.context);
+        if(category) {
+          yield* category.meters(this.context);
+        }
         return;
       }
 

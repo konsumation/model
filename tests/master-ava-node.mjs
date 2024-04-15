@@ -60,6 +60,16 @@ test("query all meter", async t => {
   );
 });
 
+test("query all meter -> empty", async t => {
+  const master = await Master.initialize(data);
+  const all = await collect(master.all({ category: "not exising", meter: "*" }));
+
+  t.deepEqual(
+    all.map(a => a.name),
+    []
+  );
+});
+
 test("query all note", async t => {
   const master = await Master.initialize(data);
 
