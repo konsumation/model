@@ -112,6 +112,20 @@ export class Meter extends Base {
   async *values(context) {}
 
   /**
+   * Deliver Value for a given date.
+   * @param {any} context
+   * @param {Date} date
+   * @returns {Promise<{date:Date,value:number}|undefined>}
+   */
+  async value(context, date) {
+    for await (const value of this.values(context)) {
+      if (value.date.getTime() === date.getTime()) {
+        return value;
+      }
+    }
+  }
+
+  /**
    * Write new value.
    * @param {any} context
    * @param {Object} attributes

@@ -1,7 +1,13 @@
 import { Base } from "./base.mjs";
 import { Meter } from "./meter.mjs";
 import { Note } from "./note.mjs";
-import { name, description, unit, fractionalDigits, order } from "./attributes.mjs";
+import {
+  name,
+  description,
+  unit,
+  fractionalDigits,
+  order
+} from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
 /**
@@ -140,6 +146,21 @@ export class Category extends Base {
   async *values(context) {
     for await (const meter of this.meters(context)) {
       yield* meter.values(context);
+    }
+  }
+
+  /**
+   * Deliver Value for a given date.
+   * @param {any} context
+   * @param {Date} date
+   * @returns {Promise<{date:Date,value:number}|undefined>}
+   */
+  async value(context, date) {
+    for await (const meter of this.meters(context)) {
+      const value = meter.value(context, date);
+      if (value) {
+        return value;
+      }
     }
   }
 
