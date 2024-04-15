@@ -81,13 +81,15 @@ export class Master extends Base {
   async *all(query) {
     if (query.category) {
       const category = await this.category(query.category);
+
+      if (query.meter === "*" || query.note === undefined) {
+        yield* category.meters(this.context);
+        return;
+      }
+
       if (query.meter) {
-        if (query.meter === "*") {
-          yield* category.meters(this.context);
-        } else {
-          const meter = await category.meter(this.context, query.meter);
-          yield* meter.notes(this.context);
-        }
+        const meter = await category.meter(this.context, query.meter);
+        yield* meter.notes(this.context);
       }
 
       return;
@@ -124,12 +126,12 @@ export class Master extends Base {
 
   /**
    * Add a category.
-   * @param {Object} values
+   * @param {Object} attributes
    * @returns {Promise<Category>}
    */
-  addCategory(values) {
+  addCategory(attributes) {
     // @ts-ignore
-    return new this.constructor.factories.category(values);
+    return new this.constructor.factories.category(attributes);
   }
 
   /**

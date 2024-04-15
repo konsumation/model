@@ -167,13 +167,13 @@ export class Meter extends Base {
 
   /**
    * Add a note to the meter;
-   * @param {Object} values
+   * @param {Object} attributes
    * @return {Promise<Note>}
    */
-  addNote(values = {}) {
-    values.meter = this;
+  addNote(attributes = {}) {
+    attributes.meter = this;
     // @ts-ignore
-    return new this.constructor.factories.note(values);
+    return new this.constructor.factories.note(attributes);
   }
 
   /**
