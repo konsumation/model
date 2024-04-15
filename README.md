@@ -65,7 +65,7 @@ Data model of the konsumation apps
         *   [Parameters](#parameters-9)
     *   [latestValue](#latestvalue)
         *   [Parameters](#parameters-10)
-    *   [writeValue](#writevalue)
+    *   [addValue](#addvalue)
         *   [Parameters](#parameters-11)
     *   [deleteValue](#deletevalue)
         *   [Parameters](#parameters-12)
@@ -102,7 +102,7 @@ Data model of the konsumation apps
         *   [Parameters](#parameters-21)
     *   [values](#values-1)
         *   [Parameters](#parameters-22)
-    *   [writeValue](#writevalue-1)
+    *   [addValue](#addvalue-1)
         *   [Parameters](#parameters-23)
     *   [deleteValue](#deletevalue-1)
         *   [Parameters](#parameters-24)
@@ -322,7 +322,7 @@ Add a meter to the category;
 
 #### Parameters
 
-*   `values` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**  (optional, default `{}`)
+*   `attributes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**  (optional, default `{}`)
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<[Meter](#meter)>**&#x20;
 
@@ -356,15 +356,17 @@ Get the latest value.
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<({date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)} | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
 
-### writeValue
+### addValue
 
 Add a value to the active meter.
 
 #### Parameters
 
 *   `context` **any**&#x20;
-*   `time` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)**&#x20;
-*   `value` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)**&#x20;
+*   `attributes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
+
+    *   `attributes.date` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)**&#x20;
+    *   `attributes.value` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)**&#x20;
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any>**&#x20;
 
@@ -440,7 +442,7 @@ Add a category.
 
 #### Parameters
 
-*   `values` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
+*   `attributes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<[Category](#category)>**&#x20;
 
@@ -518,15 +520,19 @@ Type: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_
 
 Returns **AsyncIterable<{date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)}>**&#x20;
 
-### writeValue
+### addValue
 
 Write new value.
 
 #### Parameters
 
 *   `context` **any**&#x20;
-*   `time` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)**&#x20;
-*   `value` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)**&#x20;
+*   `attributes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
+
+    *   `attributes.date` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)**&#x20;
+    *   `attributes.value` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)**&#x20;
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any>**&#x20;
 
 ### deleteValue
 
@@ -575,7 +581,7 @@ Add a note to the meter;
 
 #### Parameters
 
-*   `values` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**  (optional, default `{}`)
+*   `attributes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**  (optional, default `{}`)
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<[Note](#note)>**&#x20;
 
