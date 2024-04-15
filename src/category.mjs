@@ -158,15 +158,16 @@ export class Category extends Base {
   /**
    * Add a value to the active meter.
    * @param {any} context
-   * @param {Date} time
-   * @param {number} value
+   * @param {Object} attributes
+   * @param {Date} attributes.date
+   * @param {number} attributes.value
    * @returns {Promise<any>}
    */
-  async writeValue(context, time, value) {
+  async addValue(context, attributes) {
     const meter = await this.activeMeter(context);
     this.checkMeterIsPresent(meter);
     // @ts-ignore
-    return meter.writeValue(context, time, value);
+    return meter.addValue(context, attributes);
   }
 
   checkMeterIsPresent(meter) {

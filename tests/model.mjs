@@ -58,12 +58,9 @@ class MyMeter extends Meter {
     data.categories[this.category.name].meters[this.name] = meter;
   }
 
-  async writeValue(data, date, value) {
+  async addValue(data, attributes) {
     // console.log("VALUE WRITE", date, value);
-    data.categories[this.category.name].meters[this.name].values.push({
-      date,
-      value
-    });
+    data.categories[this.category.name].meters[this.name].values.push(attributes);
   }
 
   async *notes(data) {

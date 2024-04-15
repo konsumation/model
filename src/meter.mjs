@@ -114,10 +114,12 @@ export class Meter extends Base {
   /**
    * Write new value.
    * @param {any} context
-   * @param {Date} time
-   * @param {number} value
+   * @param {Object} attributes
+   * @param {Date} attributes.date
+   * @param {number} attributes.value
+   * @returns {Promise<any>}
    */
-  async writeValue(context, time, value) {}
+  async addValue(context, attributes) {}
 
   /**
    * Delete a value.

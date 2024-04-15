@@ -220,11 +220,13 @@ export class Master extends Base {
             await object.write(context);
           }
           // @ts-ignore
-          object.writeValue(
+          object.addValue(
             // @ts-ignore
             context,
-            m[2] ? new Date(parseFloat(m[2]) * 1000) : new Date(m[3]),
-            parseFloat(m[4])
+            {
+              date: m[2] ? new Date(parseFloat(m[2]) * 1000) : new Date(m[3]),
+              value: parseFloat(m[4])
+            }
           );
 
           statistics.value++;
