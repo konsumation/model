@@ -63,74 +63,78 @@ Data model of the konsumation apps
         *   [Parameters](#parameters-8)
     *   [values](#values)
         *   [Parameters](#parameters-9)
-    *   [latestValue](#latestvalue)
+    *   [value](#value)
         *   [Parameters](#parameters-10)
-    *   [addValue](#addvalue)
+    *   [latestValue](#latestvalue)
         *   [Parameters](#parameters-11)
-    *   [deleteValue](#deletevalue)
+    *   [addValue](#addvalue)
         *   [Parameters](#parameters-12)
-    *   [text](#text)
+    *   [deleteValue](#deletevalue)
         *   [Parameters](#parameters-13)
+    *   [text](#text)
+        *   [Parameters](#parameters-14)
     *   [type](#type-1)
 *   [SCHEMA\_VERSION\_2](#schema_version_2)
 *   [SCHEMA\_VERSION\_3](#schema_version_3)
 *   [SCHEMA\_VERSION\_CURRENT](#schema_version_current)
 *   [Master](#master)
-    *   [Parameters](#parameters-14)
+    *   [Parameters](#parameters-15)
     *   [Properties](#properties-1)
     *   [write](#write-1)
-        *   [Parameters](#parameters-15)
+        *   [Parameters](#parameters-16)
     *   [close](#close)
     *   [addCategory](#addcategory)
-        *   [Parameters](#parameters-16)
+        *   [Parameters](#parameters-17)
     *   [categories](#categories)
     *   [category](#category-1)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-18)
     *   [text](#text-1)
     *   [initialize](#initialize)
-        *   [Parameters](#parameters-18)
+        *   [Parameters](#parameters-19)
 *   [Meter](#meter-1)
-    *   [Parameters](#parameters-19)
+    *   [Parameters](#parameters-20)
     *   [name](#name-2)
     *   [category](#category-2)
     *   [description](#description-2)
     *   [serial](#serial-1)
     *   [validFrom](#validfrom-1)
     *   [write](#write-2)
-        *   [Parameters](#parameters-20)
-    *   [delete](#delete-1)
         *   [Parameters](#parameters-21)
-    *   [values](#values-1)
+    *   [delete](#delete-1)
         *   [Parameters](#parameters-22)
-    *   [addValue](#addvalue-1)
+    *   [values](#values-1)
         *   [Parameters](#parameters-23)
-    *   [deleteValue](#deletevalue-1)
+    *   [value](#value-1)
         *   [Parameters](#parameters-24)
-    *   [latestValue](#latestvalue-1)
+    *   [addValue](#addvalue-1)
         *   [Parameters](#parameters-25)
-    *   [notes](#notes-1)
+    *   [deleteValue](#deletevalue-1)
         *   [Parameters](#parameters-26)
-    *   [note](#note)
+    *   [latestValue](#latestvalue-1)
         *   [Parameters](#parameters-27)
-    *   [addNote](#addnote)
+    *   [notes](#notes-1)
         *   [Parameters](#parameters-28)
-    *   [text](#text-2)
+    *   [note](#note)
         *   [Parameters](#parameters-29)
+    *   [addNote](#addnote)
+        *   [Parameters](#parameters-30)
+    *   [text](#text-2)
+        *   [Parameters](#parameters-31)
     *   [type](#type-2)
 *   [Note](#note-1)
-    *   [Parameters](#parameters-30)
+    *   [Parameters](#parameters-32)
     *   [name](#name-3)
     *   [description](#description-3)
     *   [meter](#meter-2)
     *   [write](#write-3)
-        *   [Parameters](#parameters-31)
-    *   [delete](#delete-2)
-        *   [Parameters](#parameters-32)
-    *   [text](#text-3)
         *   [Parameters](#parameters-33)
+    *   [delete](#delete-2)
+        *   [Parameters](#parameters-34)
+    *   [text](#text-3)
+        *   [Parameters](#parameters-35)
     *   [type](#type-3)
 *   [toText](#totext)
-    *   [Parameters](#parameters-34)
+    *   [Parameters](#parameters-36)
 
 ## AttributeDefinition
 
@@ -346,6 +350,17 @@ All values from all meters.
 
 Returns **AsyncIterable<{date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)}>**&#x20;
 
+### value
+
+Deliver Value for a given date.
+
+#### Parameters
+
+*   `context` **any**&#x20;
+*   `date` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)**&#x20;
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<({date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)} | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
+
 ### latestValue
 
 Get the latest value.
@@ -519,6 +534,17 @@ Type: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_
 *   `context` **any**&#x20;
 
 Returns **AsyncIterable<{date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)}>**&#x20;
+
+### value
+
+Deliver Value for a given date.
+
+#### Parameters
+
+*   `context` **any**&#x20;
+*   `date` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)**&#x20;
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<({date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)} | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
 
 ### addValue
 
