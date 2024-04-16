@@ -129,7 +129,11 @@ export class Master extends Base {
   /**
    * Add a category.
    * @param {Object} attributes
-   * @returns {Promise<Category>}
+   * @param {string} attributes.name
+   * @param {string} [attributes.description]
+   * @param {number} [attributes.fractionalDigits]
+   * @param {string} [attributes.unit]
+   * @returns {Category}
    */
   addCategory(attributes) {
     // @ts-ignore

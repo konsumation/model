@@ -33,14 +33,14 @@ export class Note extends Base {
 
   /**
    * Create a new Category.
-   * @param {Object} values
-   * @param {string} values.name
-   * @param {Meter} values.meter
-   * @param {string} [values.description]
+   * @param {Object} attributes
+   * @param {string} attributes.name
+   * @param {Meter} attributes.meter
+   * @param {string} [attributes.description]
    */
-  constructor(values) {
+  constructor(attributes) {
     super();
-    this.setAttributes(values);
+    this.setAttributes(attributes);
   }
 
   toString() {

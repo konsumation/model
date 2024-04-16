@@ -47,15 +47,15 @@ export class Category extends Base {
 
   /**
    * Create a new Category.
-   * @param {Object} values
-   * @param {string} values.name
-   * @param {string} [values.description]
-   * @param {number} [values.fractionalDigits]
-   * @param {string} [values.unit]
+   * @param {Object} attributes
+   * @param {string} attributes.name
+   * @param {string} [attributes.description]
+   * @param {number} [attributes.fractionalDigits]
+   * @param {string} [attributes.unit]
    */
-  constructor(values) {
+  constructor(attributes) {
     super();
-    this.setAttributes(values);
+    this.setAttributes(attributes);
   }
 
   toString() {
@@ -119,9 +119,16 @@ export class Category extends Base {
   /**
    * Add a meter to the category;
    * @param {Object} attributes
-   * @return {Promise<Meter>}
+   * @param {string} attributes.name
+   * @param {Category} [attributes.category]
+   * @param {Date} attributes.validFrom
+   * @param {string} [attributes.description]
+   * @param {string} [attributes.serial]
+   * @param {number} [attributes.fractionalDigits]
+   * @param {string} [attributes.unit]
+   * @return {Meter}
    */
-  addMeter(attributes = {}) {
+  addMeter(attributes) {
     attributes.category = this;
     // @ts-ignore
     return new this.constructor.factories.meter(attributes);

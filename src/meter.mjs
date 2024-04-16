@@ -55,18 +55,18 @@ export class Meter extends Base {
 
   /**
    * Create a new Meter.
-   * @param {Object} values
-   * @param {string} values.name
-   * @param {string} values.category
-   * @param {Date} values.validFrom
-   * @param {string} [values.description]
-   * @param {string} [values.serial]
-   * @param {number} [values.fractionalDigits]
-   * @param {string} [values.unit]
+   * @param {Object} attributes
+   * @param {string} attributes.name
+   * @param {Category} attributes.category
+   * @param {Date} attributes.validFrom
+   * @param {string} [attributes.description]
+   * @param {string} [attributes.serial]
+   * @param {number} [attributes.fractionalDigits]
+   * @param {string} [attributes.unit]
    */
-  constructor(values) {
+  constructor(attributes) {
     super();
-    this.setAttributes(values);
+    this.setAttributes(attributes);
   }
 
   get fractionalDigits() {
@@ -184,9 +184,12 @@ export class Meter extends Base {
   /**
    * Add a note to the meter;
    * @param {Object} attributes
-   * @return {Promise<Note>}
+   * @param {string} attributes.name
+   * @param {Meter} attributes.meter
+   * @param {string} [attributes.description]
+   * @return {Note}
    */
-  addNote(attributes = {}) {
+  addNote(attributes) {
     attributes.meter = this;
     // @ts-ignore
     return new this.constructor.factories.note(attributes);
