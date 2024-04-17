@@ -31,6 +31,8 @@ Data model of the konsumation apps
 *   [fractionalDigits](#fractionaldigits)
 *   [fractionalDigits](#fractionaldigits-1)
 *   [order](#order)
+*   [value](#value)
+*   [date](#date)
 *   [Base](#base)
     *   [attributeNames](#attributenames)
     *   [getAttributes](#getattributes)
@@ -63,7 +65,7 @@ Data model of the konsumation apps
         *   [Parameters](#parameters-8)
     *   [values](#values)
         *   [Parameters](#parameters-9)
-    *   [value](#value)
+    *   [value](#value-1)
         *   [Parameters](#parameters-10)
     *   [latestValue](#latestvalue)
         *   [Parameters](#parameters-11)
@@ -104,7 +106,7 @@ Data model of the konsumation apps
         *   [Parameters](#parameters-22)
     *   [values](#values-1)
         *   [Parameters](#parameters-23)
-    *   [value](#value-1)
+    *   [value](#value-2)
         *   [Parameters](#parameters-24)
     *   [addValue](#addvalue-1)
         *   [Parameters](#parameters-25)
@@ -135,6 +137,18 @@ Data model of the konsumation apps
     *   [type](#type-3)
 *   [toText](#totext)
     *   [Parameters](#parameters-36)
+*   [Value](#value-3)
+    *   [Parameters](#parameters-37)
+    *   [meter](#meter-3)
+    *   [date](#date-1)
+    *   [value](#value-4)
+    *   [write](#write-4)
+        *   [Parameters](#parameters-38)
+    *   [delete](#delete-3)
+        *   [Parameters](#parameters-39)
+    *   [text](#text-4)
+        *   [Parameters](#parameters-40)
+    *   [type](#type-4)
 
 ## AttributeDefinition
 
@@ -144,6 +158,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 *   `type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 *   `isKey` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)**&#x20;
+*   `isForeign` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** do we represent a foreign entity
 *   `writable` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)**&#x20;
 *   `mandatory` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)**&#x20;
 *   `default` **any?** the default value
@@ -191,6 +206,14 @@ Type: [AttributeDefinition](#attributedefinition)
 Type: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?
 
 ## order
+
+Type: [AttributeDefinition](#attributedefinition)
+
+## value
+
+Type: [AttributeDefinition](#attributedefinition)
+
+## date
 
 Type: [AttributeDefinition](#attributedefinition)
 
@@ -326,6 +349,7 @@ Add a meter to the category;
 
 #### Parameters
 
+*   `context` **any**&#x20;
 *   `attributes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
     *   `attributes.name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
@@ -465,6 +489,7 @@ Add a category.
 
 #### Parameters
 
+*   `context` **any**&#x20;
 *   `attributes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
     *   `attributes.name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
@@ -482,6 +507,7 @@ Returns **AsyncIterable<[Category](#category)>**&#x20;
 
 #### Parameters
 
+*   `context` **any**&#x20;
 *   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<([Category](#category) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
@@ -546,7 +572,7 @@ Type: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_
 
 *   `context` **any**&#x20;
 
-Returns **AsyncIterable<{date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)}>**&#x20;
+Returns **AsyncIterable<{Value}>**&#x20;
 
 ### value
 
@@ -557,11 +583,11 @@ Deliver Value for a given date.
 *   `context` **any**&#x20;
 *   `date` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)**&#x20;
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<({date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)} | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<([Value](#value) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
 
 ### addValue
 
-Write new value.
+add new value.
 
 #### Parameters
 
@@ -571,16 +597,18 @@ Write new value.
     *   `attributes.date` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)**&#x20;
     *   `attributes.value` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)**&#x20;
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any>**&#x20;
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<[Value](#value)>**&#x20;
 
 ### deleteValue
 
-Delete a value.
+delete value.
 
 #### Parameters
 
 *   `context` **any**&#x20;
-*   `time` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)**&#x20;
+*   `date` **[Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)**&#x20;
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<void>**&#x20;
 
 ### latestValue
 
@@ -590,7 +618,7 @@ Get the latest value.
 
 *   `context` **any**&#x20;
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<({date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)} | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<([Value](#value) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
 
 ### notes
 
@@ -620,6 +648,7 @@ Add a note to the meter;
 
 #### Parameters
 
+*   `context` **any**&#x20;
 *   `attributes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
     *   `attributes.name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
@@ -708,6 +737,58 @@ Text representation.
 *   `iterators` **...any**&#x20;
 
 Returns **AsyncIterable<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>**&#x20;
+
+## Value
+
+**Extends Base**
+
+### Parameters
+
+*   `attributes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
+
+### meter
+
+Type: [Meter](#meter)
+
+### date
+
+Type: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)
+
+### value
+
+Type: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)
+
+### write
+
+Write into store.
+
+#### Parameters
+
+*   `context` **any**&#x20;
+
+### delete
+
+Delete from store.
+
+#### Parameters
+
+*   `context` **any**&#x20;
+
+### text
+
+Text representation.
+
+#### Parameters
+
+*   `context` **any**&#x20;
+
+Returns **AsyncIterable<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>**&#x20;
+
+### type
+
+Name of the type in text dump
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 # install
 
