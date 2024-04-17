@@ -89,66 +89,68 @@ Data model of the konsumation apps
     *   [addCategory](#addcategory)
         *   [Parameters](#parameters-17)
     *   [categories](#categories)
-    *   [category](#category-1)
         *   [Parameters](#parameters-18)
-    *   [text](#text-1)
-    *   [initialize](#initialize)
+    *   [category](#category-1)
         *   [Parameters](#parameters-19)
+    *   [text](#text-1)
+        *   [Parameters](#parameters-20)
+    *   [initialize](#initialize)
+        *   [Parameters](#parameters-21)
 *   [Meter](#meter-1)
-    *   [Parameters](#parameters-20)
+    *   [Parameters](#parameters-22)
     *   [name](#name-2)
     *   [category](#category-2)
     *   [description](#description-2)
     *   [serial](#serial-1)
     *   [validFrom](#validfrom-1)
     *   [write](#write-2)
-        *   [Parameters](#parameters-21)
-    *   [delete](#delete-1)
-        *   [Parameters](#parameters-22)
-    *   [values](#values-1)
         *   [Parameters](#parameters-23)
-    *   [value](#value-2)
+    *   [delete](#delete-1)
         *   [Parameters](#parameters-24)
-    *   [addValue](#addvalue-1)
+    *   [values](#values-1)
         *   [Parameters](#parameters-25)
-    *   [deleteValue](#deletevalue-1)
+    *   [value](#value-2)
         *   [Parameters](#parameters-26)
-    *   [latestValue](#latestvalue-1)
+    *   [addValue](#addvalue-1)
         *   [Parameters](#parameters-27)
-    *   [notes](#notes-1)
+    *   [deleteValue](#deletevalue-1)
         *   [Parameters](#parameters-28)
-    *   [note](#note)
+    *   [latestValue](#latestvalue-1)
         *   [Parameters](#parameters-29)
-    *   [addNote](#addnote)
+    *   [notes](#notes-1)
         *   [Parameters](#parameters-30)
-    *   [text](#text-2)
+    *   [note](#note)
         *   [Parameters](#parameters-31)
+    *   [addNote](#addnote)
+        *   [Parameters](#parameters-32)
+    *   [text](#text-2)
+        *   [Parameters](#parameters-33)
     *   [type](#type-2)
 *   [Note](#note-1)
-    *   [Parameters](#parameters-32)
+    *   [Parameters](#parameters-34)
     *   [name](#name-3)
     *   [description](#description-3)
     *   [meter](#meter-2)
     *   [write](#write-3)
-        *   [Parameters](#parameters-33)
-    *   [delete](#delete-2)
-        *   [Parameters](#parameters-34)
-    *   [text](#text-3)
         *   [Parameters](#parameters-35)
+    *   [delete](#delete-2)
+        *   [Parameters](#parameters-36)
+    *   [text](#text-3)
+        *   [Parameters](#parameters-37)
     *   [type](#type-3)
 *   [toText](#totext)
-    *   [Parameters](#parameters-36)
+    *   [Parameters](#parameters-38)
 *   [Value](#value-3)
-    *   [Parameters](#parameters-37)
+    *   [Parameters](#parameters-39)
     *   [meter](#meter-3)
     *   [date](#date-1)
     *   [value](#value-4)
     *   [write](#write-4)
-        *   [Parameters](#parameters-38)
-    *   [delete](#delete-3)
-        *   [Parameters](#parameters-39)
-    *   [text](#text-4)
         *   [Parameters](#parameters-40)
+    *   [delete](#delete-3)
+        *   [Parameters](#parameters-41)
+    *   [text](#text-4)
+        *   [Parameters](#parameters-42)
     *   [type](#type-4)
 
 ## AttributeDefinition
@@ -508,6 +510,10 @@ Returns **[Category](#category)**&#x20;
 
 ### categories
 
+#### Parameters
+
+*   `context` **any**&#x20;
+
 Returns **AsyncIterable<[Category](#category)>**&#x20;
 
 ### category
@@ -522,6 +528,10 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 ### text
 
 Create text representation
+
+#### Parameters
+
+*   `context`   (optional, default `this.context`)
 
 Returns **AsyncIterable<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>**&#x20;
 
