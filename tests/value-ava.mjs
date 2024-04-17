@@ -5,8 +5,8 @@ import { Master, Category, Meter, Value, data } from "./model.mjs";
 test("Value constructor", t => testValueConstructor(t, Value));
 
 test("Value name", t => {
-  const category = new Category({ name: "C1"});
-  const meter = new Meter({ category, name: "M1"});
+  const category = new Category({ name: "C1" });
+  const meter = new Meter({ category, name: "M1" });
   const value = new Value({ meter, date: new Date(0), value: 1 });
   t.is(value.name, "1970-01-01T00:00:00.000Z");
 });
@@ -50,6 +50,26 @@ test("Value toJSON", t => {
 
   t.deepEqual(value.toJSON(), {
     date: "1970-01-01T00:00:00.000Z",
+    value: 1.2
+  });
+});
+
+test("Value localAttributes", t => {
+  const context = {};
+
+  const category = new Category({
+    name: "C1"
+  });
+  const meter = category.addMeter(context, { name: "M1" });
+
+  const value = new Value({
+    meter,
+    date: new Date(0),
+    value: 1.2
+  });
+
+  t.deepEqual(value.getLocalAttributes(), {
+    date: new Date(0),
     value: 1.2
   });
 });

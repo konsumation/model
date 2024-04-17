@@ -39,6 +39,25 @@ test("Meter toJSON", t => {
   });
 });
 
+test("Meter localAttributes", t => {
+  const context = {};
+
+  const category = new Category({
+    name: "C1",
+    unit: "m3",
+    fractionalDigits: 3
+  });
+  const meter = category.addMeter(context, { name: "M1", serial: "123" });
+
+  t.deepEqual(meter.getLocalAttributes(), {
+    name: "M1",
+    serial: "123",
+    unit: "m3",
+    fractionalDigits: 3,
+    validFrom: new Date(0)
+  });
+});
+
 test("Meter add Note", t => {
   const context = {};
 

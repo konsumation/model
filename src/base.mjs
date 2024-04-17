@@ -91,6 +91,23 @@ export class Base {
   }
 
   /**
+   * Object keys are the mapped external attribute names but only for local (not isForeign) ones.
+   * @return {Object}
+   */
+  getLocalAttributes() {
+    // @ts-ignore
+    const attributes = this.constructor.attributes;
+
+    const values = this.getAttributes();
+    for (const k of Object.keys(values)) {
+      if (attributes[k]?.isForeign) {
+        delete values[k];
+      }
+    }
+    return values;
+  }
+
+  /**
    * Sets values with external attribute names.
    * @param {Object} values
    */
@@ -131,17 +148,10 @@ export class Base {
   }
 
   toJSON() {
-    // @ts-ignore
-    const attributes = this.constructor.attributes;
-
-    const values = this.getAttributes();
+    const values = this.getLocalAttributes();
     for (const [k, v] of Object.entries(values)) {
-      if (attributes[k]?.isForeign) {
-        delete values[k];
-      } else {
-        if (v instanceof Date) {
-          values[k] = v.toISOString();
-        }
+      if (v instanceof Date) {
+        values[k] = v.toISOString();
       }
     }
     return values;

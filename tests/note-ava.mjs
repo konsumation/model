@@ -23,3 +23,23 @@ test("Note toJSON", t => {
     name: "N1"
   });
 });
+
+test("Note localAttributes", t => {
+  const context = {};
+
+  const category = new Category({
+    name: "C1",
+    unit: "m3",
+    fractionalDigits: 3
+  });
+  const meter = category.addMeter(context, { name: "M1", serial: "123" });
+
+  const note = new Note({
+    meter,
+    name: "N1"
+  });
+
+  t.deepEqual(note.getLocalAttributes(), {
+    name: "N1"
+  });
+});
