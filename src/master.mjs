@@ -67,14 +67,23 @@ export class Master extends Base {
 
     if (query.category) {
       const category = await this.category(context, query.category);
-      if (query.meter) {
-        const meter = await category.meter(context, query.meter);
 
-        if (query.note) {
-          return meter.note(context, query.note);
+      if (category) {
+        if (query.meter) {
+          const meter = await category.meter(context, query.meter);
+
+          if (meter) {
+            if (query.note) {
+              return meter.note(context, query.note);
+            }
+
+            if (query.value) {
+              return meter.value(context, query.value);
+            }
+          }
+
+          return meter;
         }
-
-        return meter;
       }
 
       return category;
@@ -87,32 +96,26 @@ export class Master extends Base {
     if (query.category) {
       const category = await this.category(context, query.category);
 
-      if (query.meter === "*" || query.note === undefined) {
-        if(category) {
+      if (category) {
+        if (query.meter === "*") {
           yield* category.meters(context);
         }
-        return;
-      }
 
-      if (query.value === "*" || query.note === undefined) {
-        if(category) {
+        if (query.value === "*") {
           yield* category.values(context);
         }
-        return;
-      }
 
-      if (query.meter) {
-        const meter = await category.meter(context, query.meter);
-        if(meter) {
-          if(query.note === '*') {
-            yield* meter.notes(context);
-          }
-          else {
-            yield* meter.values(context);
+        if (query.meter) {
+          const meter = await category.meter(context, query.meter);
+          if (meter) {
+            if (query.note === "*") {
+              yield* meter.notes(context);
+            } else {
+              yield* meter.values(context);
+            }
           }
         }
       }
-
       return;
     }
 
@@ -246,13 +249,10 @@ export class Master extends Base {
             await object.write(context);
           }
           // @ts-ignore
-          const value = object.addValue(
-            context,
-            {
-              date: m[2] ? new Date(parseFloat(m[2]) * 1000) : new Date(m[3]),
-              value: parseFloat(m[4])
-            }
-          );
+          const value = object.addValue(context, {
+            date: m[2] ? new Date(parseFloat(m[2]) * 1000) : new Date(m[3]),
+            value: parseFloat(m[4])
+          });
           await value.write(context);
           statistics.value++;
         } else {
