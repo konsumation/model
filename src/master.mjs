@@ -164,9 +164,10 @@ export class Master extends Base {
   }
 
   /**
+   * @param {any} context
    * @return {AsyncIterable<Category>}
    */
-  async *categories() {}
+  async *categories(context) {}
 
   /**
    *
@@ -186,8 +187,8 @@ export class Master extends Base {
    * Create text representation
    * @return {AsyncIterable<string>}
    */
-  async *text() {
-    yield* toText(this.context, this, undefined, this.categories());
+  async *text(context = this.context) {
+    yield* toText(context, this, undefined, this.categories(context));
   }
 
   async fromText(input) {
