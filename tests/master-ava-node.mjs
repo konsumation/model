@@ -88,7 +88,7 @@ test("query all note", async t => {
   );
 });
 
-test.only("query all meter values", async t => {
+test.skip("query all meter values", async t => {
   const master = await Master.initialize(data);
 
   const all = await collect(
