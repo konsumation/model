@@ -33,3 +33,23 @@ test("Meter/Category values", async t => {
   t.deepEqual(await meter.latestValue(context), exp);
   t.deepEqual(await category.latestValue(context), exp);
 });
+
+test("Value toJSON", t => {
+  const context = {};
+
+  const category = new Category({
+    name: "C1"
+  });
+  const meter = category.addMeter(context, { name: "M1" });
+
+  const value = new Value({
+    meter,
+    date: new Date(0),
+    value: 1.2
+  });
+
+  t.deepEqual(value.toJSON(), {
+    date: "1970-01-01T00:00:00.000Z",
+    value: 1.2
+  });
+});
