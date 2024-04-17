@@ -2,6 +2,7 @@ import { Base } from "./base.mjs";
 import { Category } from "./category.mjs";
 import { Meter } from "./meter.mjs";
 import { Note } from "./note.mjs";
+import { Value } from "./value.mjs";
 import {
   SCHEMA_VERSION_CURRENT,
   SCHEMA_VERSION_2,
@@ -11,7 +12,7 @@ import { toText } from "./util.mjs";
 import { description, schemaVersion } from "./attributes.mjs";
 export * from "./attributes.mjs";
 export * from "./consts.mjs";
-export { Category, Meter, Note, Base };
+export { Category, Meter, Note, Value, Base };
 
 /**
  * @property {string} schemaVersion
@@ -62,13 +63,15 @@ export class Master extends Base {
   }
 
   async one(query) {
+    const context = this.context;
+
     if (query.category) {
-      const category = await this.category(query.category);
+      const category = await this.category(context, query.category);
       if (query.meter) {
-        const meter = await category.meter(this.context, query.meter);
+        const meter = await category.meter(context, query.meter);
 
         if (query.note) {
-          return meter.note(this.context, query.note);
+          return meter.note(context, query.note);
         }
 
         return meter;
@@ -79,25 +82,41 @@ export class Master extends Base {
   }
 
   async *all(query) {
+    const context = this.context;
+
     if (query.category) {
-      const category = await this.category(query.category);
+      const category = await this.category(context, query.category);
 
       if (query.meter === "*" || query.note === undefined) {
         if(category) {
-          yield* category.meters(this.context);
+          yield* category.meters(context);
+        }
+        return;
+      }
+
+      if (query.value === "*" || query.note === undefined) {
+        if(category) {
+          yield* category.values(context);
         }
         return;
       }
 
       if (query.meter) {
-        const meter = await category.meter(this.context, query.meter);
-        yield* meter.notes(this.context);
+        const meter = await category.meter(context, query.meter);
+        if(meter) {
+          if(query.note === '*') {
+            yield* meter.notes(context);
+          }
+          else {
+            yield* meter.values(context);
+          }
+        }
       }
 
       return;
     }
 
-    yield* this.categories();
+    yield* this.categories(context);
   }
 
   set schemaVersion(value) {
@@ -128,6 +147,7 @@ export class Master extends Base {
 
   /**
    * Add a category.
+   * @param {any} context
    * @param {Object} attributes
    * @param {string} attributes.name
    * @param {string} [attributes.description]
@@ -135,7 +155,7 @@ export class Master extends Base {
    * @param {string} [attributes.unit]
    * @returns {Category}
    */
-  addCategory(attributes) {
+  addCategory(context, attributes) {
     // @ts-ignore
     return new this.constructor.factories.category(attributes);
   }
@@ -147,11 +167,12 @@ export class Master extends Base {
 
   /**
    *
+   * @param {any} context
    * @param {string} name
    * @returns {Promise<Category|undefined>}
    */
-  async category(name) {
-    for await (const category of this.categories()) {
+  async category(context, name) {
+    for await (const category of this.categories(context)) {
       if (category.name === name) {
         return category;
       }
@@ -172,7 +193,6 @@ export class Master extends Base {
     const statistics = Object.fromEntries(
       Object.keys(typeLookup).map(type => [type, 0])
     );
-    statistics.value = 0;
 
     // @ts-ignore
     const context = this.context;
@@ -226,15 +246,14 @@ export class Master extends Base {
             await object.write(context);
           }
           // @ts-ignore
-          object.addValue(
-            // @ts-ignore
+          const value = object.addValue(
             context,
             {
               date: m[2] ? new Date(parseFloat(m[2]) * 1000) : new Date(m[3]),
               value: parseFloat(m[4])
             }
           );
-
+          await value.write(context);
           statistics.value++;
         } else {
           m = line.match(/^(\w+)\s*=\s*(.*)/);

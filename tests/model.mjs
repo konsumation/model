@@ -1,4 +1,4 @@
-import { Master, Category, Meter, Note } from "@konsumation/model";
+import { Master, Category, Meter, Note, Value } from "@konsumation/model";
 
 export const data = {
   categories: {
@@ -39,10 +39,19 @@ class MyNote extends Note {
   }
 }
 
+class MyValue extends Value {
+  async write(data) {
+    data.categories[this.meter.category.name].meters[
+      this.meter.name
+    ].values.push(this.getAttributes());
+  }
+}
+
 class MyMeter extends Meter {
   static get factories() {
     return {
-      [MyNote.type]: MyNote
+      [MyNote.type]: MyNote,
+      [MyValue.type]: MyValue
     };
   }
 
@@ -54,17 +63,10 @@ class MyMeter extends Meter {
     const meter = this.getAttributes();
     meter.values = [];
     meter.notes = [];
-    // console.log("METER WRITE", meter);
     data.categories[this.category.name].meters[this.name] = meter;
   }
 
-  async addValue(data, attributes) {
-    // console.log("VALUE WRITE", date, value);
-    data.categories[this.category.name].meters[this.name].values.push(attributes);
-  }
-
   async *notes(data) {
-    //console.log(this.name, this.category.name, data.categories[this.category.name].meters);
     for (const [name, note] of Object.entries(
       data.categories[this.category.name].meters[this.name].notes
     )) {
@@ -75,7 +77,10 @@ class MyMeter extends Meter {
   }
 
   async *values(data) {
-    yield * data.categories[this.category.name].meters[this.name].values;
+    for (const v of data.categories[this.category.name].meters[this.name]
+      .values) {
+      yield new MyValue({ meter: this, ...v });
+    }
   }
 }
 
@@ -89,7 +94,6 @@ class MyCategory extends Category {
   async write(data) {
     const category = this.getAttributes();
     category.meters = {};
-    //console.log("CATEGORY WRITE", category);
     data.categories[category.name] = category;
   }
 
@@ -122,13 +126,10 @@ class MyMaster extends Master {
       yield new MyCategory(category);
     }
   }
-
-  async fromText(input) {
-    return super.fromText(input, [MyCategory, MyMeter, MyNote]);
-  }
 }
 
 export { MyMaster as Master };
 export { MyCategory as Category };
 export { MyMeter as Meter };
 export { MyNote as Note };
+export { MyValue as Value };

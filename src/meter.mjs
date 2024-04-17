@@ -1,5 +1,6 @@
 import { Base } from "./base.mjs";
 import { Note } from "./note.mjs";
+import { Value } from "./value.mjs";
 import { Category } from "./category.mjs";
 import {
   name,
@@ -25,7 +26,8 @@ export class Meter extends Base {
 
   static get factories() {
     return {
-      [Note.type]: Note
+      [Note.type]: Note,
+      [Value.type]: Value
     };
   }
 
@@ -107,7 +109,7 @@ export class Meter extends Base {
 
   /**
    * @param {any} context
-   * @return {AsyncIterable<{date:Date,value:number}>}
+   * @return {AsyncIterable<{Value}>}
    */
   async *values(context) {}
 
@@ -115,7 +117,7 @@ export class Meter extends Base {
    * Deliver Value for a given date.
    * @param {any} context
    * @param {Date} date
-   * @returns {Promise<{date:Date,value:number}|undefined>}
+   * @returns {Promise<Value|undefined>}
    */
   async value(context, date) {
     for await (const value of this.values(context)) {
@@ -126,26 +128,34 @@ export class Meter extends Base {
   }
 
   /**
-   * Write new value.
+   * add new value.
    * @param {any} context
    * @param {Object} attributes
    * @param {Date} attributes.date
    * @param {number} attributes.value
-   * @returns {Promise<any>}
+   * @returns {Promise<Value>}
    */
-  async addValue(context, attributes) {}
+  addValue(context, attributes) {
+    attributes.meter = this;
+    // @ts-ignore
+    return new this.constructor.factories.value(attributes);
+  }
 
   /**
-   * Delete a value.
+   * delete value.
    * @param {any} context
-   * @param {Date} time
+   * @param {Date} date
+   * @returns {Promise<void>}
    */
-  async deleteValue(context, time) {}
+  deleteValue(context, date) {
+    const value = new this.constructor.factories.value({ meter: this, date });
+    return value.delete(context);
+  }
 
   /**
    * Get the latest value.
    * @param {any} context
-   * @return {Promise<{date:Date,value:number}|undefined>}
+   * @return {Promise<Value|undefined>}
    */
   async latestValue(context) {
     let latest;
@@ -183,13 +193,14 @@ export class Meter extends Base {
 
   /**
    * Add a note to the meter;
+   * @param {any} context
    * @param {Object} attributes
    * @param {string} attributes.name
    * @param {Meter} attributes.meter
    * @param {string} [attributes.description]
    * @return {Note}
    */
-  addNote(attributes) {
+  addNote(context, attributes) {
     attributes.meter = this;
     // @ts-ignore
     return new this.constructor.factories.note(attributes);
@@ -201,14 +212,12 @@ export class Meter extends Base {
    * @returns {AsyncIterable<string>}
    */
   async *text(context) {
-    yield* toText(context, this, "name");
-
-    for await (const value of this.values(context)) {
-      yield `${value.date.toISOString()} ${value.value}`;
-    }
-
-    for await (const object of this.notes(context)) {
-      yield* object.text(context);
-    }
+    yield* toText(
+      context,
+      this,
+      "name",
+      this.values(context),
+      this.notes(context)
+    );
   }
 }

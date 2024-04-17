@@ -118,6 +118,7 @@ export class Category extends Base {
 
   /**
    * Add a meter to the category;
+   * @param {any} context
    * @param {Object} attributes
    * @param {string} attributes.name
    * @param {Category} [attributes.category]
@@ -128,7 +129,7 @@ export class Category extends Base {
    * @param {string} [attributes.unit]
    * @return {Meter}
    */
-  addMeter(attributes) {
+  addMeter(context, attributes) {
     attributes.category = this;
     // @ts-ignore
     return new this.constructor.factories.meter(attributes);

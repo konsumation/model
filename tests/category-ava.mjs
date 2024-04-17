@@ -22,7 +22,7 @@ test("Category toJSON", t => {
 
 test("Category meter", async t => {
   const master = await Master.initialize(data);
-  const category = await master.category("C1");
+  const category = await master.category(master.context, "C1");
 
   const meter = await category.meter(master.context, "M1");
 
@@ -34,7 +34,7 @@ test("Category meter", async t => {
 
 test("Category active meter", async t => {
   const master = await Master.initialize(data);
-  const category = await master.category("C1");
+  const category = await master.category(master.context, "C1");
 
   const meter = await category.activeMeter(master.context);
 

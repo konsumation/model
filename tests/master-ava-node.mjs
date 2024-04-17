@@ -1,6 +1,6 @@
 import test from "ava";
 import { testRestoreVersion3 } from "@konsumation/db-test";
-import { Master, Category, Meter, Note, emptyData, data } from "./model.mjs";
+import { Master, Category, Meter, Note, Value, emptyData, data } from "./model.mjs";
 
 test("testRestoreVersion3", async t =>
   testRestoreVersion3(t, Master, emptyData));
@@ -10,7 +10,8 @@ test("factories", t => {
     master: Master,
     category: Category,
     meter: Meter,
-    note: Note
+    note: Note,
+    value: Value
   });
 });
 
@@ -78,6 +79,23 @@ test("query all note", async t => {
       category: "C1",
       meter: "M1",
       note: "*"
+    })
+  );
+
+  t.deepEqual(
+    all.map(a => a.name),
+    [new Date(0).toISOString()]
+  );
+});
+
+test.only("query all meter values", async t => {
+  const master = await Master.initialize(data);
+
+  const all = await collect(
+    master.all({
+      category: "C1",
+      meter: "M1",
+      value: "*"
     })
   );
 

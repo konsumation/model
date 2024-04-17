@@ -9,7 +9,6 @@ test("text", async t => {
     lines.push(line);
   }
 
-  //console.log(lines);
   t.deepEqual(
     [
       "schemaVersion=3",
