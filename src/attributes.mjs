@@ -5,6 +5,7 @@ import { SCHEMA_VERSION_CURRENT } from "./consts.mjs";
  *
  * @property {string} type
  * @property {boolean} isKey
+ * @property {boolean} isForeign do we represent a foreign entity
  * @property {boolean} writable
  * @property {boolean} mandatory
  * @property {any} [default] the default value
@@ -18,7 +19,8 @@ export const description = {
   type: "string",
   writable: true,
   mandatory: false,
-  isKey: false
+  isKey: false,
+  isForeign: false
 };
 
 /**
@@ -29,7 +31,8 @@ export const name = {
   type: "string",
   writable: true,
   mandatory: true,
-  isKey: true
+  isKey: true,
+  isForeign: false
 };
 
 /**
@@ -40,7 +43,8 @@ export const id = {
   type: "number",
   writable: true,
   mandatory: false,
-  isKey: true
+  isKey: true,
+  isForeign: false
 };
 
 /**
@@ -52,7 +56,8 @@ export const unit = {
   type: "string",
   writable: true,
   mandatory: false,
-  isKey: false
+  isKey: false,
+  isForeign: false
 };
 
 /**
@@ -64,7 +69,8 @@ export const schemaVersion = {
   writable: false,
   mandatory: true,
   default: SCHEMA_VERSION_CURRENT,
-  isKey: false
+  isKey: false,
+  isForeign: false
 };
 
 /**
@@ -74,7 +80,8 @@ export const serial = {
   type: "string",
   writable: true,
   mandatory: false,
-  isKey: false
+  isKey: false,
+  isForeign: false
 };
 
 /**
@@ -85,7 +92,8 @@ export const validFrom = {
   writable: true,
   mandatory: true,
   default: new Date(0),
-  isKey: false
+  isKey: false,
+  isForeign: false
 };
 
 /**
@@ -97,7 +105,8 @@ export const fractionalDigits = {
   writable: true,
   mandatory: false,
   default: 2,
-  isKey: false
+  isKey: false,
+  isForeign: false
 };
 
 /**
@@ -109,5 +118,29 @@ export const order = {
   writable: true,
   mandatory: true,
   default: 1,
-  isKey: false
+  isKey: false,
+  isForeign: false
+};
+
+/**
+ * @type {AttributeDefinition}
+ * measured value.
+ */
+export const value = {
+  type: "number",
+  writable: true,
+  mandatory: true,
+  isKey: false,
+  isForeign: false
+};
+
+/**
+ * @type {AttributeDefinition}
+ */
+export const date = {
+  type: "timestamp",
+  writable: true,
+  mandatory: true,
+  isKey: false,
+  isForeign: false
 };

@@ -6,11 +6,17 @@ export class Base {
   static get writable() {
     return true;
   }
+  
   static get mandatory() {
     return true;
   }
+
   static get isKey() {
     return false;
+  }
+
+  static get isForeign() {
+    return true;
   }
 
   /**
