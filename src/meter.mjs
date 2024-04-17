@@ -91,12 +91,6 @@ export class Meter extends Base {
     return this.name;
   }
 
-  toJSON() {
-    const json = super.toJSON();
-    delete json.category; // TODO handle in base impl ?
-    return json;
-  }
-
   /**
    * @param {any} context
    */

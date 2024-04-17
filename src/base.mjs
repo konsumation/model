@@ -6,7 +6,7 @@ export class Base {
   static get writable() {
     return true;
   }
-  
+
   static get mandatory() {
     return true;
   }
@@ -131,10 +131,17 @@ export class Base {
   }
 
   toJSON() {
+    // @ts-ignore
+    const attributes = this.constructor.attributes;
+
     const values = this.getAttributes();
     for (const [k, v] of Object.entries(values)) {
-      if (v instanceof Date) {
-        values[k] = v.toISOString();
+      if (attributes[k]?.isForeign) {
+        delete values[k];
+      } else {
+        if (v instanceof Date) {
+          values[k] = v.toISOString();
+        }
       }
     }
     return values;

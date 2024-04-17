@@ -51,12 +51,6 @@ export class Value extends Base {
     return this.date.toISOString();
   }
 
-  toJSON() {
-    const json = super.toJSON();
-    delete json.meter; // TODO handle in base impl ?
-    return json;
-  }
-
   /**
    * Write into store.
    * @param {any} context
