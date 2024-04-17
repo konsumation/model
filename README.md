@@ -36,6 +36,7 @@ Data model of the konsumation apps
 *   [Base](#base)
     *   [attributeNames](#attributenames)
     *   [getAttributes](#getattributes)
+    *   [getLocalAttributes](#getlocalattributes)
     *   [setAttributes](#setattributes)
         *   [Parameters](#parameters)
     *   [type](#type)
@@ -228,6 +229,12 @@ Returns **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Gl
 ### getAttributes
 
 Object keys are the mapped external attribute names.
+
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
+
+### getLocalAttributes
+
+Object keys are the mapped external attribute names but only for local (not isForeign) ones.
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
