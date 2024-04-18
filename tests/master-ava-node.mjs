@@ -83,8 +83,13 @@ test("query one value string", async t => {
   const nn = new Date(0).toISOString();
 
   t.is(
-    (await master.one({ category: "C1", meter: "M1", value: new Date(0).toISOString() }))
-      .name,
+    (
+      await master.one({
+        category: "C1",
+        meter: "M1",
+        value: new Date(0).toISOString()
+      })
+    ).name,
     nn
   );
 });
@@ -174,7 +179,7 @@ test("query all note", async t => {
   );
 });
 
-test.skip("query all meter values", async t => {
+test("query all meter values", async t => {
   const master = await Master.initialize(data);
 
   const all = await collect(
@@ -187,6 +192,6 @@ test.skip("query all meter values", async t => {
 
   t.deepEqual(
     all.map(a => a.name),
-    [new Date(0).toISOString()]
+    [new Date(0).toISOString(), new Date(1000).toISOString()]
   );
 });

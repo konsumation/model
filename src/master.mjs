@@ -79,7 +79,12 @@ export class Master extends Base {
             }
 
             if (query.value) {
-              return meter.value(context, query.value instanceof Date ? query.value : new Date(query.value));
+              return meter.value(
+                context,
+                query.value instanceof Date
+                  ? query.value
+                  : new Date(query.value)
+              );
             }
           }
 
@@ -94,23 +99,17 @@ export class Master extends Base {
   async *all(query) {
     const context = this.context;
 
-    if (query.category === '*') {
+    if (query.category === "*") {
       yield* this.categories(context);
-    }
-
-    else if (query.category) {
+    } else if (query.category) {
       const category = await this.category(context, query.category);
 
       if (category) {
         if (query.meter === "*") {
           yield* category.meters(context);
-        }
-
-        if (query.value === "*") {
+        } else if (query.value === "*") {
           yield* category.values(context);
-        }
-
-        if (query.meter) {
+        } else if (query.meter) {
           const meter = await category.meter(context, query.meter);
           if (meter) {
             if (query.note === "*") {
@@ -121,7 +120,6 @@ export class Master extends Base {
           }
         }
       }
-      return;
     }
   }
 
