@@ -116,7 +116,7 @@ async function collect(it) {
 
 test("query all category", async t => {
   const master = await Master.initialize(data);
-  const all = await collect(master.all({}));
+  const all = await collect(master.all({ category: "*" }));
 
   t.deepEqual(
     all.map(a => a.name),

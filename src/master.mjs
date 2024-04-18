@@ -54,10 +54,11 @@ export class Master extends Base {
   get factories() {
     // @ts-ignore
     const factories = this.constructor.factories;
+    const categoryFactories = factories.category.factories;
     return Object.assign(
       factories,
-      factories.category.factories,
-      factories.category.factories.meter.factories,
+      categoryFactories,
+      categoryFactories.meter.factories,
       { master: this.constructor }
     );
   }
@@ -92,8 +93,12 @@ export class Master extends Base {
 
   async *all(query) {
     const context = this.context;
+    
+    if (query.category === '*') {
+      yield* this.categories(context);
+    }
 
-    if (query.category) {
+    else if (query.category) {
       const category = await this.category(context, query.category);
 
       if (category) {
@@ -118,8 +123,6 @@ export class Master extends Base {
       }
       return;
     }
-
-    yield* this.categories(context);
   }
 
   set schemaVersion(value) {
