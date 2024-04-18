@@ -7,8 +7,8 @@ test("Value constructor", t => testValueConstructor(t, Value));
 test("Value name", t => {
   const category = new Category({ name: "C1" });
   const meter = new Meter({ category, name: "M1" });
-  const value = new Value({ meter, date: new Date(0), value: 1 });
-  t.is(value.name, "1970-01-01T00:00:00.000Z");
+  t.is(new Value({ meter, date: new Date(0), value: 1 }).name, "1970-01-01T00:00:00.000Z");
+  t.is(new Value({ meter, name: "1970-01-01T00:00:00.000Z", value: 1 }).name, "1970-01-01T00:00:00.000Z");
 });
 
 test("Meter/Category values", async t => {

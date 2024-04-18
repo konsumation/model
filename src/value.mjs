@@ -34,12 +34,16 @@ export class Value extends Base {
    * Create a new Category.
    * @param {Object} attributes
    * @param {Date} attributes.date
+   * @param {string?} attributes.name
    * @param {Meter} attributes.meter
    * @param {number} attributes.value
    */
   constructor(attributes) {
     super();
     this.setAttributes(attributes);
+    if(attributes?.name) {
+      this.name = attributes.name; // TODO
+    }
   }
 
   get name()
@@ -47,8 +51,13 @@ export class Value extends Base {
     return this.date.toISOString();
   }
 
+  set name(value)
+  {
+    this.date = new Date(value);
+  }
+
   toString() {
-    return this.date.toISOString();
+    return this.name;
   }
 
   /**
