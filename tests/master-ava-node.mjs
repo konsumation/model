@@ -78,6 +78,17 @@ test("query one value", async t => {
   );
 });
 
+test("query one value string", async t => {
+  const master = await Master.initialize(data);
+  const nn = new Date(0).toISOString();
+
+  t.is(
+    (await master.one({ category: "C1", meter: "M1", value: new Date(0).toISOString() }))
+      .name,
+    nn
+  );
+});
+
 test("query one value not exising", async t => {
   const master = await Master.initialize(data);
   const nn = new Date(0).toISOString();

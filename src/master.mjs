@@ -79,7 +79,7 @@ export class Master extends Base {
             }
 
             if (query.value) {
-              return meter.value(context, query.value);
+              return meter.value(context, query.value instanceof Date ? query.value : new Date(query.value));
             }
           }
 
@@ -93,7 +93,7 @@ export class Master extends Base {
 
   async *all(query) {
     const context = this.context;
-    
+
     if (query.category === '*') {
       yield* this.categories(context);
     }
