@@ -56,16 +56,12 @@ export class Base {
    * Object keys are the mapped external attribute names.
    * @return {Object}
    */
-  getAttributes() {
-    // @ts-ignore
-    const mapping = this.constructor.attributeNameMapping;
-
+  _getAttributes(mapping) {
     const values = {};
 
     for (const key of this.attributeNames) {
       if (this[key] !== undefined) {
-        if (mapping[key] === null) {
-        } else {
+        if (mapping[key] !== null) {
           values[mapping[key] || key] = this[key];
         }
       }
@@ -81,7 +77,9 @@ export class Base {
           o = o[k];
         }
 
+        // @ts-ignore
         if (o?.[last] !== undefined) {
+          // @ts-ignore
           values[key] = o[last];
         }
       }
@@ -90,15 +88,20 @@ export class Base {
     return values;
   }
 
+  getAttributes() {
+    // @ts-ignore
+    return this._getAttributes(this.constructor.attributeNameMapping);
+  }
+
   /**
    * Object keys are the mapped external attribute names but only for local (not isForeign) ones.
    * @return {Object}
    */
-  getLocalAttributes() {
+  getLocalAttributes(mapping = {}) {
     // @ts-ignore
     const attributes = this.constructor.attributes;
 
-    const values = this.getAttributes();
+    const values = this._getAttributes(mapping);
     for (const k of Object.keys(values)) {
       if (attributes[k]?.isForeign) {
         delete values[k];

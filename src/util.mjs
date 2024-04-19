@@ -13,15 +13,9 @@ export async function* toText(context, object, key, ...iterators) {
     yield `[${object.constructor.type} "${object[key]}"]`;
   }
 
-  for (const a of object.attributeNames) {
-    if (a !== key) {
-      let value = object[a];
-      if (value !== undefined) {
-        if (value instanceof Date) {
-          value = value.toISOString();
-        }
-        yield `${a}=${value}`;
-      }
+  for (const [k, v] of Object.entries(object.toJSON())) {
+    if (k !== key && v !== undefined) {
+      yield `${k}=${v}`;
     }
   }
 
