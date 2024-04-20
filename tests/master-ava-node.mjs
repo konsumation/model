@@ -150,16 +150,11 @@ test("query all meter", async t => {
   );
 });
 
-test("query all meter -> empty", async t => {
+test("query all meter -> not exising", async t => {
   const master = await Master.initialize(data);
-  const all = await collect(
-    master.all({ category: "not exising", meter: "*" })
-  );
-
-  t.deepEqual(
-    all.map(a => a.name),
-    []
-  );
+  await t.throwsAsync(async () => {
+    await collect(master.all({ category: "not exising", meter: "*" }));
+  });
 });
 
 test("query all note", async t => {
@@ -179,6 +174,13 @@ test("query all note", async t => {
   );
 });
 
+test("query all note -> not exising", async t => {
+  const master = await Master.initialize(data);
+  await t.throwsAsync(async () => {
+    await collect(master.all({ category: "not exising", note: "*" }));
+  });
+});
+
 test("query all meter values", async t => {
   const master = await Master.initialize(data);
 
@@ -194,4 +196,11 @@ test("query all meter values", async t => {
     all.map(a => a.name),
     [new Date(0).toISOString(), new Date(1000).toISOString()]
   );
+});
+
+test("query all value -> not exising", async t => {
+  const master = await Master.initialize(data);
+  await t.throwsAsync(async () => {
+    await collect(master.all({ category: "not exising", value: "*" }));
+  });
 });

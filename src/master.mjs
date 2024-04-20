@@ -104,20 +104,30 @@ export class Master extends Base {
     } else if (query.category) {
       const category = await this.category(context, query.category);
 
-      if (category) {
-        if (query.meter === "*") {
-          yield* category.meters(context);
-        } else if (query.value === "*") {
-          yield* category.values(context);
-        } else if (query.meter) {
-          const meter = await category.meter(context, query.meter);
-          if (meter) {
-            if (query.note === "*") {
-              yield* meter.notes(context);
-            } else {
-              yield* meter.values(context);
-            }
-          }
+      if (category === undefined) {
+        const error = new Error("No such category");
+        // @ts-ignore
+        error.category = query.category;
+        throw error;
+      }
+      if (query.meter === "*") {
+        yield* category.meters(context);
+      } else if (query.value === "*") {
+        yield* category.values(context);
+      } else if (query.meter) {
+        const meter = await category.meter(context, query.meter);
+
+        if (meter === undefined) {
+          const error = new Error("No such meter");
+          // @ts-ignore
+          error.meter = query.meter;
+          throw error;
+        }
+
+        if (query.note === "*") {
+          yield* meter.notes(context);
+        } else {
+          yield* meter.values(context);
         }
       }
     }
