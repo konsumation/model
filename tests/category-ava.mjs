@@ -54,7 +54,7 @@ test("Category active meter", async t => {
   t.is(meter.name, "M1");
 });
 
-test.only("Category note", async t => {
+test("Category note", async t => {
   const master = await Master.initialize(data);
   const category = await master.category(master.context, "C1");
 
