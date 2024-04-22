@@ -1,6 +1,7 @@
 import { Base } from "./base.mjs";
 import { Meter } from "./meter.mjs";
 import { Note } from "./note.mjs";
+import { Value } from "./value.mjs";
 import {
   name,
   description,
@@ -149,7 +150,7 @@ export class Category extends Base {
   /**
    * All values from all meters.
    * @param {any} context
-   * @return {AsyncIterable<{date:Date,value:number}>}
+   * @return {AsyncIterable<{Value}>}
    */
   async *values(context) {
     for await (const meter of this.meters(context)) {
