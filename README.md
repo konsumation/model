@@ -399,7 +399,7 @@ All values from all meters.
 
 *   `context` **any**&#x20;
 
-Returns **AsyncIterable<{date: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date), value: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)}>**&#x20;
+Returns **AsyncIterable<[Value](#value)>**&#x20;
 
 ### value
 
@@ -599,7 +599,7 @@ Type: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_
 
 *   `context` **any**&#x20;
 
-Returns **AsyncIterable<{Value}>**&#x20;
+Returns **AsyncIterable<[Value](#value)>**&#x20;
 
 ### value
 
