@@ -34,7 +34,7 @@ export class Value extends Base {
    * Create a new Category.
    * @param {Object} attributes
    * @param {Date} attributes.date
-   * @param {string?} attributes.name
+   * @param {string} [attributes.name]
    * @param {Meter} attributes.meter
    * @param {number} attributes.value
    */
