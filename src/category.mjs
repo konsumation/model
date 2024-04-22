@@ -148,6 +148,21 @@ export class Category extends Base {
   }
 
   /**
+   * Deliver Value for a given date.
+   * @param {any} context
+   * @param {string} name
+   * @returns {Promise<Note|undefined>}
+   */
+  async note(context, name) {
+    for await (const meter of this.meters(context)) {
+      const value = meter.note(context, name);
+      if (value) {
+        return value;
+      }
+    }
+  }
+
+  /**
    * All values from all meters.
    * @param {any} context
    * @return {AsyncIterable<Value>}
@@ -162,7 +177,7 @@ export class Category extends Base {
    * Deliver Value for a given date.
    * @param {any} context
    * @param {Date} date
-   * @returns {Promise<{date:Date,value:number}|undefined>}
+   * @returns {Promise<Value|undefined>}
    */
   async value(context, date) {
     for await (const meter of this.meters(context)) {

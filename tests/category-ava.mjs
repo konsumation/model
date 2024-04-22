@@ -38,7 +38,6 @@ test("Category localAttributes", t => {
 test("Category meter", async t => {
   const master = await Master.initialize(data);
   const category = await master.category(master.context, "C1");
-
   const meter = await category.meter(master.context, "M1");
 
   t.is(meter.name, "M1");
@@ -53,4 +52,11 @@ test("Category active meter", async t => {
   const meter = await category.activeMeter(master.context);
 
   t.is(meter.name, "M1");
+});
+
+test.only("Category note", async t => {
+  const master = await Master.initialize(data);
+  const category = await master.category(master.context, "C1");
+
+  t.is((await category.note(master.context, new Date(0).toISOString())).description, "a note");
 });
