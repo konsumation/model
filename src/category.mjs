@@ -150,7 +150,7 @@ export class Category extends Base {
   /**
    * All values from all meters.
    * @param {any} context
-   * @return {AsyncIterable<{Value}>}
+   * @return {AsyncIterable<Value>}
    */
   async *values(context) {
     for await (const meter of this.meters(context)) {

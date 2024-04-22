@@ -103,7 +103,7 @@ export class Meter extends Base {
 
   /**
    * @param {any} context
-   * @return {AsyncIterable<{Value}>}
+   * @return {AsyncIterable<Value>}
    */
   async *values(context) {}
 
@@ -130,6 +130,7 @@ export class Meter extends Base {
    * @returns {Promise<Value>}
    */
   addValue(context, attributes) {
+    //@ts-ignore
     attributes.meter = this;
     // @ts-ignore
     return new this.constructor.factories.value(attributes);
@@ -142,6 +143,7 @@ export class Meter extends Base {
    * @returns {Promise<void>}
    */
   deleteValue(context, date) {
+    // @ts-ignore
     const value = new this.constructor.factories.value({ meter: this, date });
     return value.delete(context);
   }
