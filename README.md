@@ -130,6 +130,7 @@ Data model of the konsumation apps
     *   [text](#text-2)
         *   [Parameters](#parameters-36)
     *   [type](#type-2)
+    *   [parentType](#parenttype)
 *   [Note](#note-2)
     *   [Parameters](#parameters-37)
     *   [name](#name-3)
@@ -142,6 +143,7 @@ Data model of the konsumation apps
     *   [text](#text-3)
         *   [Parameters](#parameters-40)
     *   [type](#type-3)
+    *   [parentType](#parenttype-1)
 *   [toText](#totext)
     *   [Parameters](#parameters-41)
 *   [Value](#value-3)
@@ -156,6 +158,7 @@ Data model of the konsumation apps
     *   [text](#text-4)
         *   [Parameters](#parameters-45)
     *   [type](#type-4)
+    *   [parentType](#parenttype-2)
 
 ## AttributeDefinition
 
@@ -709,7 +712,13 @@ Returns **AsyncIterable<[string](https://developer.mozilla.org/docs/Web/JavaScri
 
 ### type
 
-Name of the type in text dump
+Name of the type in text dump.
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
+
+### parentType
+
+Name of the parents type.
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
@@ -761,7 +770,13 @@ Returns **AsyncIterable<[string](https://developer.mozilla.org/docs/Web/JavaScri
 
 ### type
 
-Name of the type in text dump
+Name of the type in text dump.
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
+
+### parentType
+
+Name of the parents type.
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
@@ -827,6 +842,12 @@ Returns **AsyncIterable<[string](https://developer.mozilla.org/docs/Web/JavaScri
 ### type
 
 Name of the type in text dump
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
+
+### parentType
+
+Name of the parents type.
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
