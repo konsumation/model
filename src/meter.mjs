@@ -32,14 +32,18 @@ export class Meter extends Base {
   }
 
   /**
-   * Name of the type in text dump
+   * Name of the type in text dump.
    * @return {string}
    */
   static get type() {
     return "meter";
   }
 
-  static get parenttype() {
+  /**
+   * Name of the parents type.
+   * @return {string}
+   */
+  static get parentType() {
     return "category";
   }
 

@@ -18,7 +18,11 @@ export class Value extends Base {
     return "value";
   }
 
-  static get parenttype() {
+  /**
+   * Name of the parents type.
+   * @return {string}
+   */
+  static get parentType() {
     return "meter";
   }
 
@@ -41,18 +45,16 @@ export class Value extends Base {
   constructor(attributes) {
     super();
     this.setAttributes(attributes);
-    if(attributes?.name) {
+    if (attributes?.name) {
       this.name = attributes.name; // TODO
     }
   }
 
-  get name()
-  {
+  get name() {
     return this.date.toISOString();
   }
 
-  set name(value)
-  {
+  set name(value) {
     this.date = new Date(value);
   }
 

@@ -12,14 +12,18 @@ export class Note extends Base {
   /** @type {Meter} */ meter;
 
   /**
-   * Name of the type in text dump
+   * Name of the type in text dump.
    * @return {string}
    */
   static get type() {
     return "note";
   }
 
-  static get parenttype() {
+  /**
+   * Name of the parents type.
+   * @return {string}
+   */
+  static get parentType() {
     return "meter";
   }
 

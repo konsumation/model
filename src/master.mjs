@@ -226,10 +226,10 @@ export class Master extends Base {
         if (type === "master") {
           object.setAttributes(values);
         } else {
-          const parenttype = typeLookup[type].parenttype;
+          const parentType = typeLookup[type].parentType;
 
-          if (last[parenttype]) {
-            values[parenttype] = last[parenttype];
+          if (last[parentType]) {
+            values[parentType] = last[parentType];
           }
 
           object = new typeLookup[type](values);
