@@ -260,7 +260,7 @@ export class Master extends Base {
       buffer += chunk;
       for (const line of buffer.split(/\n/)) {
         let m = line.match(
-          /^(([\d\.]{10,})|(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d))\s+([\d\.]+)/
+          /^(([\d\.]{10,})|(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+[A-Z]*)?))\s+([\d\.]+)/
         );
         if (m) {
           await insertObject();
@@ -275,7 +275,7 @@ export class Master extends Base {
           // @ts-ignore
           const value = object.addValue(context, {
             date: m[2] ? new Date(parseFloat(m[2]) * 1000) : new Date(m[3]),
-            value: parseFloat(m[4])
+            value: parseFloat(m[5])
           });
           await value.write(context);
           statistics.value++;
