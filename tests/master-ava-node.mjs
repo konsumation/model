@@ -72,7 +72,7 @@ test("query one value", async t => {
   const nn = new Date(0).toISOString();
 
   t.is(
-    (await master.one({ category: "C1", meter: "M1", value: new Date(0) }))
+    (await master.one({ category: "C1", meter: "M1", date: new Date(0) }))
       .name,
     nn
   );
@@ -87,7 +87,7 @@ test("query one value string", async t => {
       await master.one({
         category: "C1",
         meter: "M1",
-        value: new Date(0).toISOString()
+        date: new Date(0).toISOString()
       })
     ).name,
     nn
@@ -99,14 +99,14 @@ test("query one value not exising", async t => {
   const nn = new Date(0).toISOString();
 
   t.is(
-    await master.one({ category: "C1", meter: "M1", value: new Date() }),
+    await master.one({ category: "C1", meter: "M1", date: new Date() }),
     undefined
   );
   t.is(
     await master.one({
       category: "C1",
       meter: "not exising",
-      value: new Date(0)
+      date: new Date(0)
     }),
     undefined
   );
@@ -114,7 +114,7 @@ test("query one value not exising", async t => {
     await master.one({
       category: "not exising",
       meter: "M1",
-      value: new Date(0)
+      date: new Date(0)
     }),
     undefined
   );
@@ -188,7 +188,23 @@ test("query all meter values", async t => {
     master.all({
       category: "C1",
       meter: "M1",
-      value: "*"
+      date: "*"
+    })
+  );
+
+  t.deepEqual(
+    all.map(a => a.name),
+    [new Date(0).toISOString(), new Date(1000).toISOString()]
+  );
+});
+
+test("query all category values", async t => {
+  const master = await Master.initialize(data);
+
+  const all = await collect(
+    master.all({
+      category: "C1",
+      date: "*"
     })
   );
 
@@ -201,6 +217,6 @@ test("query all meter values", async t => {
 test("query all value -> not exising", async t => {
   const master = await Master.initialize(data);
   await t.throwsAsync(async () => {
-    await collect(master.all({ category: "not exising", value: "*" }));
+    await collect(master.all({ category: "not exising", date: "*" }));
   });
 });

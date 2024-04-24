@@ -78,12 +78,12 @@ export class Master extends Base {
               return meter.note(context, query.note);
             }
 
-            if (query.value) {
+            if (query.date) {
               return meter.value(
                 context,
                 query.value instanceof Date
-                  ? query.value
-                  : new Date(query.value)
+                  ? query.date
+                  : new Date(query.date)
               );
             }
           }
@@ -112,7 +112,7 @@ export class Master extends Base {
       }
       if (query.meter === "*") {
         yield* category.meters(context);
-      } else if (query.value === "*") {
+      } else if (query.date === "*") {
         yield* category.values(context);
       } else if (query.meter) {
         const meter = await category.meter(context, query.meter);
@@ -127,7 +127,9 @@ export class Master extends Base {
         if (query.note === "*") {
           yield* meter.notes(context);
         } else {
-          yield* meter.values(context);
+          if (query.date === "*") {
+            yield* meter.values(context);
+          }
         }
       }
     }
