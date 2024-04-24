@@ -34,7 +34,6 @@ Data model of the konsumation apps
 *   [value](#value)
 *   [date](#date)
 *   [Base](#base)
-    *   [attributeNames](#attributenames)
     *   [\_getAttributes](#_getattributes)
         *   [Parameters](#parameters)
     *   [getLocalAttributes](#getlocalattributes)
@@ -44,7 +43,6 @@ Data model of the konsumation apps
     *   [type](#type)
     *   [attributes](#attributes)
     *   [attributeNameMapping](#attributenamemapping)
-    *   [attributeNames](#attributenames-1)
 *   [Category](#category)
     *   [Parameters](#parameters-3)
     *   [name](#name-1)
@@ -229,12 +227,6 @@ Type: [AttributeDefinition](#attributedefinition)
 
 ## Base
 
-### attributeNames
-
-Attribute names on the javascript side.
-
-Returns **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>**&#x20;
-
 ### \_getAttributes
 
 Object keys are the mapped external attribute names.
@@ -251,7 +243,7 @@ Object keys are the mapped external attribute names but only for local (not isFo
 
 #### Parameters
 
-*   `mapping`   (optional, default `{}`)
+*   `mapping` &#x20;
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
 
@@ -278,12 +270,6 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 Maping of attribute names from internal (javascript) to external (database).
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
-
-### attributeNames
-
-Attribute names on the javascript side.
-
-Returns **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>**&#x20;
 
 ## Category
 
