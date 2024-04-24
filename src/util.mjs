@@ -4,7 +4,7 @@ import { Base } from "./base.mjs";
  * Text representation.
  * @param {any} context
  * @param {Base} object
- * @param {string} key
+ * @param {string} [key]
  * @returns {AsyncIterable<string>}
  */
 export async function* toText(context, object, key, ...iterators) {
