@@ -11,7 +11,6 @@ class MyBase extends Base {
 
   static get attributeNameMapping() {
     return {
-      category: null,
       "category.name": "category_name",
       validFrom: "valid_from"
     };
@@ -43,6 +42,12 @@ test("attribute expressions category.name", t => {
   t.is(b.category, category);
 
   t.deepEqual(b.getAttributes(), {
+    category,
+    category_name: "C1",
+    valid_from: date
+  });
+
+  t.deepEqual(b.getLocalAttributes(MyBase.attributeNameMapping), {
     category_name: "C1",
     valid_from: date
   });

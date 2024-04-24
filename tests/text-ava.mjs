@@ -27,8 +27,7 @@ test("text", async t => {
       "fractionalDigits=2",
       "order=1",
       '[meter "M1"]',
-      "validFrom=1970-01-01T00:00:00.000Z",
-      "fractionalDigits=2"
+      "validFrom=1970-01-01T00:00:00.000Z"
     ],
     lines
   );

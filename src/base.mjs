@@ -35,21 +35,8 @@ export class Base {
     return {};
   }
 
-  /**
-   * Attribute names on the javascript side.
-   * @return {string[]}
-   */
-  static get attributeNames() {
-    return Object.keys(this.attributes);
-  }
-
-  /**
-   * Attribute names on the javascript side.
-   * @return {string[]}
-   */
-  get attributeNames() {
-    // @ts-ignore
-    return this.constructor.attributeNames;
+  isDefinedAttribute(name) {
+    return this[name] !== undefined;
   }
 
   /**
@@ -59,28 +46,31 @@ export class Base {
   _getAttributes(mapping) {
     const values = {};
 
-    for (const key of this.attributeNames) {
+    // @ts-ignore
+    const attributes = this.constructor.attributes;
+
+    for (const key of Object.keys(attributes)) {
       if (this[key] !== undefined) {
-        if (mapping[key] !== null) {
-          values[mapping[key] || key] = this[key];
-        }
+          values[mapping?.[key] || key] = this[key];
       }
     }
 
-    for (const [exp, key] of Object.entries(mapping)) {
-      if (key !== null) {
-        const path = exp.split(/\./);
-        const last = path.pop();
+    if (mapping) {
+      for (const [exp, key] of Object.entries(mapping)) {
+        if (key !== null) {
+          const path = exp.split(/\./);
+          const last = path.pop();
 
-        let o = this;
-        for (const k of path) {
-          o = o[k];
-        }
+          let o = this;
+          for (const k of path) {
+            o = o[k];
+          }
 
-        // @ts-ignore
-        if (o?.[last] !== undefined) {
           // @ts-ignore
-          values[key] = o[last];
+          if (o?.[last] !== undefined) {
+            // @ts-ignore
+            values[key] = o[last];
+          }
         }
       }
     }
@@ -97,10 +87,9 @@ export class Base {
    * Object keys are the mapped external attribute names but only for local (not isForeign) ones.
    * @return {Object}
    */
-  getLocalAttributes(mapping = {}) {
+  getLocalAttributes(mapping) {
     // @ts-ignore
     const attributes = this.constructor.attributes;
-
     const values = this._getAttributes(mapping);
     for (const k of Object.keys(values)) {
       if (attributes[k]?.isForeign) {
@@ -122,7 +111,7 @@ export class Base {
       // @ts-ignore
       const mapping = this.constructor.attributeNameMapping;
 
-      for (const name of this.attributeNames) {
+      for (const name of Object.keys(attributes)) {
         let value = values[mapping[name] || name];
 
         if (value === undefined) {
@@ -153,8 +142,13 @@ export class Base {
   toJSON() {
     const values = this.getLocalAttributes();
     for (const [k, v] of Object.entries(values)) {
-      if (v instanceof Date) {
-        values[k] = v.toISOString();
+      if(this.isDefinedAttribute(k)) {
+        if (v instanceof Date) {
+          values[k] = v.toISOString();
+        }  
+      }
+      else {
+        delete values[k];
       }
     }
     return values;

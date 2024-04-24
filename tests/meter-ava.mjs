@@ -33,8 +33,6 @@ test("Meter toJSON", t => {
   t.deepEqual(meter.toJSON(), {
     name: "M1",
     serial: "123",
-    unit: "m3",
-    fractionalDigits: 3,
     validFrom: "1970-01-01T00:00:00.000Z"
   });
 });
@@ -56,6 +54,33 @@ test("Meter localAttributes", t => {
     fractionalDigits: 3,
     validFrom: new Date(0)
   });
+});
+
+test("Meter isDefinedAttribute", t => {
+  const category = new Category({
+    name: "C1",
+    unit: "m3",
+    fractionalDigits: 3
+  });
+
+  let meter = new Meter({
+    category,
+    name: "C1",
+    unit: "m3",
+    fractionalDigits: 3
+  });
+
+  t.true(meter.isDefinedAttribute('name'));
+  t.true(meter.isDefinedAttribute('unit'));
+  t.true(meter.isDefinedAttribute('fractionalDigits'));
+
+  meter = new Meter({
+    category,
+    name: "C1",
+  });
+
+  t.false(meter.isDefinedAttribute('unit'));
+  t.false(meter.isDefinedAttribute('fractionalDigits'));
 });
 
 test("Meter add Note", t => {

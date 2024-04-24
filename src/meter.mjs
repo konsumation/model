@@ -91,6 +91,16 @@ export class Meter extends Base {
     this.#unit = value;
   }
 
+  isDefinedAttribute(name) {
+    switch (name) {
+      case "unit":
+        return this.#unit !== undefined;
+      case "fractionalDigits":
+        return this.#fractionalDigits !== undefined;
+    }
+    return super.isDefinedAttribute(name);
+  }
+
   toString() {
     return this.name;
   }
