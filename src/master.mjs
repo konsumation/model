@@ -90,6 +90,16 @@ export class Master extends Base {
 
           return meter;
         }
+        else {
+          if (query.date) {
+            return category.value(
+              context,
+              query.value instanceof Date
+                ? query.date
+                : new Date(query.date)
+            );
+          }
+      }
       }
 
       return category;
