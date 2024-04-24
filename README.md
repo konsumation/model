@@ -788,7 +788,7 @@ Text representation.
 
 *   `context` **any**&#x20;
 *   `object` **[Base](#base)**&#x20;
-*   `key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
+*   `key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**&#x20;
 *   `iterators` **...any**&#x20;
 
 Returns **AsyncIterable<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>**&#x20;
