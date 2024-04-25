@@ -227,14 +227,14 @@ export class Category extends Base {
   /**
    * Delete a value from the active meter.
    * @param {any} context
-   * @param {Date} time
+   * @param {Date} date
    * @returns {Promise<any>}
    */
-  async deleteValue(context, time) {
+  async deleteValue(context, date) {
     const meter = await this.activeMeter(context);
     this.checkMeterIsPresent(meter);
     // @ts-ignore
-    return meter.deleteValue(context, time);
+    return meter.deleteValue(context, date);
   }
 
   /**
