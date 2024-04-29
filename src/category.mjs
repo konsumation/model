@@ -137,6 +137,17 @@ export class Category extends Base {
   }
 
   /**
+   * Delete a meter.
+   * @param {any} context
+   * @param {string} name
+   * @returns {Promise<any>}
+   */
+  async deleteMeter(context, name) {
+    const meter = await this.meter(context, name);
+    return meter.delete(context);
+  }
+
+  /**
    * All notes from all meters.
    * @param {any} context
    * @return {AsyncIterable<Note>}
