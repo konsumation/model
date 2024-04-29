@@ -125,36 +125,38 @@ Data model of the konsumation apps
         *   [Parameters](#parameters-34)
     *   [addNote](#addnote)
         *   [Parameters](#parameters-35)
-    *   [text](#text-2)
+    *   [deleteNote](#deletenote)
         *   [Parameters](#parameters-36)
+    *   [text](#text-2)
+        *   [Parameters](#parameters-37)
     *   [type](#type-2)
     *   [parentType](#parenttype)
 *   [Note](#note-2)
-    *   [Parameters](#parameters-37)
+    *   [Parameters](#parameters-38)
     *   [name](#name-3)
     *   [description](#description-3)
     *   [meter](#meter-2)
     *   [write](#write-3)
-        *   [Parameters](#parameters-38)
-    *   [delete](#delete-2)
         *   [Parameters](#parameters-39)
-    *   [text](#text-3)
+    *   [delete](#delete-2)
         *   [Parameters](#parameters-40)
+    *   [text](#text-3)
+        *   [Parameters](#parameters-41)
     *   [type](#type-3)
     *   [parentType](#parenttype-1)
 *   [toText](#totext)
-    *   [Parameters](#parameters-41)
-*   [Value](#value-3)
     *   [Parameters](#parameters-42)
+*   [Value](#value-3)
+    *   [Parameters](#parameters-43)
     *   [meter](#meter-3)
     *   [date](#date-1)
     *   [value](#value-4)
     *   [write](#write-4)
-        *   [Parameters](#parameters-43)
-    *   [delete](#delete-3)
         *   [Parameters](#parameters-44)
-    *   [text](#text-4)
+    *   [delete](#delete-3)
         *   [Parameters](#parameters-45)
+    *   [text](#text-4)
+        *   [Parameters](#parameters-46)
     *   [type](#type-4)
     *   [parentType](#parenttype-2)
 
@@ -616,7 +618,7 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 ### addValue
 
-add new value.
+Add a new value.
 
 #### Parameters
 
@@ -630,7 +632,7 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 ### deleteValue
 
-delete value.
+Delete a value.
 
 #### Parameters
 
@@ -685,6 +687,17 @@ Add a note to the meter;
     *   `attributes.description` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**&#x20;
 
 Returns **[Note](#note)**&#x20;
+
+### deleteNote
+
+delete a note.
+
+#### Parameters
+
+*   `context` **any**&#x20;
+*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<void>**&#x20;
 
 ### text
 
