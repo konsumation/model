@@ -136,7 +136,7 @@ export class Meter extends Base {
   }
 
   /**
-   * add new value.
+   * Add a new value.
    * @param {any} context
    * @param {Object} attributes
    * @param {Date} attributes.date
@@ -151,14 +151,14 @@ export class Meter extends Base {
   }
 
   /**
-   * delete value.
+   * Delete a value.
    * @param {any} context
    * @param {Date} date
    * @returns {Promise<void>}
    */
   deleteValue(context, date) {
     // @ts-ignore
-    const value = new this.constructor.factories.value({ meter: this, date });
+    const value = this.value(context, date);
     return value.delete(context);
   }
 
@@ -214,6 +214,17 @@ export class Meter extends Base {
     attributes.meter = this;
     // @ts-ignore
     return new this.constructor.factories.note(attributes);
+  }
+
+  /**
+   * delete a note.
+   * @param {any} context
+   * @param {string} name
+   * @returns {Promise<void>}
+   */
+  async deleteNote(context, name) {
+    const note = await this.note(context, name);
+    return note.delete(context);
   }
 
   /**
