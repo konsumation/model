@@ -35,6 +35,12 @@ export class Base {
     return {};
   }
 
+  /**
+   * Is the given attribute defined in the target.
+   * Some attributes are inherited from parent object and therfore not defined in the target.
+   * @param {string} name 
+   * @returns {boolean}
+   */
   isDefinedAttribute(name) {
     return this[name] !== undefined;
   }
