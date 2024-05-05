@@ -5,19 +5,19 @@ import { Category, Meter, Note } from "@konsumation/model";
 test("Meter constructor", t => testMeterConstructor(t, Meter));
 
 test("Meter default values from Category", t => {
-  const category = new Category({ unit: "m3", fractionalDigits: 3 });
+  const category = new Category({ unit: "m3", fractionalDigits: 4 });
   const meter = new Meter({ category });
 
   t.is(meter.category, category);
   t.is(meter.unit, "m3");
-  t.is(meter.fractionalDigits, 3);
+  t.is(meter.fractionalDigits, 4);
 });
 
 test("Meter convert dates", t => {
   const category = new Category({});
-  const meter = new Meter({ category, validFrom: "1970-01-01T00:00:00.000Z" });
+  const meter = new Meter({ category, validFrom: "1970-01-01T01:00:00.000Z" });
 
-  t.deepEqual(meter.validFrom, new Date(0));
+  t.deepEqual(meter.validFrom, new Date(3600000));
 });
 
 test("Meter toJSON", t => {

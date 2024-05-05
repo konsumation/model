@@ -123,7 +123,7 @@ export class Category extends Base {
    * @param {Object} attributes
    * @param {string} attributes.name
    * @param {Category} [attributes.category]
-   * @param {Date} attributes.validFrom
+   * @param {Date} [attributes.validFrom]
    * @param {string} [attributes.description]
    * @param {string} [attributes.serial]
    * @param {number} [attributes.fractionalDigits]
