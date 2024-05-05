@@ -1,14 +1,6 @@
 import test from "ava";
 import { testRestoreVersion3 } from "@konsumation/db-test";
-import {
-  Master,
-  Category,
-  Meter,
-  Note,
-  Value,
-  emptyData,
-  data
-} from "./model.mjs";
+import { Master, emptyData, data } from "./model.mjs";
 
 test("testRestoreVersion3", async t =>
   testRestoreVersion3(t, Master, emptyData));
@@ -62,8 +54,7 @@ test("query one value from meter", async t => {
   const nn = new Date(0).toISOString();
 
   t.is(
-    (await master.one({ category: "C1", meter: "M1", date: new Date(0) }))
-      .name,
+    (await master.one({ category: "C1", meter: "M1", date: new Date(0) })).name,
     nn
   );
 });
@@ -72,11 +63,7 @@ test("query one value from category", async t => {
   const master = await Master.initialize(data);
   const nn = new Date(0).toISOString();
 
-  t.is(
-    (await master.one({ category: "C1", date: new Date(0) }))
-      .name,
-    nn
-  );
+  t.is((await master.one({ category: "C1", date: new Date(0) })).name, nn);
 });
 
 test("query one value string", async t => {
