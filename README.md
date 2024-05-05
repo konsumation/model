@@ -643,7 +643,7 @@ Returns **AsyncIterable<[Value](#value)>**&#x20;
 
 ### value
 
-Deliver Value for a given date.
+Deliver value for a given date.
 
 #### Parameters
 
