@@ -64,7 +64,7 @@ export class Meter extends Base {
    * @param {Object} attributes
    * @param {string} attributes.name
    * @param {Category} attributes.category
-   * @param {Date} attributes.validFrom
+   * @param {Date} [attributes.validFrom]
    * @param {string} [attributes.description]
    * @param {string} [attributes.serial]
    * @param {number} [attributes.fractionalDigits]
@@ -122,7 +122,7 @@ export class Meter extends Base {
   async *values(context) {}
 
   /**
-   * Deliver Value for a given date.
+   * Deliver value for a given date.
    * @param {any} context
    * @param {Date} date
    * @returns {Promise<Value|undefined>}
@@ -156,10 +156,10 @@ export class Meter extends Base {
    * @param {Date} date
    * @returns {Promise<void>}
    */
-  deleteValue(context, date) {
+  async deleteValue(context, date) {
     // @ts-ignore
-    const value = this.value(context, date);
-    return value.delete(context);
+    const value = await this.value(context, date);
+    return value?.delete(context);
   }
 
   /**
