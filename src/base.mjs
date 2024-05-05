@@ -118,7 +118,7 @@ export class Base {
       const mapping = this.constructor.attributeNameMapping;
 
       for (const name of Object.keys(attributes)) {
-        let value = values[mapping[name] || name];
+        let value = values[mapping[name]] || values[name];
 
         if (value === undefined) {
           /*     if(this[name] !== undefined) {
