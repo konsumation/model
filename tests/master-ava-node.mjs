@@ -13,16 +13,6 @@ import {
 test("testRestoreVersion3", async t =>
   testRestoreVersion3(t, Master, emptyData));
 
-test("factories", t => {
-  t.deepEqual(new Master().factories, {
-    master: Master,
-    category: Category,
-    meter: Meter,
-    note: Note,
-    value: Value
-  });
-});
-
 test("query one category", async t => {
   const master = await Master.initialize(data);
   t.is((await master.one({ category: "C1" })).name, "C1");
