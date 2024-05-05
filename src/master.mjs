@@ -316,7 +316,7 @@ export class Master extends Base {
 
     await insertObject();
 
-    statistics.lines = lineNumber;
+    statistics.line = lineNumber;
 
     return statistics;
   }
