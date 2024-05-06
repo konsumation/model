@@ -34,6 +34,11 @@ test("set undefined value", t => {
   t.is(master.schemaVersion, "3");
 });
 
+test("set null value", t => {
+  const master = new Master({ schemaVersion: null });
+  t.is(master.schemaVersion, "3");
+});
+
 test("attribute expressions category.name", t => {
   const date = new Date();
   const category = new Category({ name: "C1" });

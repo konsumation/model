@@ -120,7 +120,7 @@ export class Base {
       for (const name of Object.keys(attributes)) {
         let value = values[mapping[name]] || values[name];
 
-        if (value === undefined) {
+        if (value === undefined || value === null) {
           /*     if(this[name] !== undefined) {
             this[name] = value;
           }*/
