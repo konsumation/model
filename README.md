@@ -89,80 +89,84 @@ Data model of the konsumation apps
 *   [Master](#master)
     *   [Parameters](#parameters-20)
     *   [Properties](#properties-1)
-    *   [write](#write-1)
+    *   [one](#one)
         *   [Parameters](#parameters-21)
+    *   [all](#all)
+        *   [Parameters](#parameters-22)
+    *   [write](#write-1)
+        *   [Parameters](#parameters-23)
     *   [close](#close)
     *   [addCategory](#addcategory)
-        *   [Parameters](#parameters-22)
-    *   [categories](#categories)
-        *   [Parameters](#parameters-23)
-    *   [category](#category-1)
         *   [Parameters](#parameters-24)
-    *   [text](#text-1)
+    *   [categories](#categories)
         *   [Parameters](#parameters-25)
-    *   [fromText](#fromtext)
+    *   [category](#category-1)
         *   [Parameters](#parameters-26)
-    *   [initialize](#initialize)
+    *   [text](#text-1)
         *   [Parameters](#parameters-27)
+    *   [fromText](#fromtext)
+        *   [Parameters](#parameters-28)
+    *   [initialize](#initialize)
+        *   [Parameters](#parameters-29)
 *   [Meter](#meter-1)
-    *   [Parameters](#parameters-28)
+    *   [Parameters](#parameters-30)
     *   [name](#name-2)
     *   [category](#category-2)
     *   [description](#description-2)
     *   [serial](#serial-1)
     *   [validFrom](#validfrom-1)
     *   [write](#write-2)
-        *   [Parameters](#parameters-29)
-    *   [delete](#delete-1)
-        *   [Parameters](#parameters-30)
-    *   [values](#values-1)
         *   [Parameters](#parameters-31)
-    *   [value](#value-2)
+    *   [delete](#delete-1)
         *   [Parameters](#parameters-32)
-    *   [addValue](#addvalue-1)
+    *   [values](#values-1)
         *   [Parameters](#parameters-33)
-    *   [deleteValue](#deletevalue-1)
+    *   [value](#value-2)
         *   [Parameters](#parameters-34)
-    *   [latestValue](#latestvalue-1)
+    *   [addValue](#addvalue-1)
         *   [Parameters](#parameters-35)
-    *   [notes](#notes-1)
+    *   [deleteValue](#deletevalue-1)
         *   [Parameters](#parameters-36)
-    *   [note](#note-1)
+    *   [latestValue](#latestvalue-1)
         *   [Parameters](#parameters-37)
-    *   [addNote](#addnote)
+    *   [notes](#notes-1)
         *   [Parameters](#parameters-38)
-    *   [deleteNote](#deletenote)
+    *   [note](#note-1)
         *   [Parameters](#parameters-39)
-    *   [text](#text-2)
+    *   [addNote](#addnote)
         *   [Parameters](#parameters-40)
+    *   [deleteNote](#deletenote)
+        *   [Parameters](#parameters-41)
+    *   [text](#text-2)
+        *   [Parameters](#parameters-42)
     *   [type](#type-2)
     *   [parentType](#parenttype)
 *   [Note](#note-2)
-    *   [Parameters](#parameters-41)
+    *   [Parameters](#parameters-43)
     *   [name](#name-3)
     *   [description](#description-3)
     *   [meter](#meter-2)
     *   [write](#write-3)
-        *   [Parameters](#parameters-42)
-    *   [delete](#delete-2)
-        *   [Parameters](#parameters-43)
-    *   [text](#text-3)
         *   [Parameters](#parameters-44)
+    *   [delete](#delete-2)
+        *   [Parameters](#parameters-45)
+    *   [text](#text-3)
+        *   [Parameters](#parameters-46)
     *   [type](#type-3)
     *   [parentType](#parenttype-1)
 *   [toText](#totext)
-    *   [Parameters](#parameters-45)
+    *   [Parameters](#parameters-47)
 *   [Value](#value-3)
-    *   [Parameters](#parameters-46)
+    *   [Parameters](#parameters-48)
     *   [meter](#meter-3)
     *   [date](#date-1)
     *   [value](#value-4)
     *   [write](#write-4)
-        *   [Parameters](#parameters-47)
-    *   [delete](#delete-3)
-        *   [Parameters](#parameters-48)
-    *   [text](#text-4)
         *   [Parameters](#parameters-49)
+    *   [delete](#delete-3)
+        *   [Parameters](#parameters-50)
+    *   [text](#text-4)
+        *   [Parameters](#parameters-51)
     *   [type](#type-4)
     *   [parentType](#parenttype-2)
 
@@ -524,6 +528,36 @@ Schema version for newly created databases
 
 *   `schemaVersion` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
+### one
+
+Query for one item.
+
+#### Parameters
+
+*   `query` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
+
+    *   `query.category` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**&#x20;
+    *   `query.meter` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**&#x20;
+    *   `query.note` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**&#x20;
+    *   `query.date` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date))?**&#x20;
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<([Category](#category) | [Meter](#meter) | [Note](#note) | [Value](#value) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))>**&#x20;
+
+### all
+
+Query for several items.
+
+#### Parameters
+
+*   `query` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**&#x20;
+
+    *   `query.category` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**&#x20;
+    *   `query.meter` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**&#x20;
+    *   `query.note` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**&#x20;
+    *   `query.date` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date))?**&#x20;
+
+Returns **AsyncIterable<([Category](#category) | [Meter](#meter) | [Note](#note) | [Value](#value))>**&#x20;
+
 ### write
 
 Write attributes store.
@@ -533,6 +567,8 @@ Write attributes store.
 *   `context` **any**&#x20;
 
 ### close
+
+Shut down backend store.
 
 ### addCategory
 
