@@ -63,6 +63,15 @@ export class Master extends Base {
     );
   }
 
+  /**
+   * Query for one item.
+   * @param {Object} query
+   * @param {string} [query.category]
+   * @param {string} [query.meter]
+   * @param {string} [query.note]
+   * @param {string|Date} [query.date]
+   * @returns {Promise<Category|Meter|Note|Value|undefined>}
+   */
   async one(query) {
     const context = this.context;
 
@@ -81,7 +90,7 @@ export class Master extends Base {
             if (query.date) {
               return meter.value(
                 context,
-                query.value instanceof Date ? query.date : new Date(query.date)
+                query.date instanceof Date ? query.date : new Date(query.date)
               );
             }
           }
@@ -91,7 +100,7 @@ export class Master extends Base {
           if (query.date) {
             return category.value(
               context,
-              query.value instanceof Date ? query.date : new Date(query.date)
+              query.date instanceof Date ? query.date : new Date(query.date)
             );
           }
         }
@@ -101,6 +110,15 @@ export class Master extends Base {
     }
   }
 
+  /**
+   * Query for several items.
+   * @param {Object} query
+   * @param {string} [query.category]
+   * @param {string} [query.meter]
+   * @param {string} [query.note]
+   * @param {string|Date} [query.date]
+   * @returns {AsyncIterable<Category|Meter|Note|Value>}
+   */
   async *all(query) {
     const context = this.context;
 
@@ -163,6 +181,7 @@ export class Master extends Base {
   async write(context) {}
 
   /**
+   * Shut down backend store.
    */
   async close() {}
 
