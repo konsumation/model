@@ -38,7 +38,7 @@ export class Base {
   /**
    * Is the given attribute defined in the target.
    * Some attributes are inherited from parent object and therfore not defined in the target.
-   * @param {string} name 
+   * @param {string} name
    * @returns {boolean}
    */
   isDefinedAttribute(name) {
@@ -57,7 +57,7 @@ export class Base {
 
     for (const key of Object.keys(attributes)) {
       if (this[key] !== undefined) {
-          values[mapping?.[key] || key] = this[key];
+        values[mapping?.[key] || key] = this[key];
       }
     }
 
@@ -126,8 +126,17 @@ export class Base {
           }*/
         } else {
           if (typeof value === "string") {
-            if (attributes[name]?.type === "timestamp") {
-              value = new Date(value);
+            const attribute = attributes[name];
+            if (attribute) {
+              if (attribute.regex && !value.match(attribute.regex)) {
+                const error = new Error("invalid value");
+                error.attribute = attribute;
+                error.value = value;
+                throw error;
+              }
+              else if (attribute?.type === "timestamp") {
+                value = new Date(value);
+              }
             }
           }
 
@@ -148,12 +157,11 @@ export class Base {
   toJSON() {
     const values = this.getLocalAttributes();
     for (const [k, v] of Object.entries(values)) {
-      if(this.isDefinedAttribute(k)) {
+      if (this.isDefinedAttribute(k)) {
         if (v instanceof Date) {
           values[k] = v.toISOString();
-        }  
-      }
-      else {
+        }
+      } else {
         delete values[k];
       }
     }
