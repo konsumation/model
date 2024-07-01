@@ -4,6 +4,7 @@ import { SCHEMA_VERSION_CURRENT } from "./consts.mjs";
  * @typedef {Object} AttributeDefinition
  *
  * @property {string} type
+ * @property {RegExp} [regex]
  * @property {boolean} isKey
  * @property {boolean} isForeign do we represent a foreign entity
  * @property {boolean} writable
@@ -29,6 +30,7 @@ export const description = {
  */
 export const name = {
   type: "string",
+  regex: /^[\w\._\-\:]+$/,
   writable: true,
   mandatory: true,
   isKey: true,
