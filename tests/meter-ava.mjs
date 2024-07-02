@@ -45,10 +45,10 @@ test("Meter localAttributes", t => {
     unit: "m3",
     fractionalDigits: 3
   });
-  const meter = category.addMeter(context, { name: "M1", serial: "123" });
+  const meter = category.addMeter(context, { name: "M1.ev.1", serial: "123" });
 
   t.deepEqual(meter.getLocalAttributes(), {
-    name: "M1",
+    name: "M1.ev.1",
     serial: "123",
     unit: "m3",
     fractionalDigits: 3,
