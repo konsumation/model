@@ -11,6 +11,7 @@ test("Meter default values from Category", t => {
   t.is(meter.category, category);
   t.is(meter.unit, "m3");
   t.is(meter.fractionalDigits, 4);
+  t.is(meter.isAggregating, true);
 });
 
 test("Meter convert dates", t => {
@@ -33,7 +34,8 @@ test("Meter toJSON", t => {
   t.deepEqual(meter.toJSON(), {
     name: "M1",
     serial: "123",
-    validFrom: "1970-01-01T00:00:00.000Z"
+    validFrom: "1970-01-01T00:00:00.000Z",
+    isAggregating: true
   });
 });
 
@@ -52,7 +54,8 @@ test("Meter localAttributes", t => {
     serial: "123",
     unit: "m3",
     fractionalDigits: 3,
-    validFrom: new Date(0)
+    validFrom: new Date(0),
+    isAggregating: true
   });
 });
 

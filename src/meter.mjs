@@ -8,7 +8,8 @@ import {
   validFrom,
   description,
   unit,
-  fractionalDigits
+  fractionalDigits,
+  isAggregating
 } from "./attributes.mjs";
 import { toText } from "./util.mjs";
 
@@ -23,6 +24,7 @@ export class Meter extends Base {
   /** @type {Date} */ validFrom = validFrom.default;
   /** @type {number?} */ #fractionalDigits;
   /** @type {string?} */ #unit;
+  /** @type {boolean} */ isAggregating = true;
 
   static get factories() {
     return {
@@ -55,7 +57,8 @@ export class Meter extends Base {
       serial,
       unit,
       validFrom,
-      fractionalDigits
+      fractionalDigits,
+      isAggregating
     };
   }
 
@@ -69,6 +72,7 @@ export class Meter extends Base {
    * @param {string} [attributes.serial]
    * @param {number} [attributes.fractionalDigits]
    * @param {string} [attributes.unit]
+   * @param {boolean} [attributes.isAggregating]
    */
   constructor(attributes) {
     super();

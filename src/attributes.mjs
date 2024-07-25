@@ -146,3 +146,15 @@ export const date = {
   isKey: false,
   isForeign: false
 };
+
+/**
+ * @type {AttributeDefinition}
+ */
+export const isAggregating = {
+  type: "boolean",
+  writable: true,
+  mandatory: true,
+  isKey: false,
+  isForeign: false,
+  default: true
+};

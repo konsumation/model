@@ -19,6 +19,7 @@ test("text", async t => {
       '[meter "M1"]',
       "validFrom=1970-01-01T00:00:00.000Z",
       "fractionalDigits=4",
+      "isAggregating=true",
       "1970-01-01T00:00:00.000Z 1",
       "1970-01-01T00:00:01.000Z 2",
       '[note "1970-01-01T00:00:00.000Z"]',
@@ -27,7 +28,8 @@ test("text", async t => {
       "fractionalDigits=2",
       "order=1",
       '[meter "M1"]',
-      "validFrom=1970-01-01T00:00:00.000Z"
+      "validFrom=1970-01-01T00:00:00.000Z",
+      "isAggregating=true"
     ],
     lines
   );
