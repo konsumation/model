@@ -33,6 +33,7 @@ Data model of the konsumation apps
 *   [order](#order)
 *   [value](#value)
 *   [date](#date)
+*   [isAggregating](#isaggregating)
 *   [Base](#base)
     *   [isDefinedAttribute](#isdefinedattribute)
         *   [Parameters](#parameters)
@@ -115,6 +116,7 @@ Data model of the konsumation apps
     *   [description](#description-2)
     *   [serial](#serial-1)
     *   [validFrom](#validfrom-1)
+    *   [isAggregating](#isaggregating-1)
     *   [write](#write-2)
         *   [Parameters](#parameters-31)
     *   [delete](#delete-1)
@@ -235,6 +237,10 @@ Type: [AttributeDefinition](#attributedefinition)
 Type: [AttributeDefinition](#attributedefinition)
 
 ## date
+
+Type: [AttributeDefinition](#attributedefinition)
+
+## isAggregating
 
 Type: [AttributeDefinition](#attributedefinition)
 
@@ -658,6 +664,10 @@ Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 ### validFrom
 
 Type: [Date](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date)
+
+### isAggregating
+
+Type: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
 
 ### write
 
